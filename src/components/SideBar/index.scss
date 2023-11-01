@@ -1,0 +1,34 @@
+@use "./../../styles/vars";
+
+.sidebar {
+    display: flex;
+    flex-direction: column;
+    background-color: vars.$menu;
+    gap: 2rem;
+    height: 100vh;
+    width: 250px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    a {
+        text-align: center;
+        padding: 1rem;
+        margin-left: 2rem;
+        color: vars.$textColor;
+        font-family: vars.$fontText;
+        font-size: 22px;
+        transition: background-color 1s ;
+        transition: color 0.5s ;
+        &:hover {
+            color: vars.$textColorHover;
+            background-color: vars.$bgContent;
+            // padding: 1rem;
+            border-radius: 20px;
+        }
+    }
+}
+
+.logo {
+    width: 250px;
+    height: 6rem;
+}
