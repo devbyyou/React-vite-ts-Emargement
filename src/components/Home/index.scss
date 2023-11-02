@@ -1,0 +1,32 @@
+@use "./../../styles/vars";
+
+.form {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-direction: row;
+    margin-top: 2rem;
+
+    &__input {
+        width: 30vh;
+        padding: 11px;
+        border: none;
+        background-color: #f7f7f7;
+        border-radius: 30px;
+        padding-left: 40px;
+        margin-left: 30px;
+    }
+}
+.logo__search {
+    position: absolute;
+    left: 18.2rem;
+    opacity: 0.5;
+    font-family: vars.$fontText;
+    color: vars.$textColor;
+}
+.content__page--home{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}

@@ -2,7 +2,7 @@ import React from 'react';
 
 function Parametre() {
   return (
-    <div className="content__page">Parametre</div>
+    <div className="content__page">Paramètre</div>
   );
 }
 

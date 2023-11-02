@@ -1,19 +1,42 @@
 import React from 'react';
-// import { Route, Routes } from 'react-router-dom';
-// import Home from '../Home';
-// import Equipes from '../Equipes';
 import './index.scss';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
+import { GoHome } from 'react-icons/go';
+import { PiUsersThreeLight } from 'react-icons/pi';
+import { LuClipboardSignature } from 'react-icons/lu';
+import { AiOutlineSetting } from 'react-icons/ai';
+import cn from 'classnames';
 import logo from '../../assets/devbyyou.png';
 
+interface NavLinkParams {
+  isActive: boolean;
+}
+
 function SideBar() {
+  const classNameLink = ({ isActive }: NavLinkParams) => cn('icons', {
+    'menu-link--active': isActive,
+  });
+
   return (
     <nav className="sidebar">
       <img className="logo" src={logo} alt="logo" />
-      <Link to="/">Home</Link>
-      <Link to="/Equipes">Equipes</Link>
-      <Link to="/Presents">Presents</Link>
-      <Link to="/Parametre">Parametre</Link>
+      <NavLink className={classNameLink} to="/">
+        <GoHome />
+        Home
+      </NavLink>
+      <NavLink className={classNameLink} to="/Equipes">
+        <PiUsersThreeLight />
+        Equipes
+      </NavLink>
+      <NavLink className={classNameLink} to="/Presents">
+        <LuClipboardSignature />
+        Presents
+      </NavLink>
+      <NavLink className={classNameLink} to="/Parametre">
+        <AiOutlineSetting />
+        Paramètre
+
+      </NavLink>
     </nav>
   );
 }

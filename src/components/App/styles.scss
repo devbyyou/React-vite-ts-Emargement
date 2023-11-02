@@ -1,11 +1,7 @@
-@use './../../styles/vars';
+@use "./../../styles/vars";
 
-
-.content{
-    // position: relative;
-padding-left: 250px;
-
-&__page{
- background-color: beige;
-}
+.content {
+    padding-left: 250px;
+    // background-color: vars.$bgContent;
+    // height: 100vh;
 }
