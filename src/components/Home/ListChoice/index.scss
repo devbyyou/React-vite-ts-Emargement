@@ -1,0 +1,86 @@
+@use "../../../styles/vars";
+
+.listChoice {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin-right: 30px;
+    border-radius: 10px;
+    width: 17rem;
+    height: 21rem;
+    box-shadow: 1px 1px 3px 1px rgba(225, 225, 225);
+    padding: 20px;
+    // box-shadow: 7px 7px 12px #8e857ab8;
+    h2 {
+        font-family: vars.$fontTextCorp;
+        font-weight: bold;
+        font-size: 20px;
+        padding-bottom: 15px;
+    }
+    &__card {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 20px;
+        background-color: #fff;
+        border-radius: 10px;
+        cursor: pointer;
+        transition:
+            background-color 0.3s ease,
+            color 0.3s ease,
+            box-shadow 0.3s ease;
+        height: 80px;
+        text-align: center;
+        color: #333;
+        box-shadow: 5px 5px 10px #8e857a73;
+        position: relative;
+
+        &:hover {
+            background-color: #f7f7f7;
+            box-shadow: 7px 7px 12px #8e857ab8;
+        }
+
+        &-content {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+            justify-content: center;
+            align-items: center;
+            p {
+                font-family: vars.$fontTextCorp;
+                font-weight: bold;
+                font-size: 15px;
+            }
+            span {
+                font-family: vars.$fontText;
+                color: gray;
+                opacity: 0.8;
+                font-size: 13px;
+            }
+        }
+        &-items {
+            display: flex;
+            gap: 3px;
+            flex-direction: row;
+        }
+        &::after {
+            content: "";
+            width: 50px;
+            height: 50px;
+            background-color: rgb(194 232 217 / 36%);
+            position: absolute;
+            left: 6px;
+            border-radius: 30px;
+            opacity: 0.6;
+        }
+    }
+}
+
+.plannerLogo {
+    height: 2em;
+    width: 2em;
+}
+.editLogo {
+    height: 27px;
+    width: 27px;
+}

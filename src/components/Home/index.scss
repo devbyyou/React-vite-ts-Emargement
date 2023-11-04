@@ -24,9 +24,25 @@
     font-family: vars.$fontText;
     color: vars.$textColor;
 }
-.content__page--home{
+.header__page--home{
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
+}
+
+.messageHome {
+    // background-color: aqua;
+    margin-left: 30px;
+    font-weight: bold;
+    font-family: vars.$fontTextCorp;
+    font-size: 25px;
+}
+
+.content__displayChoice{
+    // background-color: red;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    // height: 128px;
 }

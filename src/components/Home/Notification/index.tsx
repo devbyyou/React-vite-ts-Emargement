@@ -1,7 +1,8 @@
-import React from "react";
-import "./style.scss";
-import { IoMdNotificationsOutline } from "react-icons/io";
-import { HiMiniChevronUpDown } from "react-icons/hi2";
+import React from 'react';
+import './style.scss';
+import { IoMdNotificationsOutline } from 'react-icons/io';
+import { HiMiniChevronUpDown } from 'react-icons/hi2';
+
 function Notification() {
   return (
     <div className="content__notification">
@@ -15,7 +16,7 @@ function Notification() {
       </div>
       <div className="name-id">
         <p className="name">Robert Fox</p>
-         <p className='id'>#12334</p>
+        <p className="id">#12334</p>
       </div>
 
       <div className="icone-profile">
