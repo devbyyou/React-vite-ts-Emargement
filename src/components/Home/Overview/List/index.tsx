@@ -10,7 +10,7 @@ function List() {
           <BiFootball className="card__icons" />
           Equipe
         </p>
-        <p className="card__number">1</p>
+        <p className="card__number">14</p>
       </div>
     </div>
   );

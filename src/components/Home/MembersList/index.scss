@@ -1,0 +1,111 @@
+@use "../../../styles/vars";
+.members-list {
+    width: 54%;
+    margin-left: 30px;
+    // padding: 10px;
+    position: relative;
+    font-family: "Blinker", sans-serif;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+}
+
+.add-button {
+    position: absolute;
+    // left: 22rem;
+    background-color: rgba(194, 232, 217, 0.36);
+    color: rgb(37, 35, 35);
+    border: none;
+    padding: 15px;
+    border-radius: 7px;
+    cursor: pointer;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+    gap: 2px;
+    font-family: "Blinker", sans-serif;
+    width: 125px;
+    margin-top: 0.7rem;
+    &:hover {
+        background-color: #cff7cf69;
+        background-color: #f4f9f4;
+    }
+}
+
+.search-bar input {
+    width: 100%;
+    padding: 15px;
+    /* margin-top: 10px; */
+    margin-bottom: 10px;
+    border: 2px solid #dfdfdf70;
+    border-radius: 9px;
+    padding-left: 50px;
+}
+
+.table {
+    border-collapse: collapse;
+    width: 100%;
+    border: 1px solid rgb(223 223 223 / 86%);
+    border-radius: 9px;
+    &__email {
+        font-family: "Blinker", sans-serif;
+        color: gray;
+        opacity: 0.8;
+        font-size: 13px;
+    }
+}
+
+.row {
+    display: flex;
+    border: 1px solid rgb(223 223 223 / 56%);
+    align-items: center;
+    padding: 10px;
+    border-radius: 9px;
+    border-left: none;
+    border-right: none;
+    border-top: none;
+    &:hover {
+        background-color: #f4f9f4;
+        cursor: pointer;
+    }
+}
+
+.cell {
+    flex: 1;
+    padding: 10px;
+    text-align: center;
+}
+
+.label {
+    font-weight: bold;
+    font-size: 0.9em;
+    color: #888;
+    border-bottom: 1px solid #dfdfdf70;
+}
+
+.admin {
+    color: #ffc107;
+}
+
+.owner {
+    color: #007bff;
+}
+.titleMembre {
+    font-family: vars.$fontTextCorp;
+    font-weight: bold;
+    font-size: 20px;
+}
+.logo__search_members {
+    width: 2em;
+    height: 2em;
+    position: absolute;
+    top: 48px;
+    left: 12px;
+    color: #888;
+}

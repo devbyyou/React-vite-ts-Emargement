@@ -5,6 +5,8 @@ import { AiOutlineSearch } from 'react-icons/ai';
 import Notification from './Notification';
 import Overview from './Overview';
 import ListChoice from './ListChoice';
+import MembersList from './MembersList';
+import Graph from './Graph';
 
 function Home() {
   return (
@@ -25,6 +27,9 @@ function Home() {
         <Overview />
         <ListChoice />
       </div>
+      <MembersList />
+      <h3 className="title__graph">Pourcentage de fréquentation (par jour) </h3>
+      <Graph />
     </div>
   );
 }
