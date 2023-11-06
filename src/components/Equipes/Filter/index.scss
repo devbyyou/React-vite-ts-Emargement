@@ -1,0 +1,47 @@
+@use "../../../styles/vars";
+.filter {
+    // background-color: aqua;
+    width: 15rem;
+    padding: 30px;
+    margin-top: 30px;
+    font-family: vars.$fontTextCorp;
+    margin-left: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 1rem;
+}
+
+.card__filer {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 5px;
+    padding: 10px;
+    margin-top: 10px;
+    // padding: 2px;
+    box-shadow: rgba(0, 0, 0, 0.05) 0px 3px 2px 0px;
+
+    &-content {
+        display: flex;
+        flex-direction: column;
+        // align-items: center;
+        // justify-content: center;
+        gap: 15px;
+        margin-top: 20px;
+        &-element {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            // border: 1px solid red;
+            label {
+                font-size: 12px;
+            }
+        }
+    }
+    p {
+        color: grey;
+        font-size: 16px;
+        font-weight: lighter;
+    }
+}

@@ -2,6 +2,9 @@ import React from 'react';
 import './index.scss';
 import { RiTeamLine } from 'react-icons/ri';
 import { GrFormAdd } from 'react-icons/gr';
+import { AiOutlineSearch } from 'react-icons/ai';
+import Filter from './Filter';
+import Cards from './Cards';
 
 function Equipes() {
   return (
@@ -17,9 +20,13 @@ function Equipes() {
         </button>
       </header>
       <form className="content__equipe-form" action="submit">
-
-        <input placeholder="trouve ton équipe" className="content__equipe-input" type="text" />
+        <AiOutlineSearch className="content__equipe-form-logo" />
+        <input placeholder="Trouve ton équipe" className="content__equipe-input" type="text" />
       </form>
+      <div className="content__equipe__contenu">
+        <Filter />
+        <Cards />
+      </div>
     </div>
   );
 }

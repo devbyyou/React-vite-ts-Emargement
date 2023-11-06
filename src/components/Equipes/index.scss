@@ -67,9 +67,10 @@
     }
     &-input {
         background-color: #fcfcfc;
-        margin-left: 50px;
+        margin: 0 auto;
+        display: block;
         padding: 15px;
-        width: 85vh;
+        width: 80%;
         border: none;
         border-radius: 5px;
         padding-left: 60px;
@@ -81,4 +82,22 @@
             rgba(0, 0, 0, 0.09) 0px 16px 8px,
             rgba(0, 0, 0, 0.09) 0px 32px 16px;
     }
+    &-form {
+        position: relative;
+        &-logo {
+            position: absolute;
+            left: 95px;
+            top: 9px;
+            width: 2em;
+            height: 2em;
+            color: #656565;
+        }
+    }
+}
+.content__equipe__contenu{
+    display: flex;
+    justify-content: flex-start;
+    // align-items:flex-start;
+    flex-direction: row;
+    // background-color: aqua;
 }
