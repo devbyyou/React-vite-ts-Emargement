@@ -1,0 +1,84 @@
+@use "../../styles/vars";
+
+.content__equipe {
+    // font-family: vars.$fontText;
+    &-title {
+        // margin-left: 30px;
+        font-family: vars.$fontTextCorp;
+        font-weight: bold;
+        font-size: 30px;
+        // margin: 40px 0 10px 30px;
+    }
+
+    &-header {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+    }
+    &-tl {
+        margin: 50px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: row;
+        gap: 1rem;
+        position: relative;
+        &::after {
+            content: "";
+            width: 50px;
+            height: 50px;
+            border-radius: 30%;
+            background-color: vars.$button;
+            position: absolute;
+            right: 6.6rem;
+            top: -6px;
+        }
+    }
+    &-button {
+        margin: 50px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: row;
+        gap: 3px;
+        border: none;
+        border-radius: 7px;
+        padding: 5px;
+        padding-right: 1rem;
+        // text-decoration: none;
+        // border: 2px solid red;
+        font-family: vars.$fontText;
+        background-color: vars.$button;
+        color: vars.$buttonColor;
+        // font-weight: bolder;
+        &:hover {
+            background-color: vars.$buttonHover;
+        }
+    }
+    &-tlogo {
+        width: 2em;
+        height: 2em;
+    }
+    &-alogo {
+        color: vars.$buttonColor;
+        width: 2em;
+        height: 2em;
+    }
+    &-input {
+        background-color: #fcfcfc;
+        margin-left: 50px;
+        padding: 15px;
+        width: 85vh;
+        border: none;
+        border-radius: 5px;
+        padding-left: 60px;
+        font-family: vars.$fontTextCorp;
+        box-shadow:
+            rgba(0, 0, 0, 0.09) 0px 2px 1px,
+            rgba(0, 0, 0, 0.09) 0px 4px 2px,
+            rgba(0, 0, 0, 0.09) 0px 8px 4px,
+            rgba(0, 0, 0, 0.09) 0px 16px 8px,
+            rgba(0, 0, 0, 0.09) 0px 32px 16px;
+    }
+}
