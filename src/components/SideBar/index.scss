@@ -1,4 +1,4 @@
-@use "./../../styles/vars";
+@use "../../styles/vars";
 
 .sidebar {
     display: flex;
@@ -11,7 +11,7 @@
     top: 0;
     align-items: center;
     left: 0;
-    border-right: 2px solid rgb(146 146 146 / 9%);;
+    border-right: 2px solid rgb(146 146 146 / 9%);
     padding: 20px;
     a {
         // text-align: center;

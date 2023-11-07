@@ -10,6 +10,7 @@ function MembersList() {
         <h2 className="titleMembre">Membres</h2>
 
       </div>
+
       <div className="search-bar">
         <CiSearch className="logo__search_members" />
         <input type="text" placeholder="Rechercher par nom" />

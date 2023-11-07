@@ -1,0 +1,9 @@
+@use '../../../styles/vars';
+
+.content__page-presents{
+    display: flex;
+    flex-direction: column;
+    gap:5rem;
+    align-items: center;
+    justify-content: center;
+}

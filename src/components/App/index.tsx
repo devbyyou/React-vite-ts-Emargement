@@ -1,10 +1,10 @@
 import { Route, Routes } from 'react-router-dom';
 import SideBar from '../SideBar';
 import './styles.scss';
-import Home from '../Home';
-import Equipes from '../Equipes';
-import Presents from '../Presents';
-import Parametre from '../Parametre';
+import Home from '../Pages/Home';
+import Equipes from '../Pages/Equipes';
+import Presents from '../Pages/Presents';
+import Parametre from '../Pages/Parametre';
 
 function App() {
   return (

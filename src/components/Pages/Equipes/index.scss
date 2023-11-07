@@ -1,4 +1,4 @@
-@use "../../styles/vars";
+@use "../../../styles/vars";
 
 .content__equipe {
     // font-family: vars.$fontText;
@@ -81,13 +81,20 @@
             rgba(0, 0, 0, 0.09) 0px 8px 4px,
             rgba(0, 0, 0, 0.09) 0px 16px 8px,
             rgba(0, 0, 0, 0.09) 0px 32px 16px;
+            position: relative;
     }
     &-form {
         position: relative;
+        // background-color: aqua;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: row;
+        // width: 100%;
         &-logo {
             position: absolute;
-            left: 95px;
-            top: 9px;
+            left: 11%;
+            top: 20%;
             width: 2em;
             height: 2em;
             color: #656565;

@@ -1,6 +1,6 @@
 import React from 'react';
 import './index.scss';
-import graph from '../../../assets/graph.png';
+import graph from '../../../../assets/graph.png';
 
 function Graph() {
   return (

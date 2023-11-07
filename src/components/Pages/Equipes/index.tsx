@@ -20,8 +20,8 @@ function Equipes() {
         </button>
       </header>
       <form className="content__equipe-form" action="submit">
-        <AiOutlineSearch className="content__equipe-form-logo" />
         <input placeholder="Trouve ton équipe" className="content__equipe-input" type="text" />
+        <AiOutlineSearch className="content__equipe-form-logo" />
       </form>
       <div className="content__equipe__contenu">
         <Filter />

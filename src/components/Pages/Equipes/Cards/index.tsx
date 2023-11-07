@@ -2,7 +2,7 @@ import React from 'react';
 import './index.scss';
 import { RiTeamLine } from 'react-icons/ri';
 import { CgMoreVerticalO } from 'react-icons/cg';
-import logo from '../../../assets/devbyou.png';
+import logo from '../../../../assets/devbyou.png';
 
 function Cards() {
   return (
