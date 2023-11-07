@@ -7,6 +7,14 @@ function ListPresents() {
 
       <div className="listPresents__timer">Début du prochaine entrainement dans : 3:05 min</div>
       <div className="listPresents__table">
+
+        <select className="teamSelect" name="teamSelect" id="teamSelect">
+          <option value="">Choisi ton équipe</option>
+          <option value="cdm">CDM</option>
+          <option value="senior">Sénior</option>
+          <option value="u20">U20</option>
+        </select>
+
         <div className="listPresents__row listPresents__label">
           <div className="listPresents__cell">Nom</div>
           <div className="listPresents__cell">Vu à</div>

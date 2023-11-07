@@ -18,6 +18,8 @@
 }
 
 .listPresents__table {
+    display: flex;
+    flex-direction: column;
     border-collapse: collapse;
     width: 100%;
     border: 1px solid rgb(223 223 223 / 86%);
@@ -63,4 +65,15 @@
 }
 .absent {
     background-color: #f4e4e8;
+}
+.teamSelect{
+    // text-decoration: none;
+    border: 1px solid vars.$button;
+    // border: none;
+    font-family: vars.$fontText;
+    margin: 0 auto ;
+    padding: 9px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
