@@ -30,8 +30,8 @@ function ListPresents() {
           </div>
           <div className="listPresents__cell ">18:00</div>
           <div className="listPresents__cell">PRESENT</div>
-          <div className="listPresents__cell">NAN</div>
-          <div className="listPresents__cell">NAN</div>
+          <div className="listPresents__cell">_</div>
+          <div className="listPresents__cell">_</div>
         </div>
 
         <div className="listPresents__row retard">
@@ -40,8 +40,8 @@ function ListPresents() {
             <div className="listPresents__table__email">066666666</div>
           </div>
           <div className="listPresents__cell ">18:10</div>
-          <div className="listPresents__cell">NAN</div>
-          <div className="listPresents__cell">NAN</div>
+          <div className="listPresents__cell">_</div>
+          <div className="listPresents__cell">_</div>
           <div className="listPresents__cell">RETARD</div>
         </div>
 
@@ -50,10 +50,10 @@ function ListPresents() {
             John Doe
             <div className="listPresents__table__email">066666666</div>
           </div>
-          <div className="listPresents__cell ">NAN</div>
-          <div className="listPresents__cell">NAN</div>
+          <div className="listPresents__cell ">_</div>
+          <div className="listPresents__cell">_</div>
           <div className="listPresents__cell">ABSENT</div>
-          <div className="listPresents__cell">NAN</div>
+          <div className="listPresents__cell">_</div>
         </div>
 
       </div>
