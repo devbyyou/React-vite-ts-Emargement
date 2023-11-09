@@ -24,15 +24,15 @@ function SideBar() {
         <GoHome />
         Home
       </NavLink>
-      <NavLink className={classNameLink} to="/Equipes">
+      <NavLink className={classNameLink} to="/equipes">
         <PiUsersThreeLight />
         Equipes
       </NavLink>
-      <NavLink className={classNameLink} to="/Presents">
+      <NavLink className={classNameLink} to="/presents">
         <LuClipboardSignature />
         Presents
       </NavLink>
-      <NavLink className={classNameLink} to="/Parametre">
+      <NavLink className={classNameLink} to="/parametre">
         <AiOutlineSetting />
         Paramètre
 
