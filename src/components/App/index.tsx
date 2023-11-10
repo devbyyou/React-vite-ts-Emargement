@@ -6,6 +6,7 @@ import Equipes from '../Pages/Equipes';
 import Presents from '../Pages/Presents';
 import Parametre from '../Pages/Parametre';
 import Profil from '../Pages/Profil';
+import Equipe from '../Pages/Equipe';
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
         <Route path="/presents" element={<Presents />} />
         <Route path="/parametre" element={<Parametre />} />
         <Route path="/profil" element={<Profil />} />
+        <Route path="/equipes/senior" element={<Equipe />} />
         <Route path="*" element={<div>404</div>} />
       </Routes>
     </div>

@@ -46,7 +46,6 @@ function MembersList() {
           <div className="cell admin">. U20</div>
           <div className="cell">30 m ago</div>
         </div>
-
       </div>
       <button type="button" className="add-button">
         <BiSolidChevronRight className="members-list__logo" />

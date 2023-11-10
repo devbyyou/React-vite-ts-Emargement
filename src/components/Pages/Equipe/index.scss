@@ -1,0 +1,116 @@
+@use "../../../styles/vars";
+
+.equipe__content {
+    font-family: vars.$fontText;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 2rem;
+    &-action {
+        // border: 1px solid green;
+        margin-right: 20px;
+        margin-top: 30px;
+        &-card {
+            box-shadow:
+                rgba(0, 0, 0, 0.05) 0px 6px 24px 0px,
+                rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+            width: 250px;
+            margin: 10px;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            align-items: flex-start;
+            justify-content: flex-start;
+            border-radius: 0.5rem;
+            h3 {
+                // border: 1px solid red;
+                width: 100%;
+                padding: 10px;
+                background-color: #f6f7f9;
+                display: flex;
+                align-items: center;
+                flex-direction: row;
+                gap: 0.1rem;
+            }
+            button {
+                border: none;
+                padding: 0.5rem;
+                border-radius: 0.5rem;
+                background-color: rgba(246, 61, 61, 0.715);
+                color: white;
+                margin: 15px;
+                &:hover {
+                    background-color: red;
+                }
+            }
+        }
+    }
+
+    &__informations {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        width: 100%;
+    }
+}
+
+.equipe__content__information {
+    &-club {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        gap: 1rem;
+        // border: 2px solid rgba(223, 223, 223, 0.86);
+        margin: 30px;
+        padding: 10px;
+        border-radius: 0.5rem;
+        box-shadow:
+            rgba(50, 50, 93, 0.25) 0px 2px 5px -1px,
+            rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+    }
+    &-statut {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        padding: 1rem;
+        h3 {
+            font-size: 30px;
+        }
+        p {
+            color: grey;
+            font-size: 14px;
+        }
+    }
+    &-logo {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        img {
+            width: 90px;
+            height: 90px;
+        }
+        button {
+            border: none;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            background-color: vars.$button;
+            color: vars.$textColor;
+            &:hover {
+                background-color: vars.$buttonHover;
+            }
+        }
+    }
+    &-effectif {
+        width: 100%;
+        margin-left: 2rem;
+    }
+}
+
+.logo__search_members-equipe{
+position: absolute;
+width: 2em;
+height: 2em;
+margin-left: 12px;
+margin-top: 8px;
+}
+
