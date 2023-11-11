@@ -7,6 +7,7 @@ import Presents from '../Pages/Presents';
 import Parametre from '../Pages/Parametre';
 import Profil from '../Pages/Profil';
 import Equipe from '../Pages/Equipe';
+import Joueur from '../Pages/Joueur';
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
         <Route path="/parametre" element={<Parametre />} />
         <Route path="/profil" element={<Profil />} />
         <Route path="/equipes/senior" element={<Equipe />} />
+        <Route path="/equipes/senior/joueur" element={<Joueur />} />
         <Route path="*" element={<div>404</div>} />
       </Routes>
     </div>

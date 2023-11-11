@@ -43,7 +43,7 @@ function Equipe() {
                 <div className="cell">Dernière Activité</div>
               </div>
 
-              <Link to="/equipe/joueur" className="row">
+              <Link to="/equipes/senior/joueur" className="row">
                 <div className="cell">
                   John Doe
                   <div className="table__email">letsgo@gmail.com</div>
