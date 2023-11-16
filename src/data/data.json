@@ -153,10 +153,26 @@
     "categories": [
       {
         "id": 1,
-        "nom": "U18",
+        "nom": "Senior",
         "date_creation": "2023-01-03",
         "statut": "active",
-        "tranche_age": "Moins de 18 ans",
+        "tranche_age": "plus de 18 ans",
+        "nombre_total": 100
+      },
+      {
+        "id": 2,
+        "nom": "CDM",
+        "date_creation": "2023-01-03",
+        "statut": "active",
+        "tranche_age": "plus de 18 ans",
+        "nombre_total": 100
+      },
+      {
+        "id": 3,
+        "nom": "U20",
+        "date_creation": "2023-01-03",
+        "statut": "active",
+        "tranche_age": "Moins de 20 ans",
         "nombre_total": 100
       }
     ],

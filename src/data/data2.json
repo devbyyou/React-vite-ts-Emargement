@@ -1,0 +1,449 @@
+{
+    "coaches": [
+        {
+            "id": 1,
+            "nom": "Dupont",
+            "prenom": "Jean",
+            "email": "jean.dupont@email.com",
+            "tel": "123-456-7890",
+            "role": "entraineur",
+            "mot_de_passe": "hashed_password",
+            "date_creation": "2023-01-01",
+            "last_activity": "2023-11-14T12:30:00",
+            "logo": "url_du_logo_coach",
+            "equipes": [
+                {
+                    "id": 1,
+                    "nom": "Les Aigles",
+                    "logo": "url_du_logo_equipe",
+                    "categorie": {
+                        "id": 1,
+                        "nom": "U18"
+                    },
+                    "seance": {
+                        "id": 1,
+                        "date": "2023-11-14",
+                        "heure": "18:00",
+                        "lieu": "Stade Municipal",
+                        "joueurs_present": [
+                            {
+                                "id": 1,
+                                "nom": "Martin",
+                                "prenom": "Paul"
+                            },
+                            {
+                                "id": 2,
+                                "nom": "Durand",
+                                "prenom": "Alice"
+                            }
+                        ],
+                        "joueurs_absents": [
+                            {
+                                "id": 3,
+                                "nom": "Lefevre",
+                                "prenom": "Marc"
+                            },
+                            {
+                                "id": 4,
+                                "nom": "Fournier",
+                                "prenom": "Sophie"
+                            }
+                        ],
+                        "joueurs_retard": [
+                            {
+                                "id": 5,
+                                "nom": "Girard",
+                                "prenom": "Pierre"
+                            },
+                            {
+                                "id": 6,
+                                "nom": "Lambert",
+                                "prenom": "Marie"
+                            }
+                        ],
+                        "statut": "terminee"
+                    },
+                    "statut": "actif"
+                },
+                {
+                    "id": 2,
+                    "nom": "Les Tigres",
+                    "logo": "url_du_logo_equipe",
+                    "categorie": {
+                        "id": 1,
+                        "nom": "U18"
+                    },
+                    "seance": {
+                        "id": 2,
+                        "date": "2023-11-15",
+                        "heure": "16:00",
+                        "lieu": "Stade Municipal",
+                        "joueurs_present": [
+                            {
+                                "id": 3,
+                                "nom": "Lefevre",
+                                "prenom": "Marc"
+                            },
+                            {
+                                "id": 4,
+                                "nom": "Fournier",
+                                "prenom": "Sophie"
+                            }
+                        ],
+                        "joueurs_absents": [
+                            {
+                                "id": 1,
+                                "nom": "Martin",
+                                "prenom": "Paul"
+                            },
+                            {
+                                "id": 2,
+                                "nom": "Durand",
+                                "prenom": "Alice"
+                            }
+                        ],
+                        "joueurs_retard": [
+                            {
+                                "id": 5,
+                                "nom": "Girard",
+                                "prenom": "Pierre"
+                            },
+                            {
+                                "id": 6,
+                                "nom": "Lambert",
+                                "prenom": "Marie"
+                            }
+                        ],
+                        "statut": "terminee"
+                    },
+                    "statut": "actif"
+                }
+            ],
+            "statut": "actif"
+        }
+    ],
+    "equipes": [
+        {
+            "id": 1,
+            "nom": "Les Aigles",
+            "logo": "url_du_logo_equipe",
+            "categorie": {
+                "id": 1,
+                "nom": "U18"
+            },
+            "seance": {
+                "id": 1,
+                "date": "2023-11-14",
+                "heure": "18:00",
+                "lieu": "Stade Municipal",
+                "joueurs_present": [
+                    {
+                        "id": 1,
+                        "nom": "Martin",
+                        "prenom": "Paul"
+                    },
+                    {
+                        "id": 2,
+                        "nom": "Durand",
+                        "prenom": "Alice"
+                    }
+                ],
+                "joueurs_absents": [
+                    {
+                        "id": 3,
+                        "nom": "Lefevre",
+                        "prenom": "Marc"
+                    },
+                    {
+                        "id": 4,
+                        "nom": "Fournier",
+                        "prenom": "Sophie"
+                    }
+                ],
+                "joueurs_retard": [
+                    {
+                        "id": 5,
+                        "nom": "Girard",
+                        "prenom": "Pierre"
+                    },
+                    {
+                        "id": 6,
+                        "nom": "Lambert",
+                        "prenom": "Marie"
+                    }
+                ],
+                "statut": "terminee"
+            },
+            "statut": "actif"
+        },
+        {
+            "id": 2,
+            "nom": "Les Tigres",
+            "logo": "url_du_logo_equipe",
+            "categorie": {
+                "id": 1,
+                "nom": "U18"
+            },
+            "seance": {
+                "id": 2,
+                "date": "2023-11-15",
+                "heure": "16:00",
+                "lieu": "Stade Municipal",
+                "joueurs_present": [
+                    {
+                        "id": 3,
+                        "nom": "Lefevre",
+                        "prenom": "Marc"
+                    },
+                    {
+                        "id": 4,
+                        "nom": "Fournier",
+                        "prenom": "Sophie"
+                    }
+                ],
+                "joueurs_absents": [
+                    {
+                        "id": 1,
+                        "nom": "Martin",
+                        "prenom": "Paul"
+                    },
+                    {
+                        "id": 2,
+                        "nom": "Durand",
+                        "prenom": "Alice"
+                    }
+                ],
+                "joueurs_retard": [
+                    {
+                        "id": 5,
+                        "nom": "Girard",
+                        "prenom": "Pierre"
+                    },
+                    {
+                        "id": 6,
+                        "nom": "Lambert",
+                        "prenom": "Marie"
+                    }
+                ],
+                "statut": "terminee"
+            },
+            "statut": "actif"
+        }
+    ],
+    "categories": [
+        {
+            "id": 1,
+            "nom": "U18",
+            "date_creation": "2023-01-03",
+            "statut": "active",
+            "tranche_age": "Moins de 18 ans",
+            "nombre_total": 100
+        }
+    ],
+    "joueurs": [
+        {
+            "id": 1,
+            "nom": "Martin",
+            "prenom": "Paul",
+            "email": "paul.martin@email.com",
+            "tel": "123-456-7890",
+            "categorie": {
+                "id": 1,
+                "nom": "U18"
+            },
+            "derniere_activite": "2023-11-14T12:30:00",
+            "date_creation": "2023-01-04",
+            "equipe": {
+                "id": 1,
+                "nom": "Les Aigles"
+            },
+            "statut": "actif",
+            "logo": "url_du_logo_joueur",
+            "nom_prenom_tel_parent": "Martin Parent - 123-456-7890",
+            "total_presence": 20,
+            "dates_heures_absence": [
+                {
+                    "date": "2023-11-01",
+                    "heure": "15:00"
+                },
+                {
+                    "date": "2023-11-05",
+                    "heure": "16:30"
+                }
+            ],
+            "mot_de_passe": "hashed_password",
+            "role": "joueur",
+            "age": 16,
+            "etat": "present",
+            "nombre_total_joueur": 30
+        },
+        {
+            "id": 2,
+            "nom": "Durand",
+            "prenom": "Alice",
+            "email": "alice.durand@email.com",
+            "tel": "123-456-7891",
+            "categorie": {
+                "id": 1,
+                "nom": "U18"
+            },
+            "derniere_activite": "2023-11-14T12:30:00",
+            "date_creation": "2023-01-04",
+            "equipe": {
+                "id": 1,
+                "nom": "Les Aigles"
+            },
+            "statut": "actif",
+            "logo": "url_du_logo_joueur",
+            "nom_prenom_tel_parent": "Durand Parent - 123-456-7891",
+            "total_presence": 18,
+            "dates_heures_absence": [
+                {
+                    "date": "2023-11-02",
+                    "heure": "14:00"
+                }
+            ],
+            "mot_de_passe": "hashed_password",
+            "role": "joueur",
+            "age": 17,
+            "etat": "absent",
+            "nombre_total_joueur": 30
+        },
+        {
+            "id": 3,
+            "nom": "Lefevre",
+            "prenom": "Marc",
+            "email": "marc.lefevre@email.com",
+            "tel": "123-456-7892",
+            "categorie": {
+                "id": 1,
+                "nom": "U18"
+            },
+            "derniere_activite": "2023-11-14T12:30:00",
+            "date_creation": "2023-01-04",
+            "equipe": {
+                "id": 2,
+                "nom": "Les Tigres"
+            },
+            "statut": "actif",
+            "logo": "url_du_logo_joueur",
+            "nom_prenom_tel_parent": "Lefevre Parent - 123-456-7892",
+            "total_presence": 22,
+            "dates_heures_absence": [
+                {
+                    "date": "2023-11-03",
+                    "heure": "16:30"
+                }
+            ],
+            "mot_de_passe": "hashed_password",
+            "role": "joueur",
+            "age": 16,
+            "etat": "retard",
+            "nombre_total_joueur": 30
+        },
+        {
+            "id": 4,
+            "nom": "Fournier",
+            "prenom": "Sophie",
+            "email": "sophie.fournier@email.com",
+            "tel": "123-456-7893",
+            "categorie": {
+                "id": 1,
+                "nom": "U18"
+            },
+            "derniere_activite": "2023-11-14T12:30:00",
+            "date_creation": "2023-01-04",
+            "equipe": {
+                "id": 2,
+                "nom": "Les Tigres"
+            },
+            "statut": "actif",
+            "logo": "url_du_logo_joueur",
+            "nom_prenom_tel_parent": "Fournier Parent - 123-456-7893",
+            "total_presence": 15,
+            "dates_heures_absence": [
+                {
+                    "date": "2023-11-04",
+                    "heure": "17:00"
+                }
+            ],
+            "mot_de_passe": "hashed_password",
+            "role": "joueur",
+            "age": 18,
+            "etat": "absent",
+            "nombre_total_joueur": 30
+        },
+        {
+            "id": 5,
+            "nom": "Girard",
+            "prenom": "Pierre",
+            "email": "pierre.girard@email.com",
+            "tel": "123-456-7894",
+            "categorie": {
+                "id": 1,
+                "nom": "U18"
+            },
+            "derniere_activite": "2023-11-14T12:30:00",
+            "date_creation": "2023-01-04",
+            "equipe": {
+                "id": 1,
+                "nom": "Les Aigles",
+                "categorie": {
+                    "id": 1,
+                    "nom": "U18"
+                }
+            },
+            "statut": "actif",
+            "logo": "url_du_logo_joueur",
+            "nom_prenom_tel_parent": "Girard Parent - 123-456-7894",
+            "total_presence": 25,
+            "dates_heures_absence": [
+                {
+                    "date": "2023-11-05",
+                    "heure": "18:30"
+                }
+            ],
+            "mot_de_passe": "hashed_password",
+            "role": "joueur",
+            "age": 17,
+            "etat": "retard",
+            "nombre_total_joueur": 30
+        },
+        {
+            "id": 6,
+            "nom": "Lambert",
+            "prenom": "Marie",
+            "email": "marie.lambert@email.com",
+            "tel": "123-456-7895",
+            "categorie": {
+                "id": 1,
+                "nom": "U18"
+            },
+            "derniere_activite": "2023-11-14T12:30:00",
+            "date_creation": "2023-01-04",
+            "equipe": {
+                "id": 2,
+                "nom": "Les Tigres",
+                "categorie": {
+                    "id": 1,
+                    "nom": "U18"
+                }
+            },
+            "statut": "actif",
+            "logo": "url_du_logo_joueur",
+            "nom_prenom_tel_parent": "Lambert Parent - 123-456-7895",
+            "total_presence": 28,
+            "dates_heures_absence": [
+                {
+                    "date": "2023-11-06",
+                    "heure": "19:00"
+                }
+            ],
+            "mot_de_passe": "hashed_password",
+            "role": "joueur",
+            "age": 18,
+            "etat": "absent",
+            "nombre_total_joueur": 30
+        }
+    ]
+}
