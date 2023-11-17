@@ -10,8 +10,6 @@ const initialState: JoueursState = {
   joueurs,
 };
 
-// console.log(joueurs);
-
 const joueursReducer = createReducer(initialState, () => {
 
 });
