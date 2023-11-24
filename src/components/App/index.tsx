@@ -11,6 +11,7 @@ import Joueur from '../Pages/Joueur';
 import LoginForm from '../Pages/LoginForm';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { changeCredentialsField } from '../../store/reducers/user';
+import QRCodeReader from '../QrCode/QRCodeReader';
 
 function App() {
   const dispatch = useAppDispatch();
@@ -48,6 +49,7 @@ function App() {
           <Route path="/profil" element={<Profil />} />
           <Route path="/equipes/senior" element={<Equipe />} />
           <Route path="/equipes/senior/joueur" element={<Joueur />} />
+          <Route path="/pageJoueur" element={<QRCodeReader />} />
           <Route path="*" element={<div>404</div>} />
         </Routes>
       </div>

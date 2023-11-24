@@ -37,6 +37,11 @@ function SideBar() {
         Paramètre
 
       </NavLink>
+      <NavLink className={classNameLink} to="/pageJoueur">
+        <GoHome />
+        Page Joueur
+
+      </NavLink>
     </nav>
   );
 }
