@@ -1,4 +1,5 @@
 import { createAction, createReducer } from '@reduxjs/toolkit';
+// import { useEffect } from 'react';
 import { createAppAsyncThunk } from '../../utils/redux';
 import { axiosInstance } from '../../utils/axios';
 import { LoginResponse } from '../../@types/user';
@@ -15,7 +16,7 @@ interface UserState {
     role:string;
   };
   pseudo: string;
-  token: string;
+  token: { token:string };
   errorLogin: string | null;
   isLoading: boolean;
 }
@@ -24,7 +25,7 @@ const userData = getUserDataFromLocalStorage();
 export const initialState: UserState = {
   logged: false,
   pseudo: '',
-  token: '',
+  token: { token: '' },
   errorLogin: null,
   isLoading: false,
   credentials: {

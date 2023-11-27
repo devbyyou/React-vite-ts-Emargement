@@ -1,23 +1,38 @@
-import { createReducer } from '@reduxjs/toolkit';
-import { coaches } from '../../data/data2.json';
-import { Coach } from '../../@types/types2';
+import { createAsyncThunk, createReducer } from '@reduxjs/toolkit';
+import { axiosInstance } from '../../utils/axios';
+// import { fetchCoaches } from './coachesActions';
 
-interface CoachesState {
-  coaches: Coach[]
-}
+export const fetchCoaches = createAsyncThunk('coaches/fetchCoaches', async (_, thunkAPI) => {
+  try {
+    const response = await axiosInstance.get('/coaches');
+    return response.data;
+  } catch (error) {
+    // Gérer les erreurs ici
+    console.error(error);
+    throw error;
+  }
+});
 
-const initialState: CoachesState = {
-  coaches,
+const initialState = {
+  coaches: [],
+  loading: false,
+  error: null,
 };
 
-// export const monActionAvecParams = createAction('MON_ACTION_AVEC_PARAMS');
-
-const coachesReducer = createReducer(initialState, () => {
-  // builder;
-  // .addCase(monActionAvecParams, (state, action) => {
-  // // Je récupère le paramètre passer dans mon action lors du dispatch
-  // // Cette information se retrouve dans `action.payload`
-  //   state.yeah = action.payload;
-  // });
+const coachesReducer = createReducer(initialState, (builder) => {
+  builder
+    .addCase(fetchCoaches.pending, (state) => {
+      state.loading = true;
+      state.error = null;
+    })
+    .addCase(fetchCoaches.fulfilled, (state, action) => {
+      state.loading = false;
+      state.coaches = action.payload;
+    })
+    .addCase(fetchCoaches.rejected, (state, action) => {
+      state.loading = false;
+      // state.error = action.error.message;
+    });
 });
+
 export default coachesReducer;

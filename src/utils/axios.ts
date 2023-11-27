@@ -1,4 +1,5 @@
 import axios from 'axios';
+// import { useEffect } from 'react';
 import { getUserDataFromLocalStorage } from './user';
 
 // Je créer une instance d'axios me permettant d'enregistrer
@@ -14,8 +15,11 @@ axiosInstance.interceptors.request.use((config) => {
   const userData = getUserDataFromLocalStorage();
 
   // Si mon utilisateur est connecté, je lui ajoute un header Authorization
+  // const token = userData ? userData.token : null;
+
+  // console.log('Token:', userData.token.token);
   //   eslint-disable-next-line no-param-reassign
-  config.headers.Authorization = userData ? `Bearer ${userData.token}` : null;
+  config.headers.Authorization = userData ? `Bearer ${userData.token.token}` : null;
 
   return config;
 });

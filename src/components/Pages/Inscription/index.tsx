@@ -1,6 +1,7 @@
-import React, { ChangeEvent, FormEvent } from 'react';
+import React, { ChangeEvent, FormEvent, useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
 import { changeCredentialsField, inscription } from '../../../store/reducers/inscription';
+import { fetchCoaches } from '../../../store/reducers/coaches';
 
 function Inscription() {
   const email = useAppSelector((state) => state.inscription.credentials.email);
@@ -23,6 +24,11 @@ function Inscription() {
     event.preventDefault();
     dispatch(inscription());
   }
+
+  useEffect(() => {
+    // Appel de l'action pour récupérer les coaches
+    dispatch(fetchCoaches());
+  }, [dispatch]);
 
   return (
     <div onSubmit={handlerSubmit}>
