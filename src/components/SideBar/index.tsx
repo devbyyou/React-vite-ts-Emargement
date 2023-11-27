@@ -42,6 +42,11 @@ function SideBar() {
         Page Joueur
 
       </NavLink>
+      <NavLink className={classNameLink} to="/inscription">
+        <GoHome />
+        Inscription
+
+      </NavLink>
     </nav>
   );
 }

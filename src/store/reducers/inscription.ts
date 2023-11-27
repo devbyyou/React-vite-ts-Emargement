@@ -9,6 +9,10 @@ interface UserState {
   credentials: {
     email: string;
     password: string;
+    prenom:string;
+    nom:string;
+    tel:string;
+    role:string;
   };
   pseudo: string;
   token: string;
@@ -26,20 +30,33 @@ export const initialState: UserState = {
   credentials: {
     email: 'lyy.pro@gmail.com',
     password: 'motdepasse123',
+    prenom: 'youssouf',
+    nom: 'ly',
+    tel: '123456789',
+    role: 'Entraineur',
   },
   ...userData,
 };
 
-export const login = createAppAsyncThunk(
-  'user/LOGIN',
+export const inscription = createAppAsyncThunk(
+  'inscription/INSCRIPTION',
   async (_, thunkAPI) => {
     // On va aller récupérer depuis le state les credentials
     const state = thunkAPI.getState();
     // Je récupère mon email et mon mot de passe
-    const { email, password } = state.user.credentials;
-    const { data } = await axiosInstance.post('/login', {
+    const {
+      email, password, prenom,
+      nom,
+      tel,
+      role,
+    } = state.inscription.credentials;
+    const { data } = await axiosInstance.post('/inscription', {
       email,
       password,
+      prenom,
+      nom,
+      tel,
+      role,
     });
 
     // Pour sauvegarde mes informations, je transforme mon objet en chaine de caractère
@@ -55,7 +72,7 @@ export const login = createAppAsyncThunk(
 export const changeCredentialsField = createAction<{
   value:string;
   field: keyof UserState['credentials']
-}>('user/CHANGE_CREDENTIALS_FIELD');
+}>('inscription/CHANGE_CREDENTIALS_FIELD');
 
 const userReducer = createReducer(initialState, (builder) => {
   builder
@@ -63,7 +80,7 @@ const userReducer = createReducer(initialState, (builder) => {
       const { field, value } = action.payload;
       state.credentials[field] = value;
     })
-    .addCase(login.fulfilled, (state, action) => {
+    .addCase(inscription.fulfilled, (state, action) => {
       // J'enregistre les informations retourner par mon API
       state.logged = action.payload.logged;
       state.pseudo = action.payload.pseudo;

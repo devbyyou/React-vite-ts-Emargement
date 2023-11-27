@@ -3,6 +3,7 @@ import equipesReducer from './equipes';
 import categoriesReducer from './categories';
 import joueursReducer from './joueurs';
 import userReducer from './user';
+import inscriptionReducer from './inscription';
 import qrCodeReducer from './qrCode';
 
 const reducer = {
@@ -11,6 +12,7 @@ const reducer = {
   categories: categoriesReducer,
   joueurs: joueursReducer,
   user: userReducer,
+  inscription: inscriptionReducer,
   qrCode: qrCodeReducer,
 };
 

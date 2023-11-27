@@ -10,13 +10,15 @@ import Equipe from '../Pages/Equipe';
 import Joueur from '../Pages/Joueur';
 import LoginForm from '../Pages/LoginForm';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
-import { changeCredentialsField } from '../../store/reducers/user';
+import { changeCredentialsField, login } from '../../store/reducers/user';
 import QRCodeReader from '../QrCode/QRCodeReader';
+import Inscription from '../Pages/Inscription';
 
 function App() {
   const dispatch = useAppDispatch();
   const email = useAppSelector((state) => state.user.credentials.email);
   const password = useAppSelector((state) => state.user.credentials.password);
+
   const handleChangeField = (value: string, field: 'email' | 'password') => {
     dispatch(changeCredentialsField({
       value,
@@ -25,7 +27,7 @@ function App() {
   };
 
   const handleLogin = () => {
-
+    dispatch(login());
   };
 
   return (
@@ -46,6 +48,7 @@ function App() {
           <Route path="/equipes" element={<Equipes />} />
           <Route path="/presents" element={<Presents />} />
           <Route path="/parametre" element={<Parametre />} />
+          <Route path="/inscription" element={<Inscription />} />
           <Route path="/profil" element={<Profil />} />
           <Route path="/equipes/senior" element={<Equipe />} />
           <Route path="/equipes/senior/joueur" element={<Joueur />} />
