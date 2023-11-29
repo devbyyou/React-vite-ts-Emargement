@@ -11,7 +11,7 @@ interface UserState {
     password: string;
   };
   pseudo: string;
-  token: string;
+  token: { token:string };
   errorLogin: string | null;
   isLoading: boolean;
 }
@@ -20,7 +20,7 @@ const userData = getUserDataFromLocalStorage();
 export const initialState: UserState = {
   logged: false,
   pseudo: '',
-  token: '',
+  token: { token: '' },
   errorLogin: null,
   isLoading: false,
   credentials: {
@@ -65,6 +65,7 @@ const userReducer = createReducer(initialState, (builder) => {
     })
     .addCase(login.fulfilled, (state, action) => {
       // J'enregistre les informations retourner par mon API
+      console.log(action.payload);
       state.logged = action.payload.logged;
       state.pseudo = action.payload.pseudo;
       state.token = action.payload.token;

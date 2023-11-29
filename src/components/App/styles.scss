@@ -6,13 +6,12 @@
     height: 100vh;
 }
 
-.login{
-    display: flex;
-    justify-content: center;
-    flex-direction: row;
-}
-.inscriptionTest{
-    background-color : #b8d6f2;
+.inscriptionTest {
+    background-color: #b8d6f2;
     margin: 2rem;
     padding: 1rem;
+}
+.content__connexion {
+    height: 100vh;
+    background-color: red;
 }

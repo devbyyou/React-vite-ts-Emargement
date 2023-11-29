@@ -1,0 +1,46 @@
+@use "../../styles/vars";
+.connexion__content {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    background-color: aqua;
+}
+.login {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    background-color: red;
+    width: 50%;
+    height: 50%;
+}
+
+.login-form {
+  &-element {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+  }
+
+  &-message {
+    margin: 0.3em 1em;
+  }
+
+  &-logged {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+  }
+
+  &-button {
+    font-size: 1em;
+    color: #fff;
+    background-color: vars.$button;
+    border-radius: 0.3em;
+    border: 0;
+    padding: 0.7em;
+    height: 2.5em;
+  }
+}
