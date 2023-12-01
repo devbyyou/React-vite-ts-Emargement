@@ -1,8 +1,10 @@
 @use "../../../../styles/vars";
 
 .field {
-  margin: 0.3em 0.3em 0.3em 0;
+  margin: 0.3em 0.3em 0.9em 0;
   position: relative;
+  width: 80%;
+
 
   &-input {
     width: 100%;
@@ -40,6 +42,11 @@
       padding: 1.4em 0.7em 0.4em;
     }
   }
+}
+
+.mdpOublie{
+  margin-bottom: 15px;
+  font-size: 12px;
 }
 
 @keyframes labelSlideUpAndShow {

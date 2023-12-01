@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import { FormEvent } from 'react';
 import Field from './Field';
 
@@ -60,11 +61,12 @@ function LoginForm({
             onChange={handleChangeField('password')}
             value={password}
           />
+          <Link className="mdpOublie" to="/">Mot de passe oublié?</Link>
           <button
             type="submit"
             className="login-form-button"
           >
-            OK
+            Connexion
           </button>
         </form>
       )}

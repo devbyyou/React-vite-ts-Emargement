@@ -65,7 +65,7 @@ const userReducer = createReducer(initialState, (builder) => {
     })
     .addCase(login.fulfilled, (state, action) => {
       // J'enregistre les informations retourner par mon API
-      console.log(action.payload);
+      // console.log(action.payload);
       state.logged = action.payload.logged;
       state.pseudo = action.payload.pseudo;
       state.token = action.payload.token;

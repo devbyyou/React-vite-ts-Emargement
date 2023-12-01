@@ -22,6 +22,7 @@ function Connexion() {
   return (
     <div className="connexion__content">
       <div className="login">
+        <h1> Connexion à QrEmargement</h1>
         <LoginForm
           email={email}
           password={password}
