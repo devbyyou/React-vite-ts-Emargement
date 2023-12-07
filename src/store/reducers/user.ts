@@ -11,7 +11,25 @@ interface UserState {
     password: string;
   };
   pseudo: string;
-  token: { token:string };
+  token: {
+    token:string,
+    user: {
+      created_at:string,
+      date_creation:string,
+      email:string,
+      // id:string,
+      last_activity:string,
+      // logo:string,
+      nom:string,
+      password:string,
+      prenom:string,
+      role:string,
+      // session_id:boolean,
+      statut:string,
+      tel:string,
+      updated_at:string,
+    },
+  };
   errorLogin: string | null;
   isLoading: boolean;
 }
@@ -20,12 +38,30 @@ const userData = getUserDataFromLocalStorage();
 export const initialState: UserState = {
   logged: false,
   pseudo: '',
-  token: { token: '' },
+  token: {
+    token: '',
+    user: {
+      created_at: '',
+      date_creation: '',
+      email: '',
+      // id: ,
+      last_activity: '',
+      // logo: '',
+      nom: '',
+      password: '',
+      prenom: '',
+      role: '',
+      // session_id: '',
+      statut: '',
+      tel: '',
+      updated_at: '',
+    },
+  },
   errorLogin: null,
   isLoading: false,
   credentials: {
-    email: 'lyy.pro@gmail.com',
-    password: 'motdepasse123',
+    email: 'pierre.dupont@example.com',
+    password: 'motdepasse1',
   },
   ...userData,
 };

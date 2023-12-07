@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 // import { Link } from 'react-router-dom';
 import './index.scss';
 import Overview from './Overview';
@@ -6,16 +6,23 @@ import ListChoice from './ListChoice';
 import MembersList from './MembersList';
 import Graph from './Graph';
 import Header from './Header';
+import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
+import { login } from '../../../store/reducers/user';
 // import { useAppSelector } from '../../../hooks/redux';
 
 function Home() {
-  // const coachesData = useAppSelector((state) => state.coaches);
+  const dispatch = useAppDispatch();
+  const token = useAppSelector((state) => state.user.token);
+  // console.log(token);
 
   return (
     <div>
       <Header />
       <div className="messageHome">
-        Bienvenue à nouveau, Robert 👋
+        { `
+        Bienvenue à nouveau, 
+        ${token.user.prenom}`}
+        👋
       </div>
       <h2 className="title">Overview</h2>
 
