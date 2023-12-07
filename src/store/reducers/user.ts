@@ -4,6 +4,51 @@ import { axiosInstance } from '../../utils/axios';
 import { LoginResponse } from '../../@types/user';
 import { getUserDataFromLocalStorage } from '../../utils/user';
 
+interface Equipe {
+  id: number
+  nom: string
+  logo: string
+  statut: string
+  categorie_id: number
+  joueurs: Joueur[]
+  Categories: Categories
+  coaches_equipes: CoachesEquipes
+}
+
+interface Joueur {
+  id: number
+  nom: string
+  prenom: string
+  email: string
+}
+
+interface Categories {
+  id: number
+  nom: string
+  tranche_age: string
+  nombre_total: number
+}
+
+interface CoachesEquipes {
+  created_at: string
+  updated_at: string
+  coach_id: number
+  equipe_id: number
+}
+interface User {
+  created_at: string;
+  date_creation: string;
+  email: string;
+  last_activity: string;
+  equipes: Equipe[];
+  nom: string;
+  password: string;
+  prenom: string;
+  role: string;
+  statut: string;
+  tel: string;
+  updated_at: string;
+}
 interface UserState {
   logged: boolean;
   credentials: {
@@ -13,22 +58,7 @@ interface UserState {
   pseudo: string;
   token: {
     token:string,
-    user: {
-      created_at:string,
-      date_creation:string,
-      email:string,
-      // id:string,
-      last_activity:string,
-      // logo:string,
-      nom:string,
-      password:string,
-      prenom:string,
-      role:string,
-      // session_id:boolean,
-      statut:string,
-      tel:string,
-      updated_at:string,
-    },
+    user: User,
   };
   errorLogin: string | null;
   isLoading: boolean;
@@ -44,14 +74,42 @@ export const initialState: UserState = {
       created_at: '',
       date_creation: '',
       email: '',
-      // id: ,
       last_activity: '',
-      // logo: '',
+      equipes: [
+        {
+          // id: 1,
+          nom: '',
+          logo: '',
+          statut: '',
+          // categorie_id: 1,
+          joueurs: [
+            {
+              // id: 1,
+              nom: '',
+              prenom: '',
+              email: '',
+            },
+            // ... autres joueurs
+          ],
+          Categories: {
+            // id: 1,
+            nom: '',
+            tranche_age: '',
+            // nombre_total: ,
+          },
+          coaches_equipes: {
+            created_at: '',
+            updated_at: '',
+            // coach_id: 1,
+            // equipe_id: 1,
+          },
+        },
+        // ... autres équipes
+      ],
       nom: '',
       password: '',
       prenom: '',
       role: '',
-      // session_id: '',
       statut: '',
       tel: '',
       updated_at: '',
