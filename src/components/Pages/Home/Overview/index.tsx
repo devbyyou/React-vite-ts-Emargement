@@ -8,11 +8,11 @@ function Overview() {
   const nbEquipes = useAppSelector((state) => state.user.token.user);
   // console.log(nbEquipes);
   const nbTotalEquipes = nbEquipes.equipes.length;
-  const nbTotalJoueurs = nbEquipes.equipes;
+  const nbJoueurs = nbEquipes.equipes;
 
-  nbTotalJoueurs.map((joueur) => (
-    console.log(joueur.joueurs.length)
-  ));
+  const nbJoueutTotal = nbJoueurs.map((joueur) => joueur.joueurs.length);
+  // eslint-disable-next-line no-return-assign, no-param-reassign
+  const calculTotalJoueur = nbJoueutTotal.reduce((equipeA, equipeB) => equipeA += equipeB);
 
   return (
     <div className="overviews">
@@ -31,7 +31,7 @@ function Overview() {
             <BiFootball className="card__icons" />
             Joueur
           </p>
-          <p className="card__number">14</p>
+          <p className="card__number">{calculTotalJoueur}</p>
         </div>
       </div>
     </div>
