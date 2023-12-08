@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import SideBar from '../SideBar';
 import './styles.scss';
@@ -11,10 +12,23 @@ import Joueur from '../Pages/Joueur';
 import QRCodeReader from '../QrCode/QRCodeReader';
 import Inscription from '../Pages/Inscription';
 import Connexion from '../Connexion';
-import { useAppSelector } from '../../hooks/redux';
+import { useAppDispatch, useAppSelector } from '../../hooks/redux';
+import { fetchCoaches } from '../../store/reducers/coaches';
 
 function App() {
   const logged = useAppSelector((state) => state.user.logged);
+  const dispatch = useAppDispatch();
+  useEffect(() => {
+    // Déclenche l'effet toutes les 10 secondes
+    const intervalId = setInterval(() => {
+      if (logged) {
+        dispatch(fetchCoaches());
+      }
+    }, 30 * 60 * 1000); // 30 minutes en millisecondes
+
+    // Nettoie l'intervalle lorsque le composant est démonté
+    return () => clearInterval(intervalId);
+  }, [dispatch, logged]);
 
   return (
     <div className="content__connexion">

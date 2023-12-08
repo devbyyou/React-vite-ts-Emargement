@@ -4,7 +4,7 @@ import { axiosInstance } from '../../utils/axios';
 
 export const fetchCoaches = createAsyncThunk('coaches/fetchCoaches', async (_, thunkAPI) => {
   try {
-    const response = await axiosInstance.get('/coaches');
+    const response = await axiosInstance.get('/');
     return response.data;
   } catch (error) {
     // Gérer les erreurs ici

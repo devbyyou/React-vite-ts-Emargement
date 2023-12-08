@@ -8,4 +8,5 @@ export const getUserDataFromLocalStorage = () => {
 
 export const removeUserDataFromLocalStorage = () => {
   localStorage.removeItem('user');
+  localStorage.clear();
 };
