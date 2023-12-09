@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unescaped-entities */
 import React from 'react';
 import './index.scss';
 import Overview from './Overview';
@@ -8,8 +9,8 @@ import Header from './Header';
 import { useAppSelector } from '../../../hooks/redux';
 
 function Home() {
-  const token = useAppSelector((state) => state.user.token);
-  // console.log(token);
+  const user = useAppSelector((state) => state.user.token.user);
+  const { prenom } = user;
 
   return (
     <div>
@@ -17,10 +18,10 @@ function Home() {
       <div className="messageHome">
         { `
         Bienvenue à nouveau, 
-        ${token.user.prenom}`}
+        ${prenom}`}
         👋
       </div>
-      <h2 className="title">Overview</h2>
+      <h2 className="title">Vue d'ensemble</h2>
 
       <div className="content__displayChoice">
         <Overview />

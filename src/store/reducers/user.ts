@@ -5,13 +5,14 @@ import { LoginResponse } from '../../@types/user';
 import { getUserDataFromLocalStorage } from '../../utils/user';
 
 interface Equipe {
+  // map(arg0: (joueur: any) => JSX.Element): unknown;
   id: number
   nom: string
   logo: string
   statut: string
   categorie_id: number
   joueurs: Joueur[]
-  Categories: Categories
+  categories: Categories
   coaches_equipes: CoachesEquipes
 }
 
@@ -20,6 +21,7 @@ interface Joueur {
   nom: string
   prenom: string
   email: string
+  derniere_activite: string | number
 }
 
 interface Categories {
@@ -36,6 +38,7 @@ interface CoachesEquipes {
   equipe_id: number
 }
 interface User {
+  id:number;
   created_at: string;
   date_creation: string;
   email: string;
@@ -84,14 +87,15 @@ export const initialState: UserState = {
           // categorie_id: 1,
           joueurs: [
             {
-              // id: 1,
+              id: 1,
               nom: '',
               prenom: '',
               email: '',
+              derniere_activite: '',
             },
             // ... autres joueurs
           ],
-          Categories: {
+          categories: {
             // id: 1,
             nom: '',
             tranche_age: '',
@@ -104,7 +108,6 @@ export const initialState: UserState = {
             // equipe_id: 1,
           },
         },
-        // ... autres équipes
       ],
       nom: '',
       password: '',
@@ -113,6 +116,7 @@ export const initialState: UserState = {
       statut: '',
       tel: '',
       updated_at: '',
+      id: 0,
     },
   },
   errorLogin: null,
