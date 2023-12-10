@@ -3,6 +3,7 @@ import './index.scss';
 // import { CiSearch } from 'react-icons/ci';
 import { BiSolidChevronRight } from 'react-icons/bi';
 import moment from 'moment';
+import { Link } from 'react-router-dom';
 import { useAppSelector } from '../../../../hooks/redux';
 import FormSearchMembers from './FormSearchMembers';
 
@@ -70,7 +71,9 @@ function MembersList() {
       {/* Fin Tableau */}
       <button type="button" className="add-button">
         <BiSolidChevronRight className="members-list__logo" />
-        Voir plus
+        <Link to="/equipes">
+          Voir plus
+        </Link>
       </button>
     </div>
   );

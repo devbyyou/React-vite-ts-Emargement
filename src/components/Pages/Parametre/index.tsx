@@ -1,4 +1,5 @@
 /* eslint-disable react/no-unescaped-entities */
+import ProfilePictureSection from './ProfilePictureSection';
 import './index.scss';
 
 function Parametre() {
@@ -72,7 +73,10 @@ function Parametre() {
 
         <div className="parametre__content-logout">
           <button type="button" className="parametre__content-logout-btn">Déconnexion</button>
+          <ProfilePictureSection />
+          <ProfilePictureSection />
         </div>
+
       </div>
     </div>
   );
