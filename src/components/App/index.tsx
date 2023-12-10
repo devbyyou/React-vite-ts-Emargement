@@ -19,7 +19,6 @@ function App() {
   const logged = useAppSelector((state) => state.user.logged);
   const dispatch = useAppDispatch();
   useEffect(() => {
-    // Déclenche l'effet toutes les 10 secondes
     const intervalId = setInterval(() => {
       if (logged) {
         dispatch(fetchCoaches());

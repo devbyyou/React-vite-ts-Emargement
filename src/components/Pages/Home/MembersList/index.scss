@@ -61,6 +61,12 @@
     }
 }
 
+.tablenoScrool{
+    overflow-y: scroll;
+    scroll-behavior: smooth;
+    height: 50vh;
+}
+
 .row {
     display: flex;
     border: 1px solid rgb(223 223 223 / 56%);
@@ -71,7 +77,8 @@
     border-right: none;
     border-top: none;
     &:hover {
-        background-color: #f4f9f4;
+        // background-color: #f4f9f4;
+        background-color: rgba(194, 232, 217, 0.36);
         cursor: pointer;
     }
 }
@@ -80,6 +87,27 @@
     flex: 1;
     padding: 10px;
     text-align: center;
+}
+
+.cellNoscroll {
+    &:first-child {
+        position: sticky;
+        left: 0;
+        z-index: 1;
+        &:hover {
+            background-color: none;
+        }
+    }
+}
+
+.noScrool {
+    position: sticky;
+    top: 0;
+    z-index: 2;
+    background-color: #f4f9f4;
+    &:hover {
+        background-color: #f4f9f4;
+    }
 }
 
 .label {

@@ -1,11 +1,14 @@
-import React, { useEffect } from 'react';
+import React, { useState } from 'react';
 import './index.scss';
-import { CiSearch } from 'react-icons/ci';
+// import { CiSearch } from 'react-icons/ci';
 import { BiSolidChevronRight } from 'react-icons/bi';
 import moment from 'moment';
 import { useAppSelector } from '../../../../hooks/redux';
+import FormSearchMembers from './FormSearchMembers';
 
 function MembersList() {
+  const [inputState, inputSetState] = useState<string>('');
+
   const user = useAppSelector((state) => state.user.token.user);
   const { equipes } = user;
 
@@ -26,14 +29,11 @@ function MembersList() {
       <div className="header">
         <h2 className="titleMembre">Membres</h2>
       </div>
-      <div className="search-bar">
-        <CiSearch className="logo__search_members" />
-        <input type="text" placeholder="Rechercher par nom" />
-      </div>
+      <FormSearchMembers inputState={inputState} inputSetState={inputSetState} />
 
       {/* Début Tableau */}
-      <div className="table">
-        <div className="row label">
+      <div className="table tablenoScrool">
+        <div className="row label noScrool">
           <div className="cell">Nom</div>
           <div className="cell">Catégories</div>
           <div className="cell">Dernière Activité</div>
@@ -43,9 +43,13 @@ function MembersList() {
   listEquipes.map((listeJoueurs) => {
     const categories = listeJoueurs.categories.nom;
     const { joueurs } = listeJoueurs;
-    return joueurs.map((joueur) => (
+    // eslint-disable-next-line max-len
+    const filterdJoueur = joueurs.filter((joueur) => joueur.nom.toLowerCase().includes(inputState.toLowerCase()));
+    // console.log(filterdJoueur);
+
+    return filterdJoueur.map((joueur) => (
       <div key={joueur.id} className="row">
-        <div className="cell">
+        <div className="cell cellNoscroll">
           {`
           ${joueur.nom}
           ${joueur.prenom}
