@@ -16,11 +16,44 @@ export interface User {
   tel: string
   role: string
   password: string
-  date_creation: string
+  date_creation: string | number
   last_activity: string
-  logo: string | null
+  logo: string
   statut: string
   session_id: string | null
   created_at: string
   updated_at: string
+  equipes: Equipe[];
+  banniere: string,
+}
+export interface Equipe {
+  id: number
+  nom: string
+  logo?: string
+  statut: string
+  categorie_id: number
+  joueurs: Joueur[]
+  categories: Categories
+  coaches_equipes: CoachesEquipes
+}
+export interface Joueur {
+  id: number
+  nom: string
+  prenom: string
+  email: string
+  derniere_activite: string | number
+}
+
+export interface Categories {
+  id: number
+  nom: string
+  tranche_age: string
+  nombre_total: number
+}
+
+export interface CoachesEquipes {
+  created_at: string
+  updated_at: string
+  coach_id: number
+  equipe_id: number
 }

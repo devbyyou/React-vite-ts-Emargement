@@ -2,10 +2,10 @@ import React, { useState } from 'react';
 import './index.scss';
 // import { CiSearch } from 'react-icons/ci';
 import { BiSolidChevronRight } from 'react-icons/bi';
-import moment from 'moment';
 import { Link } from 'react-router-dom';
 import { useAppSelector } from '../../../../hooks/redux';
 import FormSearchMembers from './FormSearchMembers';
+import functionConverteDate from './ConverteDate';
 
 function MembersList() {
   const [inputState, inputSetState] = useState<string>('');
@@ -14,15 +14,6 @@ function MembersList() {
   const { equipes } = user;
 
   const listEquipes = equipes.map((listJoueurs) => listJoueurs);
-  // eslint-disable-next-line max-len
-
-  function convertDate(derniere_activite: string | number): React.ReactNode {
-    const lastActivity = moment(derniere_activite);
-    const now = moment();
-
-    const minutesElapsed = now.diff(lastActivity, 'minutes');
-    return minutesElapsed;
-  }
 
   return (
     <div className="members-list">
@@ -61,7 +52,7 @@ function MembersList() {
           .
           {categories}
         </div>
-        <div className="cell">{`${convertDate(joueur.derniere_activite)} min ago`}</div>
+        <div className="cell">{`${functionConverteDate.convertDateToDelay(joueur.derniere_activite)} min ago`}</div>
       </div>
     ));
   })

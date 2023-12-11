@@ -1,57 +1,9 @@
 import { createAction, createReducer } from '@reduxjs/toolkit';
 import { createAppAsyncThunk } from '../../utils/redux';
 import { axiosInstance } from '../../utils/axios';
-import { LoginResponse } from '../../@types/user';
+import { LoginResponse, User } from '../../@types/user';
 import { getUserDataFromLocalStorage } from '../../utils/user';
 
-interface Equipe {
-  // map(arg0: (joueur: any) => JSX.Element): unknown;
-  id: number
-  nom: string
-  logo: string
-  statut: string
-  categorie_id: number
-  joueurs: Joueur[]
-  categories: Categories
-  coaches_equipes: CoachesEquipes
-}
-
-interface Joueur {
-  id: number
-  nom: string
-  prenom: string
-  email: string
-  derniere_activite: string | number
-}
-
-interface Categories {
-  id: number
-  nom: string
-  tranche_age: string
-  nombre_total: number
-}
-
-interface CoachesEquipes {
-  created_at: string
-  updated_at: string
-  coach_id: number
-  equipe_id: number
-}
-interface User {
-  id:number;
-  created_at: string;
-  date_creation: string;
-  email: string;
-  last_activity: string;
-  equipes: Equipe[];
-  nom: string;
-  password: string;
-  prenom: string;
-  role: string;
-  statut: string;
-  tel: string;
-  updated_at: string;
-}
 interface UserState {
   logged: boolean;
   credentials: {
@@ -75,16 +27,16 @@ export const initialState: UserState = {
     token: '',
     user: {
       created_at: '',
-      date_creation: '',
+      date_creation: 1,
       email: '',
       last_activity: '',
       equipes: [
         {
-          // id: 1,
+          id: 1,
           nom: '',
           logo: '',
           statut: '',
-          // categorie_id: 1,
+          categorie_id: 1,
           joueurs: [
             {
               id: 1,
@@ -96,27 +48,30 @@ export const initialState: UserState = {
             // ... autres joueurs
           ],
           categories: {
-            // id: 1,
+            id: 1,
             nom: '',
             tranche_age: '',
-            // nombre_total: ,
+            nombre_total: 0,
           },
           coaches_equipes: {
             created_at: '',
             updated_at: '',
-            // coach_id: 1,
-            // equipe_id: 1,
+            coach_id: 1,
+            equipe_id: 1,
           },
         },
       ],
       nom: '',
       password: '',
+      logo: '',
       prenom: '',
+      banniere: '',
       role: '',
       statut: '',
       tel: '',
       updated_at: '',
       id: 0,
+      session_id: null,
     },
   },
   errorLogin: null,
