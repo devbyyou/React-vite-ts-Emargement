@@ -1,7 +1,7 @@
 import { createAction, createReducer } from '@reduxjs/toolkit';
 import { createAppAsyncThunk } from '../../utils/redux';
 import { axiosInstance } from '../../utils/axios';
-import { LoginResponse, User } from '../../@types/user';
+import { Equipe, LoginResponse, User } from '../../@types/user';
 import { getUserDataFromLocalStorage } from '../../utils/user';
 
 interface UserState {
@@ -17,6 +17,7 @@ interface UserState {
   };
   errorLogin: string | null;
   isLoading: boolean;
+  filteredEquipes: Equipe[];
 }
 const userData = getUserDataFromLocalStorage();
 
@@ -74,6 +75,7 @@ export const initialState: UserState = {
       session_id: null,
     },
   },
+  filteredEquipes: [],
   errorLogin: null,
   isLoading: false,
   credentials: {
@@ -118,10 +120,10 @@ const userReducer = createReducer(initialState, (builder) => {
     })
     .addCase(login.fulfilled, (state, action) => {
       // J'enregistre les informations retourner par mon API
-      // console.log(action.payload);
       state.logged = action.payload.logged;
       state.pseudo = action.payload.pseudo;
       state.token = action.payload.token;
+      // state
 
       // Je réinitialiser les credentials
       state.credentials.email = '';

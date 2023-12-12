@@ -1,5 +1,6 @@
 import React from 'react';
 import './index.scss';
+import { Link } from 'react-router-dom';
 import { useAppSelector } from '../../../hooks/redux';
 import functionConverteDate from '../Home/MembersList/ConverteDate';
 
@@ -31,7 +32,9 @@ function Profil() {
           </div>
 
           <div className="profil__banniere-dec-btn">
-            <button type="button">Modifier mon profil</button>
+            <Link to="/parametre">
+              <button type="button">Modifier mon profil</button>
+            </Link>
           </div>
         </div>
       </div>

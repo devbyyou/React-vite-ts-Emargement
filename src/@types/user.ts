@@ -23,7 +23,7 @@ export interface User {
   session_id: string | null
   created_at: string
   updated_at: string
-  equipes: Equipe[];
+  equipes: Equipe[]
   banniere: string,
 }
 export interface Equipe {

@@ -1,0 +1,7 @@
+{ id: React.Key | null | undefined; categories: 
+{ nom: string | number | boolean 
+| React.ReactElement<any, string | React.JSXElementConstructor<any>>
+| React.ReactFragment | React.ReactPortal | null | undefined;
+    };
+     nom: string | number | boolean | React.ReactElement<any, string | React.JSXElementConstructor<any>> | React.ReactFragment | React.ReactPortal | null | undefined; joueurs: string | any[];
+}

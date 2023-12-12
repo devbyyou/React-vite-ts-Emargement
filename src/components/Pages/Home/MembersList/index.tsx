@@ -60,12 +60,12 @@ function MembersList() {
         {/* Fin tableau liste joueur */}
       </div>
       {/* Fin Tableau */}
-      <button type="button" className="add-button">
-        <BiSolidChevronRight className="members-list__logo" />
-        <Link to="/equipes">
+      <Link to="/equipes">
+        <button type="button" className="add-button">
+          <BiSolidChevronRight className="members-list__logo" />
           Voir plus
-        </Link>
-      </button>
+        </button>
+      </Link>
     </div>
   );
 }
