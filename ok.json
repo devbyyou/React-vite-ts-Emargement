@@ -1,7 +1,201 @@
-{ id: React.Key | null | undefined; categories: 
-{ nom: string | number | boolean 
-| React.ReactElement<any, string | React.JSXElementConstructor<any>>
-| React.ReactFragment | React.ReactPortal | null | undefined;
-    };
-     nom: string | number | boolean | React.ReactElement<any, string | React.JSXElementConstructor<any>> | React.ReactFragment | React.ReactPortal | null | undefined; joueurs: string | any[];
+{
+    "token": {
+        "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImVtYWlsIjoicGllcnJlLmR1cG9udEBleGFtcGxlLmNvbSIsInJvbGUiOiJlbnRyYcOubmV1ciIsImlhdCI6MTcwMjQ3Mzc3MCwiZXhwIjoxNzAyNDczNzcxfQ.g3w_1MDjKvGVEu37sJBJ7AonX7wHo9qECH8xG6kyflM",
+        "user": {
+            "id": 1,
+            "nom": "Dupont",
+            "prenom": "Pierre",
+            "email": "pierre.dupont@example.com",
+            "tel": "0123456789",
+            "role": "entraîneur",
+            "password": "motdepasse1",
+            "date_creation": "2023-12-07",
+            "last_activity": "2023-12-07T11:27:13.322Z",
+            "logo": "https://miro.medium.com/v2/resize:fill:96:96/1*yWfoK01BZFKO6fFQyzxJSA.jpeg",
+            "statut": "actif",
+            "session_id": null,
+            "equipe_id": 1,
+            "banniere": "https://images.unsplash.com/photo-1489944440615-453fc2b6a9a9?q=80&w=1623&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+            "created_at": "2023-12-07T11:27:13.322Z",
+            "updated_at": "2023-12-07T11:27:13.322Z",
+            "equipes": [
+                {
+                    "id": 1,
+                    "nom": "Equipe A",
+                    "logo": "logo_equipeA.png",
+                    "statut": "active",
+                    "categorie_id": 1,
+                    "joueurs": [
+                        {
+                            "id": 45,
+                            "nom": "Lemoine",
+                            "prenom": "Nicolas",
+                            "email": "joueur45@example.com",
+                            "derniere_activite": "2023-12-07T11:27:13.339Z"
+                        },
+                        {
+                            "id": 43,
+                            "nom": "Leroy",
+                            "prenom": "Charlotte",
+                            "email": "joueur43@example.com",
+                            "derniere_activite": "2023-12-07T11:27:13.339Z"
+                        },
+                        {
+                            "id": 31,
+                            "nom": "Michel",
+                            "prenom": "Mathieu",
+                            "email": "joueur31@example.com",
+                            "derniere_activite": "2023-12-07T11:27:13.339Z"
+                        },
+                        {
+                            "id": 29,
+                            "nom": "Leroy",
+                            "prenom": "Émilie",
+                            "email": "joueur29@example.com",
+                            "derniere_activite": "2023-12-07T11:27:13.339Z"
+                        },
+                        {
+                            "id": 27,
+                            "nom": "Roux",
+                            "prenom": "Élise",
+                            "email": "joueur27@example.com",
+                            "derniere_activite": "2023-12-07T11:27:13.339Z"
+                        },
+                        {
+                            "id": 23,
+                            "nom": "Simon",
+                            "prenom": "Élise",
+                            "email": "joueur23@example.com",
+                            "derniere_activite": "2023-12-07T11:27:13.339Z"
+                        },
+                        {
+                            "id": 18,
+                            "nom": "Picard",
+                            "prenom": "Vincent",
+                            "email": "joueur18@example.com",
+                            "derniere_activite": "2023-12-07T11:27:13.339Z"
+                        },
+                        {
+                            "id": 17,
+                            "nom": "Fournier",
+                            "prenom": "Manuel",
+                            "email": "joueur17@example.com",
+                            "derniere_activite": "2023-12-07T11:27:13.339Z"
+                        },
+                        {
+                            "id": 15,
+                            "nom": "Simon",
+                            "prenom": "Pierre",
+                            "email": "joueur15@example.com",
+                            "derniere_activite": "2023-12-07T11:27:13.339Z"
+                        },
+                        {
+                            "id": 10,
+                            "nom": "Martin",
+                            "prenom": "Claire",
+                            "email": "joueur10@example.com",
+                            "derniere_activite": "2023-12-07T11:27:13.339Z"
+                        },
+                        {
+                            "id": 8,
+                            "nom": "Moreau",
+                            "prenom": "Camille",
+                            "email": "joueur8@example.com",
+                            "derniere_activite": "2023-12-07T11:27:13.339Z"
+                        },
+                        {
+                            "id": 1,
+                            "nom": "Durand",
+                            "prenom": "Charlotte",
+                            "email": "joueur1@example.com",
+                            "derniere_activite": "2023-12-07T11:27:13.339Z"
+                        }
+                    ],
+                    "categories": {
+                        "id": 1,
+                        "nom": "U17",
+                        "tranche_age": "moins de 17 ans",
+                        "nombre_total": 50
+                    },
+                    "coaches_equipes": {
+                        "created_at": "2023-12-07T17:03:46.872Z",
+                        "updated_at": "2023-12-07T17:03:46.872Z",
+                        "coach_id": 1,
+                        "equipe_id": 1
+                    }
+                },
+                {
+                    "id": 2,
+                    "nom": "Equipe B",
+                    "logo": "logo_equipeB.png",
+                    "statut": "active",
+                    "categorie_id": 1,
+                    "joueurs": [
+                        {
+                            "id": 47,
+                            "nom": "Bonnet",
+                            "prenom": "Émilie",
+                            "email": "joueur47@example.com",
+                            "derniere_activite": "2023-12-07T11:27:13.339Z"
+                        },
+                        {
+                            "id": 44,
+                            "nom": "Michel",
+                            "prenom": "Émilie",
+                            "email": "joueur44@example.com",
+                            "derniere_activite": "2023-12-07T11:27:13.339Z"
+                        },
+                        {
+                            "id": 34,
+                            "nom": "Lefevre",
+                            "prenom": "Alice",
+                            "email": "joueur34@example.com",
+                            "derniere_activite": "2023-12-07T11:27:13.339Z"
+                        },
+                        {
+                            "id": 24,
+                            "nom": "Dubois",
+                            "prenom": "Claire",
+                            "email": "joueur24@example.com",
+                            "derniere_activite": "2023-12-07T11:27:13.339Z"
+                        },
+                        {
+                            "id": 16,
+                            "nom": "Michel",
+                            "prenom": "Marie",
+                            "email": "joueur16@example.com",
+                            "derniere_activite": "2023-12-07T11:27:13.339Z"
+                        },
+                        {
+                            "id": 13,
+                            "nom": "Lemoine",
+                            "prenom": "Julien",
+                            "email": "joueur13@example.com",
+                            "derniere_activite": "2023-12-07T11:27:13.339Z"
+                        },
+                        {
+                            "id": 5,
+                            "nom": "Roux",
+                            "prenom": "Pierre",
+                            "email": "joueur5@example.com",
+                            "derniere_activite": "2023-12-07T11:27:13.339Z"
+                        }
+                    ],
+                    "categories": {
+                        "id": 12,
+                        "nom": "Senior",
+                        "tranche_age": "moins de 17 ans",
+                        "nombre_total": 50
+                    },
+                    "coaches_equipes": {
+                        "created_at": "2023-12-07T17:03:46.878Z",
+                        "updated_at": "2023-12-07T17:03:46.878Z",
+                        "coach_id": 1,
+                        "equipe_id": 2
+                    }
+                }
+            ]
+        }
+    },
+    "logged": true
 }

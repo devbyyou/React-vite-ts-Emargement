@@ -5,9 +5,13 @@ import { GrFormAdd } from 'react-icons/gr';
 import { AiOutlineSearch } from 'react-icons/ai';
 import Filter from './Filter';
 import Cards from './Cards';
+import { useAppSelector } from '../../../hooks/redux';
 
 function Equipes() {
   const [stateInputValue, setInputValue] = useState('');
+  const user = useAppSelector((state) => state.user.token.user);
+  const { equipes } = user;
+  const [filteredByCheckbox, setfilteredByCheckbox] = useState();
 
   function handleChangeForm(event: ChangeEvent<HTMLInputElement>): void {
     const inputValue = event.target.value;
@@ -15,6 +19,18 @@ function Equipes() {
   }
   const handleFormSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    // Filtrer les équipes en fonction de la barre de recherche
+    const filteredBySearch = equipes.filter((equipe) => (
+      equipe.nom.toLowerCase().includes(stateInputValue.toLowerCase())
+    ));
+
+    // Combiner le filtre par checkbox avec le filtre par recherche
+    const combinedFilter = filteredByCheckbox.length > 0
+      // eslint-disable-next-line max-len
+      ? filteredByCheckbox.filter((equipe) => filteredBySearch.some((filteredEquipe) => equipe.id === filteredEquipe.id))
+      : filteredBySearch;
+
+    setfilteredByCheckbox(combinedFilter);
   };
 
   return (
@@ -36,8 +52,11 @@ function Equipes() {
       </form>
       {/* Fin Formulaire */}
       <div className="content__equipe__contenu">
-        <Filter />
-        <Cards stateInputValue={stateInputValue} />
+        <Filter
+          filteredByCheckbox={filteredByCheckbox}
+          setfilteredByCheckbox={setfilteredByCheckbox}
+        />
+        <Cards filteredByCheckbox={filteredByCheckbox} stateInputValue={stateInputValue} />
       </div>
     </div>
   );

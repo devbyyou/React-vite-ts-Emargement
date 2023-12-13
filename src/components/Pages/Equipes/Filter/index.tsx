@@ -1,14 +1,17 @@
-import React from 'react';
+import React, {
+  ChangeEvent, MouseEvent, useEffect, useState,
+} from 'react';
 import './index.scss';
 import { useAppSelector } from '../../../../hooks/redux';
 
-function Filter() {
+function Filter({ setfilteredByCheckbox, filteredByCheckbox }) {
   const user = useAppSelector((state) => state.user.token.user);
   const { equipes } = user;
-  // const { categories } = equipes;
   const categories = equipes.map((listeEquipes) => listeEquipes.categories);
-  // console.log(categories);
-  // astuce pour ne pas répéter plusieurs fois la même catégories
+  const [activeCategories, setActiveCategories] = useState([]);
+  // Utilisez un tableau pour suivre les catégories actives
+
+  // astuce pour ne pas répéter plusieurs fois la même catégorie
   // Utilisons un ensemble pour suivre les clés déjà rencontrées
   const seenKeys = new Set();
   // Filtrons les catégories pour ne montrer que celles avec des clés uniques
@@ -18,6 +21,32 @@ function Filter() {
     return isUnique;
   });
 
+  function handleClickCheckbox(event: ChangeEvent<HTMLInputElement>): void {
+    const checkboxValue = event.target.value;
+    // const isChecked = event.target.checked;
+    // if (isChecked) {
+    //   const filteredByCategory = equipes.filter((element) => (
+    //     element.categories.nom.toLowerCase().includes(checkboxValue.toLowerCase())));
+    //   setfilteredByCheckbox(filteredByCategory);
+    // } else {
+    //   setfilteredByCheckbox(equipes);
+    // }
+    // setIsActive(isChecked);
+    if (activeCategories.includes(checkboxValue)) {
+      // Si la catégorie est déjà active, la retire du tableau
+      setActiveCategories(activeCategories.filter((category) => category !== checkboxValue));
+    } else {
+      // Si la catégorie n'est pas active, l'ajoute au tableau
+      setActiveCategories([...activeCategories, checkboxValue]);
+    }
+  }
+  const filteredByCategory = equipes.filter((element) => (
+    activeCategories.includes(element.categories.nom.toLowerCase())
+  ));
+  // Mise à jour du filtre
+  useEffect(() => {
+    setfilteredByCheckbox(filteredByCategory);
+  }, [activeCategories, setfilteredByCheckbox]);
   return (
     <div className="filter">
       <h2>Filtrer par</h2>
@@ -28,8 +57,15 @@ function Filter() {
           {
                  uniqueCategories.map((element) => (
                    <div key={element.id} className="card__filer-content-element">
-                     <label htmlFor="cdm">{element.nom}</label>
-                     <input type="checkbox" id="cdm" name="category" value="cdm" />
+                     <label htmlFor={element.nom}>{element.nom}</label>
+                     <input
+                       onChange={handleClickCheckbox}
+                       type="checkbox"
+                       id={element.nom}
+                       name="category"
+                       value={element.nom.toLowerCase()}
+                       checked={activeCategories.includes(element.nom.toLowerCase())}
+                     />
                    </div>
                  ))
           }
