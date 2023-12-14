@@ -11,7 +11,7 @@ function Equipes() {
   const [stateInputValue, setInputValue] = useState('');
   const user = useAppSelector((state) => state.user.token.user);
   const { equipes } = user;
-  const [filteredByCheckbox, setfilteredByCheckbox] = useState();
+  const [filteredByCheckbox, setfilteredByCheckbox] = useState(equipes);
 
   function handleChangeForm(event: ChangeEvent<HTMLInputElement>): void {
     const inputValue = event.target.value;
@@ -19,18 +19,6 @@ function Equipes() {
   }
   const handleFormSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    // Filtrer les équipes en fonction de la barre de recherche
-    const filteredBySearch = equipes.filter((equipe) => (
-      equipe.nom.toLowerCase().includes(stateInputValue.toLowerCase())
-    ));
-
-    // Combiner le filtre par checkbox avec le filtre par recherche
-    const combinedFilter = filteredByCheckbox.length > 0
-      // eslint-disable-next-line max-len
-      ? filteredByCheckbox.filter((equipe) => filteredBySearch.some((filteredEquipe) => equipe.id === filteredEquipe.id))
-      : filteredBySearch;
-
-    setfilteredByCheckbox(combinedFilter);
   };
 
   return (
@@ -53,10 +41,15 @@ function Equipes() {
       {/* Fin Formulaire */}
       <div className="content__equipe__contenu">
         <Filter
-          filteredByCheckbox={filteredByCheckbox}
+          // filteredByCheckbox={filteredByCheckbox}
           setfilteredByCheckbox={setfilteredByCheckbox}
         />
-        <Cards filteredByCheckbox={filteredByCheckbox} stateInputValue={stateInputValue} />
+        <Cards
+          // setfilteredByCheckbox={setfilteredByCheckbox}
+          filteredByCheckbox={filteredByCheckbox}
+          filteredByCategory={filteredByCheckbox.length > 0 ? filteredByCheckbox : null}
+          stateInputValue={stateInputValue}
+        />
       </div>
     </div>
   );

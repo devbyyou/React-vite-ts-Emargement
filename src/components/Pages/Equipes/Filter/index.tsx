@@ -1,14 +1,21 @@
 import React, {
-  ChangeEvent, MouseEvent, useEffect, useState,
+  ChangeEvent, useEffect, useRef, useState,
 } from 'react';
 import './index.scss';
 import { useAppSelector } from '../../../../hooks/redux';
+import { Equipe } from '../../../../@types/user';
 
-function Filter({ setfilteredByCheckbox, filteredByCheckbox }) {
+interface IsetfilteredByCheckbox {
+  setfilteredByCheckbox: React.Dispatch<React.SetStateAction<Equipe[]>>;
+}
+
+function Filter({ setfilteredByCheckbox }: IsetfilteredByCheckbox) {
   const user = useAppSelector((state) => state.user.token.user);
   const { equipes } = user;
   const categories = equipes.map((listeEquipes) => listeEquipes.categories);
-  const [activeCategories, setActiveCategories] = useState([]);
+  const [activeCategories, setActiveCategories] = useState<string[]>([]);
+
+  const prevFilteredByCategory = useRef<Equipe[]>(equipes);
   // Utilisez un tableau pour suivre les catégories actives
 
   // astuce pour ne pas répéter plusieurs fois la même catégorie
@@ -23,15 +30,7 @@ function Filter({ setfilteredByCheckbox, filteredByCheckbox }) {
 
   function handleClickCheckbox(event: ChangeEvent<HTMLInputElement>): void {
     const checkboxValue = event.target.value;
-    // const isChecked = event.target.checked;
-    // if (isChecked) {
-    //   const filteredByCategory = equipes.filter((element) => (
-    //     element.categories.nom.toLowerCase().includes(checkboxValue.toLowerCase())));
-    //   setfilteredByCheckbox(filteredByCategory);
-    // } else {
-    //   setfilteredByCheckbox(equipes);
-    // }
-    // setIsActive(isChecked);
+
     if (activeCategories.includes(checkboxValue)) {
       // Si la catégorie est déjà active, la retire du tableau
       setActiveCategories(activeCategories.filter((category) => category !== checkboxValue));
@@ -45,8 +44,11 @@ function Filter({ setfilteredByCheckbox, filteredByCheckbox }) {
   ));
   // Mise à jour du filtre
   useEffect(() => {
-    setfilteredByCheckbox(filteredByCategory);
-  }, [activeCategories, setfilteredByCheckbox]);
+    if (filteredByCategory.length !== prevFilteredByCategory.current.length) {
+      setfilteredByCheckbox(filteredByCategory);
+      prevFilteredByCategory.current = filteredByCategory;
+    }
+  }, [filteredByCategory, setfilteredByCheckbox]);
   return (
     <div className="filter">
       <h2>Filtrer par</h2>
