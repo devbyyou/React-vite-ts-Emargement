@@ -6,12 +6,14 @@ import { AiOutlineSearch } from 'react-icons/ai';
 import Filter from './Filter';
 import Cards from './Cards';
 import { useAppSelector } from '../../../hooks/redux';
+import { Equipe } from '../../../@types/user';
 
 function Equipes() {
   const [stateInputValue, setInputValue] = useState('');
   const user = useAppSelector((state) => state.user.token.user);
   const { equipes } = user;
-  const [filteredByCheckbox, setfilteredByCheckbox] = useState(equipes);
+  const [filteredByCheckbox, setfilteredByCheckbox] = useState<Equipe[]>(equipes);
+  const [activeNumber, setActiveNumber] = useState<Equipe[]>([]);
 
   function handleChangeForm(event: ChangeEvent<HTMLInputElement>): void {
     const inputValue = event.target.value;
@@ -41,11 +43,12 @@ function Equipes() {
       {/* Fin Formulaire */}
       <div className="content__equipe__contenu">
         <Filter
-          // filteredByCheckbox={filteredByCheckbox}
+          setActiveNumber={setActiveNumber}
           setfilteredByCheckbox={setfilteredByCheckbox}
+          activeNumber={activeNumber}
         />
         <Cards
-          // setfilteredByCheckbox={setfilteredByCheckbox}
+          activeNumber={activeNumber.length > 0 ? activeNumber : null}
           filteredByCheckbox={filteredByCheckbox}
           filteredByCategory={filteredByCheckbox.length > 0 ? filteredByCheckbox : null}
           stateInputValue={stateInputValue}

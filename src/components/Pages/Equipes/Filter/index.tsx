@@ -7,9 +7,11 @@ import { Equipe } from '../../../../@types/user';
 
 interface IsetfilteredByCheckbox {
   setfilteredByCheckbox: React.Dispatch<React.SetStateAction<Equipe[]>>;
+  setActiveNumber: React.Dispatch<React.SetStateAction<Equipe[]>>;
+  activeNumber: Equipe[] | null
 }
 
-function Filter({ setfilteredByCheckbox }: IsetfilteredByCheckbox) {
+function Filter({ setfilteredByCheckbox, setActiveNumber, activeNumber }: IsetfilteredByCheckbox) {
   const user = useAppSelector((state) => state.user.token.user);
   const { equipes } = user;
   const categories = equipes.map((listeEquipes) => listeEquipes.categories);
@@ -17,7 +19,9 @@ function Filter({ setfilteredByCheckbox }: IsetfilteredByCheckbox) {
 
   const prevFilteredByCategory = useRef<Equipe[]>(equipes);
   // Utilisez un tableau pour suivre les catégories actives
-
+  const filteredByCategory = equipes.filter((element) => (
+    activeCategories.includes(element.categories.nom.toLowerCase())
+  ));
   // astuce pour ne pas répéter plusieurs fois la même catégorie
   // Utilisons un ensemble pour suivre les clés déjà rencontrées
   const seenKeys = new Set();
@@ -28,27 +32,61 @@ function Filter({ setfilteredByCheckbox }: IsetfilteredByCheckbox) {
     return isUnique;
   });
 
+  const foundCardLess = equipes.filter((equipe) => (equipe.joueurs.length < 10));
+  // eslint-disable-next-line max-len
+  const foundCardMoreLess = equipes.filter((equipe) => (equipe.joueurs.length > 10 && equipe.joueurs.length < 40));
+  const foundCardMore = equipes.filter((equipe) => (equipe.joueurs.length > 40));
+  // console.log(foundCardMore);
+
   function handleClickCheckbox(event: ChangeEvent<HTMLInputElement>): void {
     const checkboxValue = event.target.value;
 
-    if (activeCategories.includes(checkboxValue)) {
-      // Si la catégorie est déjà active, la retire du tableau
-      setActiveCategories(activeCategories.filter((category) => category !== checkboxValue));
+    if (checkboxValue === '+40') {
+      // Si la carte est déjà présente dans activeNumber, la retire
+      if (activeNumber && activeNumber.length > 0) {
+        setActiveNumber([]);
+      } else {
+        // Sinon, ajoute la carte à activeNumber
+        setActiveNumber(foundCardMore);
+      }
+    } if (checkboxValue === '10-40') {
+      // Si la carte est déjà présente dans activeNumber, la retire
+      if (activeNumber && activeNumber.length > 0) {
+        setActiveNumber([]);
+      } else {
+        // Sinon, ajoute la carte à activeNumber
+        setActiveNumber(foundCardMoreLess);
+      }
+    } if (checkboxValue === '10') {
+    // Si la carte est déjà présente dans activeNumber, la retire
+      if (activeNumber && activeNumber.length > 0) {
+        setActiveNumber([]);
+      } else {
+      // Sinon, ajoute la carte à activeNumber
+        setActiveNumber(foundCardLess);
+      }
+    } else if (activeCategories.includes(checkboxValue)) {
+    // Si la catégorie est déjà active, la retire du tableau
+      const retireTabCategory = activeCategories.filter((category) => category !== checkboxValue);
+      setActiveCategories(retireTabCategory);
     } else {
-      // Si la catégorie n'est pas active, l'ajoute au tableau
+    // Si la catégorie n'est pas active, l'ajoute au tableau
       setActiveCategories([...activeCategories, checkboxValue]);
+      // setActiveNumber([]);
     }
   }
-  const filteredByCategory = equipes.filter((element) => (
-    activeCategories.includes(element.categories.nom.toLowerCase())
-  ));
   // Mise à jour du filtre
   useEffect(() => {
-    if (filteredByCategory.length !== prevFilteredByCategory.current.length) {
+    // eslint-disable-next-line max-len
+    if (foundCardMoreLess.length && foundCardMore.length && foundCardLess.length === 0 && activeNumber && activeNumber.length > 0) {
+      // Si la checkbox '10' est activée et activeNumber est déjà défini, réinitialise activeNumber
+      setActiveNumber([]);
+    } else if (filteredByCategory.length !== prevFilteredByCategory.current.length) {
       setfilteredByCheckbox(filteredByCategory);
       prevFilteredByCategory.current = filteredByCategory;
     }
-  }, [filteredByCategory, setfilteredByCheckbox]);
+  // eslint-disable-next-line max-len
+  }, [filteredByCategory, setfilteredByCheckbox, foundCardLess, activeNumber, setActiveNumber, foundCardMore.length, foundCardMoreLess.length]);
   return (
     <div className="filter">
       <h2>Filtrer par</h2>
@@ -78,16 +116,16 @@ function Filter({ setfilteredByCheckbox }: IsetfilteredByCheckbox) {
         <p>TOTAL EFFECTIF</p>
         <form className="card__filer-content">
           <div className="card__filer-content-element">
-            <label htmlFor="0-20">0 - 10</label>
-            <input type="checkbox" id="0-20" name="totalEffectif" value="0-20" />
+            <label htmlFor="10">0 - 10</label>
+            <input onChange={handleClickCheckbox} type="checkbox" id="10" name="totalEffectif" value="10" />
           </div>
           <div className="card__filer-content-element">
-            <label htmlFor="20-40">10 - 40</label>
-            <input type="checkbox" id="20-40" name="totalEffectif" value="20-40" />
+            <label htmlFor="10-40">10 - 40</label>
+            <input onChange={handleClickCheckbox} type="checkbox" id="10-40" name="totalEffectif" value="10-40" />
           </div>
           <div className="card__filer-content-element">
-            <label htmlFor="40plus">+40</label>
-            <input type="checkbox" id="40plus" name="totalEffectif" value="40plus" />
+            <label htmlFor="+40">+40</label>
+            <input onChange={handleClickCheckbox} type="checkbox" id="+40" name="totalEffectif" value="+40" />
           </div>
         </form>
       </div>

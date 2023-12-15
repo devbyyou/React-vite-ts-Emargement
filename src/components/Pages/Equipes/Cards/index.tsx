@@ -12,17 +12,20 @@ interface IstateInputValue {
   stateInputValue:string
   filteredByCheckbox:Equipe[]
   filteredByCategory:Equipe[] | null
+  activeNumber : Equipe[] | null
 }
-function Cards({ stateInputValue, filteredByCheckbox, filteredByCategory }:IstateInputValue) {
+function Cards({
+  stateInputValue, filteredByCheckbox, filteredByCategory, activeNumber,
+}:IstateInputValue) {
   const user = useAppSelector((state) => state.user.token.user);
   const { equipes } = user;
-  const filteredTeams = filteredByCategory || equipes.filter((equipe) => (
+  const filteredTeams = filteredByCategory || activeNumber || equipes.filter((equipe) => (
     equipe.nom.toLowerCase()
       .includes(stateInputValue.toLowerCase())
-       || equipe.categories.nom.toLowerCase()
-         .includes(stateInputValue.toLowerCase())
+    || equipe.categories.nom.toLowerCase()
+      .includes(stateInputValue.toLowerCase())
   ));
-  // console.log(filteredByCheckbox);
+  // console.log(activeNumber);
 
   return (
     <div className="content__equipe__contenu-card">
