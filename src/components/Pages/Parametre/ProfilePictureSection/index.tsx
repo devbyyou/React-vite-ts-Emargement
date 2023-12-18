@@ -1,6 +1,7 @@
 import React from 'react';
 // import './ProfilePictureSection.scss';
 import './index.scss';
+
 function ProfilePictureSection() {
   return (
     <div className="profile-section">

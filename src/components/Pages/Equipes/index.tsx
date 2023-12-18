@@ -1,12 +1,19 @@
-import React, { ChangeEvent, FormEvent, useState } from 'react';
+import React, {
+  ChangeEvent, FormEvent, useState,
+} from 'react';
 import './index.scss';
 import { RiTeamLine } from 'react-icons/ri';
 import { GrFormAdd } from 'react-icons/gr';
 import { AiOutlineSearch } from 'react-icons/ai';
+import cn from 'classnames';
 import Filter from './Filter';
 import Cards from './Cards';
-import { useAppSelector } from '../../../hooks/redux';
+import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
 import { Equipe } from '../../../@types/user';
+import NewTeam from './NewTeam';
+import {
+  toggleIsOpen,
+} from '../../../store/reducers/user';
 
 function Equipes() {
   const [stateInputValue, setInputValue] = useState('');
@@ -14,6 +21,8 @@ function Equipes() {
   const { equipes } = user;
   const [filteredByCheckbox, setfilteredByCheckbox] = useState<Equipe[]>(equipes);
   const [activeNumber, setActiveNumber] = useState<Equipe[]>([]);
+  const dispatch = useAppDispatch();
+  const isOpen = useAppSelector((state) => state.user.isOpen);
 
   function handleChangeForm(event: ChangeEvent<HTMLInputElement>): void {
     const inputValue = event.target.value;
@@ -23,6 +32,13 @@ function Equipes() {
     event.preventDefault();
   };
 
+  function handleClickToggle() {
+    // J'emet mon intention / action
+    dispatch(toggleIsOpen());
+  }
+  const openClassNames = cn('newteam__content', {
+    'newteam__content--closed': !isOpen,
+  });
   return (
     <div className="content__equipe">
       <header className="content__equipe-header">
@@ -30,7 +46,7 @@ function Equipes() {
           <RiTeamLine className="content__equipe-tlogo" />
           <h1 className="content__equipe-title">Equipes</h1>
         </div>
-        <button type="button" className="content__equipe-button">
+        <button onClick={handleClickToggle} type="button" className="content__equipe-button">
           <GrFormAdd className="content__equipe-alogo" />
           <div className="content__equipe-text"> Nouvelle équipe</div>
         </button>
@@ -54,6 +70,7 @@ function Equipes() {
           stateInputValue={stateInputValue}
         />
       </div>
+      <NewTeam openClassNames={openClassNames} />
     </div>
   );
 }

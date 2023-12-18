@@ -1,6 +1,10 @@
 @use "../../styles/vars";
 
+@import url('https://fonts.googleapis.com/css2?family=Blinker&family=Fira+Sans:wght@200&display=swap');
 .sidebar {
+
+  font-family: 'Blinker', sans-serif;
+  font-family: 'Fira Sans', sans-serif;
     display: flex;
     flex-direction: column;
     background-color: vars.$menu;
@@ -11,19 +15,20 @@
     top: 0;
     align-items: center;
     left: 0;
-    border-right: 2px solid rgb(146 146 146 / 10%);
+    // border-right: 2px solid rgb(146 146 146 / 10%);
     padding: 20px;
     box-shadow: rgba(99, 99, 99, 0.47) 0px 2px 8px 0px;
     a {
         // text-align: center;
         padding: 1rem;
         padding-left: 1.5rem;
-        color: #252525c2;;
+        color: rgb(37 37 37);
         font-family: vars.$fontText;
         font-size: 18px;
         transition: background-color 1s;
         transition: color 0.5s;
         width: 100%;
+        color: rgb(0 0 0);
         &:hover {
             color: vars.$textColorHover;
             background-color: vars.$bgContent;
