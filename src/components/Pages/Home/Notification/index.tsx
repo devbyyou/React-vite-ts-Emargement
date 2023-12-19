@@ -7,14 +7,16 @@ import { useAppSelector } from '../../../../hooks/redux';
 
 function Notification() {
   const token = useAppSelector((state) => state.user.token.user);
-  const { nom, prenom, id } = token;
+  const {
+    nom, prenom, id, logo,
+  } = token;
   return (
     <Link to="/profil" className="content__notification">
       {/* <IoMdNotificationsOutline className="notif" /> */}
       {/* 2 */}
       <div className="pics">
         <img
-          src="https://miro.medium.com/v2/resize:fill:96:96/1*yWfoK01BZFKO6fFQyzxJSA.jpeg"
+          src={logo}
           alt="profile"
         />
       </div>

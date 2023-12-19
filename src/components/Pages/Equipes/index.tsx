@@ -13,7 +13,7 @@ import { Equipe } from '../../../@types/user';
 import NewTeam from './NewTeam';
 import {
   toggleIsOpen,
-} from '../../../store/reducers/user';
+} from '../../../store/reducers/equipes';
 
 function Equipes() {
   const [stateInputValue, setInputValue] = useState('');
@@ -22,7 +22,7 @@ function Equipes() {
   const [filteredByCheckbox, setfilteredByCheckbox] = useState<Equipe[]>(equipes);
   const [activeNumber, setActiveNumber] = useState<Equipe[]>([]);
   const dispatch = useAppDispatch();
-  const isOpen = useAppSelector((state) => state.user.isOpen);
+  const isOpen = useAppSelector((state) => state.equipes.isOpen);
 
   function handleChangeForm(event: ChangeEvent<HTMLInputElement>): void {
     const inputValue = event.target.value;

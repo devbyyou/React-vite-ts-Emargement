@@ -6,7 +6,6 @@ import { getUserDataFromLocalStorage } from '../../utils/user';
 
 interface UserState {
   logged: boolean;
-  isOpen: boolean;
   credentials: {
     email: string;
     password: string;
@@ -24,7 +23,6 @@ const userData = getUserDataFromLocalStorage();
 
 export const initialState: UserState = {
   logged: false,
-  isOpen: true,
   pseudo: '',
   token: {
     token: '',
@@ -113,13 +111,9 @@ export const changeCredentialsField = createAction<{
   value:string;
   field: keyof UserState['credentials']
 }>('user/CHANGE_CREDENTIALS_FIELD');
-export const toggleIsOpen = createAction('user/TOGGLE_IS_OPEN');
 
 const userReducer = createReducer(initialState, (builder) => {
   builder
-    .addCase(toggleIsOpen, (state) => {
-      state.isOpen = !state.isOpen;
-    })
     .addCase(changeCredentialsField, (state, action) => {
       const { field, value } = action.payload;
       state.credentials[field] = value;

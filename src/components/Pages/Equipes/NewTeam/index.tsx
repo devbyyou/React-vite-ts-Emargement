@@ -1,13 +1,17 @@
-import React, { KeyboardEvent } from 'react';
+import React, { ChangeEvent, FormEvent, KeyboardEvent } from 'react';
 import './index.scss';
-import { useAppDispatch } from '../../../../hooks/redux';
-import { toggleIsOpen } from '../../../../store/reducers/user';
+import { useAppDispatch, useAppSelector } from '../../../../hooks/redux';
+import { changeCredentialsField, createEquipe, toggleIsOpen } from '../../../../store/reducers/equipes';
 
 interface IopenClassNames {
   openClassNames:string,
 }
 
 function NewTeam({ openClassNames } :IopenClassNames) {
+  const nom = useAppSelector((state) => state.equipes.credentials.nom);
+  const categorieId = useAppSelector((state) => state.equipes.credentials.categorieId);
+  const logo = useAppSelector((state) => state.equipes.credentials.logo);
+  const statut = useAppSelector((state) => state.equipes.credentials.statut);
   const dispatch = useAppDispatch();
   function handleClickedClose() {
     dispatch(toggleIsOpen());
@@ -19,6 +23,19 @@ function NewTeam({ openClassNames } :IopenClassNames) {
     }
   }
 
+  function handleSubmitForm(event: FormEvent<HTMLFormElement>): void {
+    event.preventDefault();
+    dispatch(createEquipe());
+  }
+
+  const handleChangeInput = (field: 'nom' | 'categorieId' | 'logo' | 'statut') => (event: ChangeEvent<HTMLInputElement>) => {
+    const { value } = event.target;
+    dispatch(changeCredentialsField({
+      value,
+      field,
+    }));
+  };
+
   return (
     <div className={openClassNames}>
       <div onClick={handleClickedClose} onKeyDown={handleKeyDown} role="button" tabIndex={0} className="modal-header">
@@ -28,14 +45,18 @@ function NewTeam({ openClassNames } :IopenClassNames) {
       </div>
 
       <div className="newteam__content__card">
-        <form action="submbit" className="my-form">
+        <form onSubmit={handleSubmitForm} action="submbit" className="my-form">
           <label>
             Nom Equipe
-            <input type="text" />
+            <input name="nom" onChange={handleChangeInput('nom')} value={nom} type="text" />
           </label>
           <label>
             Nom Catégorie
-            <input type="text" name="role" />
+            <input name="categorieId" onChange={handleChangeInput('categorieId')} value={categorieId} type="text" />
+          </label>
+          <label>
+            Statut
+            <input name="statut" onChange={handleChangeInput('statut')} value={statut} type="text" />
           </label>
           <div className="file-input-section">
             <div className="dashed-box">
@@ -48,7 +69,7 @@ function NewTeam({ openClassNames } :IopenClassNames) {
                 </svg>
                 <span>Choisir un fichier</span>
               </div>
-              <input type="file" name="profile" accept="image/png, image/jpg, image/jpeg" />
+              <input onChange={handleChangeInput('logo')} value={logo} type="file" name="logo" accept="image/png, image/jpg, image/jpeg" />
             </div>
           </div>
           <div className="my-form--button">
