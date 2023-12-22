@@ -55,7 +55,16 @@ export const createEquipe = createAppAsyncThunk(
     return data;
   },
 );
-
+// Action asynchrone pour charger les équipes associées à l'ID de l'utilisateur
+export const fetchEquipesForUser = createAppAsyncThunk(
+  'equipes/FETCH_EQUIPES_FOR_USER',
+  async (_, thunkAPI) => {
+    const state = thunkAPI.getState();
+    const userID = state.user.token.user.id; // Récupérez l'ID de l'utilisateur depuis le state
+    const { data } = await axiosInstance.get(`/equipes?userID=${userID}`);
+    return data;
+  },
+);
 const equipeReducer = createReducer(initialState, (builder) => {
   builder
     .addCase(toggleIsOpen, (state) => {
@@ -76,6 +85,10 @@ const equipeReducer = createReducer(initialState, (builder) => {
     .addCase(changeCredentialsField, (state, action) => {
       const { field, value } = action.payload;
       state.credentials[field] = value;
+    })
+    .addCase(fetchEquipesForUser.fulfilled, (state, action) => {
+      // state.loading = false; // Indiquez que le chargement est terminé
+      state.equipes = action.payload;
     });
 });
 export default equipeReducer;

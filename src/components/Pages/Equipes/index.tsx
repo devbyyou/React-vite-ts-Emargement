@@ -36,6 +36,7 @@ function Equipes() {
     // J'emet mon intention / action
     dispatch(toggleIsOpen());
   }
+
   const openClassNames = cn('newteam__content', {
     'newteam__content--closed': !isOpen,
   });
@@ -68,9 +69,12 @@ function Equipes() {
           filteredByCheckbox={filteredByCheckbox}
           filteredByCategory={filteredByCheckbox.length > 0 ? filteredByCheckbox : null}
           stateInputValue={stateInputValue}
+
         />
       </div>
-      <NewTeam openClassNames={openClassNames} />
+      <NewTeam
+        openClassNames={openClassNames}
+      />
     </div>
   );
 }

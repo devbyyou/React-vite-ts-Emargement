@@ -1,12 +1,13 @@
 /* eslint-disable no-nested-ternary */
-import React from 'react';
+import React, { useEffect } from 'react';
 import './index.scss';
 import { RiTeamLine } from 'react-icons/ri';
 import { CgMoreVerticalO } from 'react-icons/cg';
 import { Link } from 'react-router-dom';
 import logo from '../../../../assets/devbyou.png';
-import { useAppSelector } from '../../../../hooks/redux';
+import { useAppDispatch, useAppSelector } from '../../../../hooks/redux';
 import { Equipe } from '../../../../@types/user';
+import { fetchEquipesForUser } from '../../../../store/reducers/equipes';
 
 interface IstateInputValue {
   stateInputValue:string
@@ -26,6 +27,13 @@ function Cards({
       .includes(stateInputValue.toLowerCase())
   ));
   // console.log(activeNumber);
+  const dispatch = useAppDispatch();
+  useEffect(() => {
+    dispatch(fetchEquipesForUser());
+  }, [dispatch]);
+
+  const teams = useAppSelector((state) => state.equipes.equipes);
+  // console.log(teams);
 
   return (
     <div className="content__equipe__contenu-card">
@@ -38,25 +46,25 @@ function Cards({
       <div className="cards__containers">
         {
  (
-    filteredTeams.map((listesEquipes) => (
-      <Link key={listesEquipes.id} to="/equipes/senior" className="cards__containers-card">
-        <div className="cards__containers-logo-name-logo">
-          <div className="cards__containers-logo-name">
-            <img className="cards__containers-logo" src={logo} alt="" />
-            <div className="name">
-              {listesEquipes.categories.nom}
-              {' - '}
-              {listesEquipes.nom}
-            </div>
+  teams.map((listesEquipes) => (
+    <Link key={listesEquipes.id} to="/equipes/senior" className="cards__containers-card">
+      <div className="cards__containers-logo-name-logo">
+        <div className="cards__containers-logo-name">
+          <img className="cards__containers-logo" src={logo} alt="" />
+          <div className="name">
+            {/* {listesEquipes.categories.nom} */}
+            {' - '}
+            {listesEquipes.nom}
           </div>
-          <CgMoreVerticalO className="logoMore" />
         </div>
-        <div className="info">
-          <RiTeamLine />
-          <div className="count">{listesEquipes.joueurs.length}</div>
-        </div>
-      </Link>
-    ))
+        <CgMoreVerticalO className="logoMore" />
+      </div>
+      <div className="info">
+        <RiTeamLine />
+        {/* <div className="count">{listesEquipes.joueurs.length}</div> */}
+      </div>
+    </Link>
+  ))
 )
         }
       </div>

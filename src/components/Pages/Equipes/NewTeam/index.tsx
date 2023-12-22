@@ -3,8 +3,11 @@ import React, {
 } from 'react';
 import './index.scss';
 import { useAppDispatch, useAppSelector } from '../../../../hooks/redux';
-import { changeCredentialsField, createEquipe, toggleIsOpen } from '../../../../store/reducers/equipes';
+import {
+  changeCredentialsField, createEquipe, fetchEquipesForUser, toggleIsOpen,
+} from '../../../../store/reducers/equipes';
 import { findAllCategories } from '../../../../store/reducers/categories';
+// import { Equipe } from '../../../../@types/user';
 
 interface IopenClassNames {
   openClassNames:string,
@@ -16,7 +19,11 @@ function NewTeam({ openClassNames } :IopenClassNames) {
   const logo = useAppSelector((state) => state.equipes.credentials.logo);
   const statut = useAppSelector((state) => state.equipes.credentials.statut);
   // const equipes = useAppSelector((state) => state.user.statut);
+  // const team = useAppSelector((state) => state.equipes.equipes);
   const dispatch = useAppDispatch();
+  useEffect(() => {
+    dispatch(fetchEquipesForUser());
+  }, [dispatch]);
   function handleClickedClose() {
     dispatch(toggleIsOpen());
   }
@@ -27,9 +34,10 @@ function NewTeam({ openClassNames } :IopenClassNames) {
     }
   }
 
-  function handleSubmitForm(event: FormEvent<HTMLFormElement>): void {
+  async function handleSubmitForm(event: FormEvent<HTMLFormElement>): Promise<void> {
     event.preventDefault();
-    dispatch(createEquipe());
+    await dispatch(createEquipe());
+    await dispatch(fetchEquipesForUser());
     dispatch(toggleIsOpen());
   }
 
@@ -45,7 +53,7 @@ function NewTeam({ openClassNames } :IopenClassNames) {
     dispatch(findAllCategories());
   }, [dispatch]);
   const categories = useAppSelector((state) => state.categories.categories);
-  // console.log();
+  // console.log(categories);
   return (
     <div className={openClassNames}>
       <div onClick={handleClickedClose} onKeyDown={handleKeyDown} role="button" tabIndex={0} className="modal-header">
