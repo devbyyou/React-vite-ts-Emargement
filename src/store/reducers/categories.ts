@@ -1,17 +1,35 @@
 import { createReducer } from '@reduxjs/toolkit';
-import { categories } from '../../data/data2.json';
-// import categoriesData from '../../data/data';
-import { Category } from '../../@types/types2';
+
+import { createAppAsyncThunk } from '../../utils/redux';
+import { axiosInstance } from '../../utils/axios';
+import { Categories } from '../../@types/user';
 
 interface CategoriesState {
-  categories: Category[]
+  categories: Categories[]
 }
 
 const initialState: CategoriesState = {
-  categories,
+  categories: [],
 };
 
-const categoriesReducer = createReducer(initialState, () => {
+export const findAllCategories = createAppAsyncThunk(
+  'categories/FETCH_CATEGORIES',
+  async (_, thunkAPI) => {
+    try {
+      const response = await axiosInstance.get('/categories');
+      return response.data;
+    } catch (error) {
+      // Gérer les erreurs ici
+      console.error(error);
+      throw error;
+    }
+  },
+);
 
+const categoriesReducer = createReducer(initialState, (builder) => {
+  builder
+    .addCase(findAllCategories.fulfilled, (state, action) => {
+      state.categories = action.payload;
+    });
 });
 export default categoriesReducer;

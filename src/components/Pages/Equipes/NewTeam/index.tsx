@@ -1,7 +1,10 @@
-import React, { ChangeEvent, FormEvent, KeyboardEvent } from 'react';
+import React, {
+  ChangeEvent, FormEvent, KeyboardEvent, useEffect,
+} from 'react';
 import './index.scss';
 import { useAppDispatch, useAppSelector } from '../../../../hooks/redux';
 import { changeCredentialsField, createEquipe, toggleIsOpen } from '../../../../store/reducers/equipes';
+import { findAllCategories } from '../../../../store/reducers/categories';
 
 interface IopenClassNames {
   openClassNames:string,
@@ -9,9 +12,10 @@ interface IopenClassNames {
 
 function NewTeam({ openClassNames } :IopenClassNames) {
   const nom = useAppSelector((state) => state.equipes.credentials.nom);
-  const categorieId = useAppSelector((state) => state.equipes.credentials.categorieId);
+  // const categorieId = useAppSelector((state) => state.equipes.credentials.categorieId);
   const logo = useAppSelector((state) => state.equipes.credentials.logo);
   const statut = useAppSelector((state) => state.equipes.credentials.statut);
+  // const equipes = useAppSelector((state) => state.user.statut);
   const dispatch = useAppDispatch();
   function handleClickedClose() {
     dispatch(toggleIsOpen());
@@ -26,6 +30,7 @@ function NewTeam({ openClassNames } :IopenClassNames) {
   function handleSubmitForm(event: FormEvent<HTMLFormElement>): void {
     event.preventDefault();
     dispatch(createEquipe());
+    dispatch(toggleIsOpen());
   }
 
   const handleChangeInput = (field: 'nom' | 'categorieId' | 'logo' | 'statut') => (event: ChangeEvent<HTMLInputElement>) => {
@@ -36,6 +41,11 @@ function NewTeam({ openClassNames } :IopenClassNames) {
     }));
   };
 
+  useEffect(() => {
+    dispatch(findAllCategories());
+  }, [dispatch]);
+  const categories = useAppSelector((state) => state.categories.categories);
+  // console.log();
   return (
     <div className={openClassNames}>
       <div onClick={handleClickedClose} onKeyDown={handleKeyDown} role="button" tabIndex={0} className="modal-header">
@@ -50,10 +60,25 @@ function NewTeam({ openClassNames } :IopenClassNames) {
             Nom Equipe
             <input name="nom" onChange={handleChangeInput('nom')} value={nom} type="text" />
           </label>
-          <label>
+          {/* <label>
             Nom Catégorie
-            <input name="categorieId" onChange={handleChangeInput('categorieId')} value={categorieId} type="text" />
-          </label>
+            <input name="categorieId"
+             onChange={handleChangeInput('categorieId')}
+              value={categorieId} type="text" />
+          </label> */}
+          <div className="newteam__content__card--categorie">
+            <p>CATEGORIES</p>
+            <div className="newteam__content__card--categorie--label">
+              {
+                categories.map((categorie) => (
+                  <label key={categorie.id}>
+                    {categorie.nom}
+                    <input name="categorieId" onChange={handleChangeInput('categorieId')} value={categorie.id} type="radio" />
+                  </label>
+                ))
+              }
+            </div>
+          </div>
           <label>
             Statut
             <input name="statut" onChange={handleChangeInput('statut')} value={statut} type="text" />
