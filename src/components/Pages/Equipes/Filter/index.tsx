@@ -12,8 +12,10 @@ interface IsetfilteredByCheckbox {
 }
 
 function Filter({ setfilteredByCheckbox, setActiveNumber, activeNumber }: IsetfilteredByCheckbox) {
-  const user = useAppSelector((state) => state.user.token.user);
-  const { equipes } = user;
+  // const user = useAppSelector((state) => state.user.token.user);
+  // const { equipes } = user;
+  const equipes = useAppSelector((state) => state.equipes.equipes);
+
   const categories = equipes.map((listeEquipes) => listeEquipes.categories);
   const [activeCategories, setActiveCategories] = useState<string[]>([]);
 

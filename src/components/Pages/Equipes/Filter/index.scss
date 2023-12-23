@@ -1,11 +1,11 @@
 @use "../../../../styles/vars";
 .filter {
     // background-color: aqua;
-    width: 15rem;
-    padding: 30px;
+    width: 13rem;
+    padding: 30px 5px 30px 30px;
     margin-top: 30px;
     font-family: vars.$fontTextCorp;
-    margin-left: 10px;
+    // margin-left: 10px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;

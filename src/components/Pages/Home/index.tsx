@@ -1,17 +1,21 @@
 /* eslint-disable react/no-unescaped-entities */
-import React from 'react';
+import React, { useEffect } from 'react';
 import './index.scss';
 import Overview from './Overview';
 import ListChoice from './ListChoice';
 import MembersList from './MembersList';
 import Graph from './Graph';
 import Header from './Header';
-import { useAppSelector } from '../../../hooks/redux';
+import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
+import { fetchEquipesForUser } from '../../../store/reducers/equipes';
 
 function Home() {
   const user = useAppSelector((state) => state.user.token.user);
   const { prenom } = user;
-
+  const dispatch = useAppDispatch();
+  useEffect(() => {
+    dispatch(fetchEquipesForUser());
+  }, [dispatch]);
   return (
     <div>
       <Header />
@@ -19,6 +23,7 @@ function Home() {
         { `
         Bienvenue à nouveau, 
         ${prenom}`}
+        {' '}
         👋
       </div>
       <h2 className="title">Vue d'ensemble</h2>

@@ -15,14 +15,16 @@ interface IopenClassNames {
 
 function NewTeam({ openClassNames } :IopenClassNames) {
   const nom = useAppSelector((state) => state.equipes.credentials.nom);
-  // const categorieId = useAppSelector((state) => state.equipes.credentials.categorieId);
+  const categories = useAppSelector((state) => state.categories.categories);
   const logo = useAppSelector((state) => state.equipes.credentials.logo);
   const statut = useAppSelector((state) => state.equipes.credentials.statut);
+  // const categorieId = useAppSelector((state) => state.equipes.credentials.categorieId);
   // const equipes = useAppSelector((state) => state.user.statut);
   // const team = useAppSelector((state) => state.equipes.equipes);
   const dispatch = useAppDispatch();
   useEffect(() => {
     dispatch(fetchEquipesForUser());
+    dispatch(findAllCategories());
   }, [dispatch]);
   function handleClickedClose() {
     dispatch(toggleIsOpen());
@@ -49,10 +51,9 @@ function NewTeam({ openClassNames } :IopenClassNames) {
     }));
   };
 
-  useEffect(() => {
-    dispatch(findAllCategories());
-  }, [dispatch]);
-  const categories = useAppSelector((state) => state.categories.categories);
+  // useEffect(() => {
+  //   dispatch(findAllCategories());
+  // }, [dispatch]);
   // console.log(categories);
   return (
     <div className={openClassNames}>

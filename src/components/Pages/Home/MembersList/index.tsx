@@ -1,17 +1,20 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './index.scss';
 // import { CiSearch } from 'react-icons/ci';
 import { BiSolidChevronRight } from 'react-icons/bi';
 import { Link } from 'react-router-dom';
-import { useAppSelector } from '../../../../hooks/redux';
+import { useAppDispatch, useAppSelector } from '../../../../hooks/redux';
 import FormSearchMembers from './FormSearchMembers';
 import functionConverteDate from './ConverteDate';
+import { fetchEquipesForUser } from '../../../../store/reducers/equipes';
 
 function MembersList() {
+  const dispatch = useAppDispatch();
+  useEffect(() => {
+    dispatch(fetchEquipesForUser());
+  }, [dispatch]);
   const [inputState, inputSetState] = useState<string>('');
-
-  const user = useAppSelector((state) => state.user.token.user);
-  const { equipes } = user;
+  const equipes = useAppSelector((state) => state.equipes.equipes);
 
   const listEquipes = equipes.map((listJoueurs) => listJoueurs);
 

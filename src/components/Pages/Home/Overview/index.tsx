@@ -1,18 +1,22 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import './style.scss';
 import { BiFootball } from 'react-icons/bi';
-import List from './List';
-import { useAppSelector } from '../../../../hooks/redux';
+// import List from './List';
+import { useAppDispatch, useAppSelector } from '../../../../hooks/redux';
+import { fetchEquipesForUser } from '../../../../store/reducers/equipes';
 
 function Overview() {
-  const nbEquipes = useAppSelector((state) => state.user.token.user);
-  // console.log(nbEquipes);
-  const nbTotalEquipes = nbEquipes.equipes.length;
-  const nbJoueurs = nbEquipes.equipes;
+  const dispatch = useAppDispatch();
+  useEffect(() => {
+    dispatch(fetchEquipesForUser());
+  }, [dispatch]);
 
-  const nbJoueutTotal = nbJoueurs.map((joueur) => joueur.joueurs.length);
+  const equipes = useAppSelector((state) => state.equipes.equipes);
+  const nbEquipes = equipes.length;
+
+  const nbJoueursParEquipe = equipes.map((listeJoueurs) => listeJoueurs.joueurs.length);
   // eslint-disable-next-line no-return-assign, no-param-reassign
-  const calculTotalJoueur = nbJoueutTotal.reduce((equipeA, equipeB) => equipeA += equipeB);
+  const totalJoueurs = nbJoueursParEquipe.reduce((nbA, nbB) => nbA += nbB, 0);
 
   return (
     <div className="overviews">
@@ -22,7 +26,7 @@ function Overview() {
             <BiFootball className="card__icons" />
             Equipe
           </p>
-          <p className="card__number">{nbTotalEquipes}</p>
+          <p className="card__number">{nbEquipes}</p>
         </div>
       </div>
       <div className="overview">
@@ -31,7 +35,7 @@ function Overview() {
             <BiFootball className="card__icons" />
             Joueur
           </p>
-          <p className="card__number">{calculTotalJoueur}</p>
+          <p className="card__number">{totalJoueurs}</p>
         </div>
       </div>
     </div>

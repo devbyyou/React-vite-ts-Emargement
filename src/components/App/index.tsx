@@ -14,6 +14,7 @@ import Inscription from '../Pages/Inscription';
 import Connexion from '../Connexion';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { fetchCoaches } from '../../store/reducers/coaches';
+import { findAllCategories } from '../../store/reducers/categories';
 
 function App() {
   const logged = useAppSelector((state) => state.user.logged);
@@ -24,11 +25,12 @@ function App() {
         dispatch(fetchCoaches());
       }
     }, 30 * 60 * 1000); // 30 minutes en millisecondes
-
+    dispatch(findAllCategories());
     // Nettoie l'intervalle lorsque le composant est démonté
     return () => clearInterval(intervalId);
   }, [dispatch, logged]);
-
+  const categories = useAppSelector((state) => state.categories.categories);
+  const categorie = categories.map((cat) => cat.nom);
   return (
     <div className="content__connexion">
       {
@@ -44,7 +46,7 @@ function App() {
                 <Route path="/parametre" element={<Parametre />} />
                 <Route path="/inscription" element={<Inscription />} />
                 <Route path="/profil" element={<Profil />} />
-                <Route path="/equipes/senior" element={<Equipe />} />
+                { categorie.map((cat) => <Route key={cat} path={`/equipes/${cat}`} element={<Equipe />} />)}
                 <Route path="/equipes/senior/joueur" element={<Joueur />} />
                 <Route path="/pageJoueur" element={<QRCodeReader />} />
                 <Route path="*" element={<div>404</div>} />

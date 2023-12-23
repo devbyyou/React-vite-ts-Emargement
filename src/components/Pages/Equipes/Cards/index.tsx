@@ -18,22 +18,19 @@ interface IstateInputValue {
 function Cards({
   stateInputValue, filteredByCheckbox, filteredByCategory, activeNumber,
 }:IstateInputValue) {
-  const user = useAppSelector((state) => state.user.token.user);
-  const { equipes } = user;
+  // const user = useAppSelector((state) => state.user.token.user);
+  // const { equipes } = user;
+  const equipes = useAppSelector((state) => state.equipes.equipes);
   const filteredTeams = filteredByCategory || activeNumber || equipes.filter((equipe) => (
     equipe.nom.toLowerCase()
       .includes(stateInputValue.toLowerCase())
     || equipe.categories.nom.toLowerCase()
       .includes(stateInputValue.toLowerCase())
   ));
-  // console.log(activeNumber);
   const dispatch = useAppDispatch();
   useEffect(() => {
     dispatch(fetchEquipesForUser());
   }, [dispatch]);
-
-  const teams = useAppSelector((state) => state.equipes.equipes);
-  console.log(teams);
 
   return (
     <div className="content__equipe__contenu-card">
@@ -46,8 +43,8 @@ function Cards({
       <div className="cards__containers">
         {
  (
-  teams.map((listesEquipes) => (
-    <Link key={listesEquipes.id} to="/equipes/senior" className="cards__containers-card">
+  filteredTeams.map((listesEquipes) => (
+    <Link key={listesEquipes.id} to={`/equipes/${listesEquipes.categories.nom}`} className="cards__containers-card">
       <div className="cards__containers-logo-name-logo">
         <div className="cards__containers-logo-name">
           <img className="cards__containers-logo" src={logo} alt="" />
