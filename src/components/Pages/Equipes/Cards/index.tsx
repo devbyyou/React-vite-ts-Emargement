@@ -33,7 +33,7 @@ function Cards({
   }, [dispatch]);
 
   const teams = useAppSelector((state) => state.equipes.equipes);
-  // console.log(teams);
+  console.log(teams);
 
   return (
     <div className="content__equipe__contenu-card">
@@ -52,7 +52,7 @@ function Cards({
         <div className="cards__containers-logo-name">
           <img className="cards__containers-logo" src={logo} alt="" />
           <div className="name">
-            {/* {listesEquipes.categories.nom} */}
+            {listesEquipes.categories.nom}
             {' - '}
             {listesEquipes.nom}
           </div>
@@ -61,7 +61,7 @@ function Cards({
       </div>
       <div className="info">
         <RiTeamLine />
-        {/* <div className="count">{listesEquipes.joueurs.length}</div> */}
+        <div className="count">{listesEquipes.joueurs.length}</div>
       </div>
     </Link>
   ))
