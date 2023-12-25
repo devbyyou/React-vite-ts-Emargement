@@ -18,6 +18,9 @@ import { findAllCategories } from '../../store/reducers/categories';
 
 function App() {
   const logged = useAppSelector((state) => state.user.logged);
+  const equipes = useAppSelector((state) => state.equipes.equipes);
+  // console.log(equipes);
+
   const dispatch = useAppDispatch();
   useEffect(() => {
     const intervalId = setInterval(() => {
@@ -29,8 +32,6 @@ function App() {
     // Nettoie l'intervalle lorsque le composant est démonté
     return () => clearInterval(intervalId);
   }, [dispatch, logged]);
-  const categories = useAppSelector((state) => state.categories.categories);
-  const categorie = categories.map((cat) => cat.nom);
   return (
     <div className="content__connexion">
       {
@@ -46,7 +47,13 @@ function App() {
                 <Route path="/parametre" element={<Parametre />} />
                 <Route path="/inscription" element={<Inscription />} />
                 <Route path="/profil" element={<Profil />} />
-                { categorie.map((cat) => <Route key={cat} path={`/equipes/${cat}`} element={<Equipe />} />)}
+                { equipes.map((listesEquipes) => (
+                  <Route
+                    key={listesEquipes.id}
+                    path={`/equipes/:${listesEquipes.categories.nom}/:${listesEquipes.id}`}
+                    element={<Equipe />}
+                  />
+                ))}
                 <Route path="/equipes/senior/joueur" element={<Joueur />} />
                 <Route path="/pageJoueur" element={<QRCodeReader />} />
                 <Route path="*" element={<div>404</div>} />

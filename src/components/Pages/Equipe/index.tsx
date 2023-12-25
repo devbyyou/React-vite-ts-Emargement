@@ -1,13 +1,29 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import './index.scss';
 import { MdBolt } from 'react-icons/md';
 import { CiSearch } from 'react-icons/ci';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import Header from '../Home/Header';
 import logo from '../../../assets/devbyyou.png';
+import { useAppSelector } from '../../../hooks/redux';
+import functionConverteDate from '../Home/MembersList/ConverteDate';
 // import MembersList from '../Home/MembersList';
 
 function Equipe() {
+  const { U17 } = useParams();
+  const equipes = useAppSelector((state) => state.equipes.equipes);
+  const token = useAppSelector((state) => state.user.token.user);
+  const equipe = equipes.find((eq) => eq.categories.nom === U17);
+  console.log(equipe);
+
+  useEffect(() => {
+    // Ajoutez une logique pour charger les données de l'équipe si elles ne sont pas déjà chargées
+  }, [U17]);
+
+  if (!equipe) {
+    // Gestion du cas où l'équipe n'est pas encore chargée
+    return <div>Loading...</div>;
+  }
   return (
     <div>
       <Header />
@@ -15,21 +31,41 @@ function Equipe() {
         <div className="equipe__content__informations">
           <div className="equipe__content__information-club">
             <div className="equipe__content__information-statut">
-              <h3>Sénior</h3>
-              <p>Nom: Sénior</p>
-              <p> Crée : 24-02-1996</p>
-              <p>Statut : Actif</p>
-              <p>Entraineur: Robbert</p>
+              <h3>{equipe.categories.nom}</h3>
+              <p>
+                Nom:
+                {' '}
+                {equipe.categories.nom}
+              </p>
+              <p>
+                {' '}
+                Crée :
+                {' '}
+                {`${functionConverteDate.convertDatee(equipe.created_at)} `}
+                {/* {equipe.created_at} */}
+              </p>
+              <p>
+                Statut :
+                {' '}
+                {equipe.statut}
+              </p>
+              <p>
+                Entraineur:
+                {' '}
+                {token.prenom}
+                {' '}
+                {token.nom}
+              </p>
             </div>
             <div className="equipe__content__information-logo">
               <img src={logo} alt="" />
               <button type="button">Modifier</button>
             </div>
           </div>
+
           <div className="equipe__content__information-effectif">
             <div className="header">
               <h2 className="titleMembre">Membres</h2>
-
             </div>
 
             <div className="search-bar">
@@ -42,16 +78,24 @@ function Equipe() {
                 <div className="cell">Catégories</div>
                 <div className="cell">Dernière Activité</div>
               </div>
-
-              <Link to="/equipes/senior/joueur" className="row">
+              {
+            equipe.joueurs.map((joueur) => (
+              <Link key={joueur.id} to="/equipes/senior/joueur" className="row">
                 <div className="cell">
-                  John Doe
-                  <div className="table__email">letsgo@gmail.com</div>
+                  {joueur.nom}
+                  {' '}
+                  {joueur.prenom}
+                  <div className="table__email">{joueur.email}</div>
                 </div>
-                <div className="cell owner">. Sénior</div>
-                <div className="cell">2 m ago</div>
+                <div className="cell owner">
+                  .
+                  {' '}
+                  {equipe.categories.nom}
+                </div>
+                <div className="cell">{`${functionConverteDate.convertDateToDelay(joueur.derniere_activite)} min ago`}</div>
               </Link>
-
+            ))
+          }
             </div>
           </div>
         </div>
