@@ -118,12 +118,21 @@ export const updateEquipesForUser = createAppAsyncThunk(
   },
 
 );
+export const deleteEquipesForUser = createAppAsyncThunk(
+  'equipes/DELETE_EQUIPES_FOR_USER',
+  async (equipeId, thunkAPI) => {
+    const { data } = await axiosInstance.delete(`/equipes/${equipeId}`);
+
+    return data;
+  },
+
+);
 const equipeReducer = createReducer(initialState, (builder) => {
   builder
     .addCase(toggleIsOpen, (state) => {
       state.isOpen = !state.isOpen;
     })
-    .addCase(createEquipe.fulfilled, (state, action) => {
+    .addCase(createEquipe.fulfilled, (state) => {
       // J'enregistre les informations retourner par mon API
       // state.equipe = action.payload.equipe;
       // state.categorie = action.payload.categorie;
@@ -144,6 +153,10 @@ const equipeReducer = createReducer(initialState, (builder) => {
       state.equipes = action.payload;
     })
     .addCase(updateEquipesForUser.fulfilled, (state, action) => {
+      // state.loading = false; // Indiquez que le chargement est terminé
+      state.equipes = action.payload;
+    })
+    .addCase(deleteEquipesForUser.fulfilled, (state, action) => {
       // state.loading = false; // Indiquez que le chargement est terminé
       state.equipes = action.payload;
     });

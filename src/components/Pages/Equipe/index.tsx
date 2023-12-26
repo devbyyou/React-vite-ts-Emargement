@@ -1,19 +1,20 @@
 import React, {
-  ChangeEvent, FormEvent, useEffect, useState,
+  ChangeEvent, FormEvent, MouseEvent, useEffect, useState,
 } from 'react';
 import './index.scss';
 import { MdBolt } from 'react-icons/md';
 import { CiSearch } from 'react-icons/ci';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import cn from 'classnames';
 import Header from '../Home/Header';
 import logo from '../../../assets/devbyyou.png';
 import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
 import functionConverteDate from '../Home/MembersList/ConverteDate';
-import { toggleIsOpen } from '../../../store/reducers/equipes';
+import { deleteEquipesForUser, toggleIsOpen } from '../../../store/reducers/equipes';
 import NewTeam from '../Equipes/NewTeam';
 
 function Equipe() {
+  const navigate = useNavigate();
   const [stateInput, setStateInput] = useState('');
   const dispatch = useAppDispatch();
   const params = useParams();
@@ -27,6 +28,7 @@ function Equipe() {
       eq.id.toString() === equipeId
     ),
   );
+  // console.log(equipeId);
 
   useEffect(() => {
     // logique pour charger les données de l'équipe si elles ne sont pas déjà chargées
@@ -54,6 +56,16 @@ function Equipe() {
   const openClassNames = cn('newteam__content', {
     'newteam__content--closed': !isOpen,
   });
+  // eslint-disable-next-line max-len
+  async function handleClickedButton(event: MouseEvent<HTMLButtonElement, MouseEvent>): Promise<void> {
+    event.preventDefault();
+    // eslint-disable-next-line no-alert
+    alert('Suppression de l\'equipe ! Vous allez être redirigé vers la page des equipes :)');
+    navigate('/equipes');
+    window.location.reload();
+    await dispatch(deleteEquipesForUser(equipeId));
+  }
+
   return (
     <div>
       <NewTeam equipe={equipe} openClassNames={openClassNames} />
@@ -138,7 +150,7 @@ function Equipe() {
               <MdBolt />
               Actions
             </h3>
-            <button type="button">
+            <button onClick={handleClickedButton} type="button">
               Supprimer
             </button>
           </div>

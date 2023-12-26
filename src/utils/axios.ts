@@ -15,13 +15,14 @@ axiosInstance.interceptors.response.use(
   (response) => response,
   (error) => {
     const { status } = error.response;
-
-    // Si la réponse a un statut 440, le token est probablement expiré
     if (status === 440) {
+      removeUserDataFromLocalStorage();
       const navigate = useNavigate();
+      alert(status);
+
+      // Si la réponse a un statut 440, le token est probablement expiré
       alert('Token expiré. Déconnexion de l\'utilisateur.');
       navigate('/');
-      removeUserDataFromLocalStorage();
       window.location.reload();
     }
 
