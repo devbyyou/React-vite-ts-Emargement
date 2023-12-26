@@ -31,6 +31,7 @@ function Cards({
   useEffect(() => {
     dispatch(fetchEquipesForUser());
   }, [dispatch]);
+  // console.log(filteredTeams);
 
   return (
     <div className="content__equipe__contenu-card">

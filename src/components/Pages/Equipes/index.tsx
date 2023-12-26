@@ -17,8 +17,6 @@ import {
 
 function Equipes() {
   const [stateInputValue, setInputValue] = useState('');
-  // const user = useAppSelector((state) => state.user.token.user);
-  // const { equipes } = user;
   const equipes = useAppSelector((state) => state.equipes.equipes);
   const [filteredByCheckbox, setfilteredByCheckbox] = useState<Equipe[]>(equipes);
   const [activeNumber, setActiveNumber] = useState<Equipe[]>([]);
@@ -75,6 +73,7 @@ function Equipes() {
       </div>
       <NewTeam
         openClassNames={openClassNames}
+        equipe={undefined}
       />
     </div>
   );

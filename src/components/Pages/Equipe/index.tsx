@@ -1,31 +1,58 @@
-import React, { useEffect } from 'react';
+import React, {
+  ChangeEvent, FormEvent, useEffect, useState,
+} from 'react';
 import './index.scss';
 import { MdBolt } from 'react-icons/md';
 import { CiSearch } from 'react-icons/ci';
 import { Link, useParams } from 'react-router-dom';
+import cn from 'classnames';
 import Header from '../Home/Header';
 import logo from '../../../assets/devbyyou.png';
-import { useAppSelector } from '../../../hooks/redux';
+import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
 import functionConverteDate from '../Home/MembersList/ConverteDate';
-// import MembersList from '../Home/MembersList';
+import { toggleIsOpen } from '../../../store/reducers/equipes';
+import NewTeam from '../Equipes/NewTeam';
 
 function Equipe() {
-  const { U17 } = useParams();
+  const [stateInput, setStateInput] = useState('');
+  const dispatch = useAppDispatch();
+  const params = useParams();
+  const { [Object.keys(params)[0]]: id } = params;
   const equipes = useAppSelector((state) => state.equipes.equipes);
   const token = useAppSelector((state) => state.user.token.user);
-  const equipe = equipes.find((eq) => eq.categories.nom === U17);
-  console.log(equipe);
+  const isOpen = useAppSelector((state) => state.equipes.isOpen);
+  const equipe = equipes.find((eq) => eq.id.toString() === id);
+  // console.log(params);
+  // console.log(id);
 
   useEffect(() => {
-    // Ajoutez une logique pour charger les données de l'équipe si elles ne sont pas déjà chargées
-  }, [U17]);
+    // logique pour charger les données de l'équipe si elles ne sont pas déjà chargées
+  }, [id]);
 
   if (!equipe) {
     // Gestion du cas où l'équipe n'est pas encore chargée
     return <div>Loading...</div>;
   }
+  function handleChangeInput(event: ChangeEvent<HTMLInputElement>): void {
+    const inputValue = event.target.value;
+    setStateInput(inputValue);
+  }
+  const filteredBYName = equipe.joueurs.filter(
+    (joueur) => joueur.nom.toLowerCase().includes(stateInput.toLowerCase()),
+  );
+  function handleSubmitForm(event: FormEvent<HTMLFormElement>): void {
+    event.preventDefault();
+  }
+  function handleClickToggle() {
+    // J'emet mon intention / action
+    dispatch(toggleIsOpen());
+  }
+  const openClassNames = cn('newteam__content', {
+    'newteam__content--closed': !isOpen,
+  });
   return (
     <div>
+      <NewTeam equipe={equipe} openClassNames={openClassNames} />
       <Header />
       <div className="equipe__content">
         <div className="equipe__content__informations">
@@ -35,7 +62,7 @@ function Equipe() {
               <p>
                 Nom:
                 {' '}
-                {equipe.categories.nom}
+                {equipe.nom}
               </p>
               <p>
                 {' '}
@@ -59,7 +86,7 @@ function Equipe() {
             </div>
             <div className="equipe__content__information-logo">
               <img src={logo} alt="" />
-              <button type="button">Modifier</button>
+              <button onClick={handleClickToggle} type="button">Modifier</button>
             </div>
           </div>
 
@@ -68,18 +95,18 @@ function Equipe() {
               <h2 className="titleMembre">Membres</h2>
             </div>
 
-            <div className="search-bar">
+            <form onSubmit={handleSubmitForm} className="search-bar">
               <CiSearch className="logo__search_members-equipe" />
-              <input type="text" placeholder="Rechercher par nom" />
-            </div>
-            <div className="table">
-              <div className="row label">
+              <input value={stateInput} onChange={handleChangeInput} type="text" placeholder="Rechercher par nom" />
+            </form>
+            <div className="table tablenoScrool">
+              <div className="row label noScrool">
                 <div className="cell">Nom</div>
                 <div className="cell">Catégories</div>
                 <div className="cell">Dernière Activité</div>
               </div>
               {
-            equipe.joueurs.map((joueur) => (
+            filteredBYName.map((joueur) => (
               <Link key={joueur.id} to="/equipes/senior/joueur" className="row">
                 <div className="cell">
                   {joueur.nom}

@@ -65,6 +65,27 @@ export const fetchEquipesForUser = createAppAsyncThunk(
     return data;
   },
 );
+export const updateEquipesForUser = createAppAsyncThunk(
+  'equipes/UPDATE_EQUIPES_FOR_USER',
+  async (_, thunkAPI) => {
+    // On va aller récupérer depuis le state les credentials
+    const state = thunkAPI.getState();
+    const userID = state.user.token.user.id; // Récupérez l'ID de l'utilisateur depuis le state
+    // Je récupère mon email et mon mot de passe
+    const {
+      nom, categorieId, logo, statut,
+    } = state.equipes.credentials;
+    const { data } = await axiosInstance.put(`/equipes/${userID}`, {
+      nom,
+      categorieId,
+      logo,
+      statut,
+    });
+
+    return data;
+  },
+
+);
 const equipeReducer = createReducer(initialState, (builder) => {
   builder
     .addCase(toggleIsOpen, (state) => {
@@ -87,6 +108,10 @@ const equipeReducer = createReducer(initialState, (builder) => {
       state.credentials[field] = value;
     })
     .addCase(fetchEquipesForUser.fulfilled, (state, action) => {
+      // state.loading = false; // Indiquez que le chargement est terminé
+      state.equipes = action.payload;
+    })
+    .addCase(updateEquipesForUser.fulfilled, (state, action) => {
       // state.loading = false; // Indiquez que le chargement est terminé
       state.equipes = action.payload;
     });
