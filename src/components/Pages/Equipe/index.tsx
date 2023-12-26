@@ -17,17 +17,20 @@ function Equipe() {
   const [stateInput, setStateInput] = useState('');
   const dispatch = useAppDispatch();
   const params = useParams();
-  const { [Object.keys(params)[0]]: id } = params;
+  const equipeId = Object.values(params)[0];
+  const categories = Object.values(params)[1];
   const equipes = useAppSelector((state) => state.equipes.equipes);
   const token = useAppSelector((state) => state.user.token.user);
   const isOpen = useAppSelector((state) => state.equipes.isOpen);
-  const equipe = equipes.find((eq) => eq.id.toString() === id);
-  // console.log(params);
-  // console.log(id);
+  const equipe = equipes.find(
+    (eq) => (
+      eq.id.toString() === equipeId
+    ),
+  );
 
   useEffect(() => {
     // logique pour charger les données de l'équipe si elles ne sont pas déjà chargées
-  }, [id]);
+  }, [equipeId]);
 
   if (!equipe) {
     // Gestion du cas où l'équipe n'est pas encore chargée
@@ -40,6 +43,7 @@ function Equipe() {
   const filteredBYName = equipe.joueurs.filter(
     (joueur) => joueur.nom.toLowerCase().includes(stateInput.toLowerCase()),
   );
+
   function handleSubmitForm(event: FormEvent<HTMLFormElement>): void {
     event.preventDefault();
   }
@@ -58,7 +62,7 @@ function Equipe() {
         <div className="equipe__content__informations">
           <div className="equipe__content__information-club">
             <div className="equipe__content__information-statut">
-              <h3>{equipe.categories.nom}</h3>
+              <h3>{categories}</h3>
               <p>
                 Nom:
                 {' '}

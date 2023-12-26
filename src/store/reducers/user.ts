@@ -38,6 +38,7 @@ export const initialState: UserState = {
           logo: '',
           statut: '',
           categorie_id: 1,
+          created_at: '',
           joueurs: [
             {
               id: 1,

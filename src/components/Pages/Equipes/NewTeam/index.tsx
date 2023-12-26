@@ -2,13 +2,13 @@ import React, {
   ChangeEvent, FormEvent, KeyboardEvent, useEffect,
 } from 'react';
 import './index.scss';
+import { useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../../../hooks/redux';
 import {
   changeCredentialsField, createEquipe, fetchEquipesForUser, toggleIsOpen, updateEquipesForUser,
 } from '../../../../store/reducers/equipes';
 import { findAllCategories } from '../../../../store/reducers/categories';
 import { Equipe } from '../../../../@types/user';
-// import { Equipe } from '../../../../@types/user';
 
 interface IopenClassNames {
   openClassNames:string,
@@ -16,7 +16,7 @@ interface IopenClassNames {
 }
 
 function NewTeam({ openClassNames, equipe } :IopenClassNames) {
-  // console.log(equipe);
+  const navigate = useNavigate();
 
   const nom = useAppSelector((state) => state.equipes.credentials.nom);
   const categories = useAppSelector((state) => state.categories.categories);
@@ -57,14 +57,13 @@ function NewTeam({ openClassNames, equipe } :IopenClassNames) {
 
   async function handleSubmitFormUpdate(event: FormEvent<HTMLFormElement>): Promise<void> {
     event.preventDefault();
-    console.log('oui');
+    // eslint-disable-next-line no-alert
+    alert('Modification de l\'equipe ! Vous allez être redirigé vers la page des equipes :)');
+    navigate('/equipes');
     await dispatch(updateEquipesForUser());
+    window.location.reload();
   }
 
-  // useEffect(() => {
-  //   dispatch(findAllCategories());
-  // }, [dispatch]);
-  // console.log(categories);
   return (
     <div className={openClassNames}>
       <div onClick={handleClickedClose} onKeyDown={handleKeyDown} role="button" tabIndex={0} className="modal-header">

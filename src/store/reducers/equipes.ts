@@ -1,5 +1,6 @@
 import { createAction, createReducer } from '@reduxjs/toolkit';
 // import { equipes } from '../../data/data2.json';
+// import { redirect } from 'react-router-dom';
 import { Equipe } from '../../@types/user';
 import { createAppAsyncThunk } from '../../utils/redux';
 import { axiosInstance } from '../../utils/axios';
@@ -18,13 +19,44 @@ interface EquipesState {
 }
 
 const initialState: EquipesState = {
-  equipes: [],
+  equipes: [
+    {
+      id: 1,
+      nom: '',
+      logo: '',
+      statut: '',
+      categorie_id: 1,
+      created_at: '',
+      joueurs: [
+        {
+          id: 1,
+          nom: '',
+          prenom: '',
+          email: '',
+          derniere_activite: '',
+        },
+        // ... autres joueurs
+      ],
+      categories: {
+        id: 1,
+        nom: '',
+        tranche_age: '',
+        nombre_total: 0,
+      },
+      coaches_equipes: {
+        created_at: '',
+        updated_at: '',
+        coach_id: 1,
+        equipe_id: 1,
+      },
+    },
+  ],
   isOpen: true,
   credentials: {
-    nom: 'Letest',
-    categorieId: '3',
+    nom: '',
+    categorieId: '',
     logo: '',
-    statut: 'actif',
+    statut: 'active',
   },
 
 };

@@ -27,7 +27,7 @@ export interface User {
   banniere: string,
 }
 export interface Equipe {
-  created_at: ReactNode
+  created_at: string
   id: number
   nom: string
   logo?: string

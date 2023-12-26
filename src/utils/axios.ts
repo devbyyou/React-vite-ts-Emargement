@@ -1,6 +1,6 @@
 import axios from 'axios';
 // import { useEffect } from 'react';
-import { redirect } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 import { getUserDataFromLocalStorage, removeUserDataFromLocalStorage } from './user';
 
@@ -11,24 +11,24 @@ export const axiosInstance = axios.create({
   baseURL: 'http://localhost:3000/api',
 });
 // Intercepteur pour gérer les erreurs
-// axiosInstance.interceptors.response.use(
-//   (response) => response,
-//   (error) => {
-//     const { status } = error.response;
+axiosInstance.interceptors.response.use(
+  (response) => response,
+  (error) => {
+    const { status } = error.response;
 
-//     // Si la réponse a un statut 401, le token est probablement expiré
-//     if (status === 400 || 401 || 403) {
-//       console.log('Token expiré. Déconnexion de l\'utilisateur.');
-//       window.location.href = '/';
-//       removeUserDataFromLocalStorage();
-//       window.location.reload();
-//       return redirect('/');
-//     }
+    // Si la réponse a un statut 440, le token est probablement expiré
+    if (status === 440) {
+      const navigate = useNavigate();
+      alert('Token expiré. Déconnexion de l\'utilisateur.');
+      navigate('/');
+      removeUserDataFromLocalStorage();
+      window.location.reload();
+    }
 
-//     // Propagez l'erreur pour que le code appelant puisse également la gérer
-//     return Promise.reject(error);
-//   },
-// );
+    // Propagez l'erreur pour que le code appelant puisse également la gérer
+    return Promise.reject(error);
+  },
+);
 // Je peu agir avant qu'une requête soit envoyé
 axiosInstance.interceptors.request.use((config) => {
   // Je récupère les données utilisateur
