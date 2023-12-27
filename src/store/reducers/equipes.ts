@@ -1,6 +1,7 @@
 import { createAction, createReducer } from '@reduxjs/toolkit';
 // import { equipes } from '../../data/data2.json';
 // import { redirect } from 'react-router-dom';
+// import { useParams } from 'react-router-dom';
 import { Equipe } from '../../@types/user';
 import { createAppAsyncThunk } from '../../utils/redux';
 import { axiosInstance } from '../../utils/axios';
@@ -99,15 +100,15 @@ export const fetchEquipesForUser = createAppAsyncThunk(
 );
 export const updateEquipesForUser = createAppAsyncThunk(
   'equipes/UPDATE_EQUIPES_FOR_USER',
-  async (_, thunkAPI) => {
+  async (equipeId, thunkAPI) => {
     // On va aller récupérer depuis le state les credentials
     const state = thunkAPI.getState();
-    const userID = state.user.token.user.id; // Récupérez l'ID de l'utilisateur depuis le state
+    // const userID = state.user.token.user.id; // Récupérez l'ID de l'utilisateur depuis le state
     // Je récupère mon email et mon mot de passe
     const {
       nom, categorieId, logo, statut,
     } = state.equipes.credentials;
-    const { data } = await axiosInstance.put(`/equipes/${userID}`, {
+    const { data } = await axiosInstance.put(`/equipes/${equipeId}`, {
       nom,
       categorieId,
       logo,
@@ -120,7 +121,7 @@ export const updateEquipesForUser = createAppAsyncThunk(
 );
 export const deleteEquipesForUser = createAppAsyncThunk(
   'equipes/DELETE_EQUIPES_FOR_USER',
-  async (equipeId, thunkAPI) => {
+  async (equipeId) => {
     const { data } = await axiosInstance.delete(`/equipes/${equipeId}`);
 
     return data;

@@ -14,7 +14,7 @@ import Inscription from '../Pages/Inscription';
 import Connexion from '../Connexion';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { fetchCoaches } from '../../store/reducers/coaches';
-import { findAllCategories } from '../../store/reducers/categories';
+// import { findAllCategories } from '../../store/reducers/categories';
 
 function App() {
   const logged = useAppSelector((state) => state.user.logged);
@@ -27,8 +27,8 @@ function App() {
       if (logged) {
         dispatch(fetchCoaches());
       }
-    }, 30 * 60 * 1000); // 30 minutes en millisecondes
-    dispatch(findAllCategories());
+    }, 20 * 60 * 1000); // 30 minutes en millisecondes
+    // dispatch(findAllCategories());
     // Nettoie l'intervalle lorsque le composant est démonté
     return () => clearInterval(intervalId);
   }, [dispatch, logged]);
@@ -54,7 +54,15 @@ function App() {
                     element={<Equipe />}
                   />
                 ))}
-                <Route path="/equipes/senior/joueur" element={<Joueur />} />
+                {
+
+                equipes.map((listesEquipes) => {
+                  const { joueurs } = listesEquipes;
+                  return joueurs.map((joueur) => <Route key={joueur.id} path={`/equipes/joueur/:${joueur.categorie_id}/:${joueur.id}`} element={<Joueur />} />);
+                })
+
+              }
+
                 <Route path="/pageJoueur" element={<QRCodeReader />} />
                 <Route path="*" element={<div>404</div>} />
               </Routes>

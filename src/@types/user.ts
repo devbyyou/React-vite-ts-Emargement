@@ -38,6 +38,7 @@ export interface Equipe {
   coaches_equipes: CoachesEquipes
 }
 export interface Joueur {
+  categorie_id: any
   id: number
   nom: string
   prenom: string

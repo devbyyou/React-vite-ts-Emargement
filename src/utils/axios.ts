@@ -1,6 +1,6 @@
 import axios from 'axios';
 // import { useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+// import { useNavigate } from 'react-router-dom';
 
 import { getUserDataFromLocalStorage, removeUserDataFromLocalStorage } from './user';
 
@@ -17,12 +17,17 @@ axiosInstance.interceptors.response.use(
     const { status } = error.response;
     if (status === 440) {
       removeUserDataFromLocalStorage();
-      const navigate = useNavigate();
-      alert(status);
+      // const navigate = useNavigate();
+      // alert(status);
 
       // Si la réponse a un statut 440, le token est probablement expiré
+      // eslint-disable-next-line no-alert
       alert('Token expiré. Déconnexion de l\'utilisateur.');
-      navigate('/');
+      document.location.href = 'http://localhost:5173';
+      window.location.href = 'http://localhost:5173';
+      // window.location.replace = 'http://localhost:5173';
+
+      // navigate('/');
       window.location.reload();
     }
 

@@ -13,9 +13,10 @@ import { Equipe } from '../../../../@types/user';
 interface IopenClassNames {
   openClassNames:string,
   equipe: Equipe | undefined
+  equipeId: string | undefined
 }
 
-function NewTeam({ openClassNames, equipe } :IopenClassNames) {
+function NewTeam({ openClassNames, equipe, equipeId } :IopenClassNames) {
   const navigate = useNavigate();
 
   const nom = useAppSelector((state) => state.equipes.credentials.nom);
@@ -60,7 +61,7 @@ function NewTeam({ openClassNames, equipe } :IopenClassNames) {
     // eslint-disable-next-line no-alert
     alert('Modification de l\'equipe ! Vous allez être redirigé vers la page des equipes :)');
     navigate('/equipes');
-    await dispatch(updateEquipesForUser());
+    await dispatch(updateEquipesForUser(equipeId));
     window.location.reload();
   }
 

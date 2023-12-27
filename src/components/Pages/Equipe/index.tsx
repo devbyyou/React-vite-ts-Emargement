@@ -28,8 +28,6 @@ function Equipe() {
       eq.id.toString() === equipeId
     ),
   );
-  // console.log(equipeId);
-
   useEffect(() => {
     // logique pour charger les données de l'équipe si elles ne sont pas déjà chargées
   }, [equipeId]);
@@ -65,10 +63,11 @@ function Equipe() {
     window.location.reload();
     await dispatch(deleteEquipesForUser(equipeId));
   }
+  // console.log(filteredBYName);
 
   return (
     <div>
-      <NewTeam equipe={equipe} openClassNames={openClassNames} />
+      <NewTeam equipeId={equipeId} equipe={equipe} openClassNames={openClassNames} />
       <Header />
       <div className="equipe__content">
         <div className="equipe__content__informations">
@@ -123,7 +122,7 @@ function Equipe() {
               </div>
               {
             filteredBYName.map((joueur) => (
-              <Link key={joueur.id} to="/equipes/senior/joueur" className="row">
+              <Link key={joueur.id} to={`/equipes/joueur/${joueur.categorie_id}/${joueur.id}`} className="row">
                 <div className="cell">
                   {joueur.nom}
                   {' '}
