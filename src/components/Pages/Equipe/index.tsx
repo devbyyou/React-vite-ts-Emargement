@@ -16,6 +16,7 @@ import NewTeam from '../Equipes/NewTeam';
 function Equipe() {
   const navigate = useNavigate();
   const [stateInput, setStateInput] = useState('');
+  const [stateActiveRef, setstateActiveRef] = useState(false);
   const dispatch = useAppDispatch();
   const params = useParams();
   const equipeId = Object.values(params)[0];
@@ -28,6 +29,10 @@ function Equipe() {
       eq.id.toString() === equipeId
     ),
   );
+
+  // console.log('ref =', ref);
+  // console.log('ref.current =', ref.current);
+
   useEffect(() => {
     // logique pour charger les données de l'équipe si elles ne sont pas déjà chargées
   }, [equipeId]);
@@ -49,6 +54,8 @@ function Equipe() {
   }
   function handleClickToggle() {
     // J'emet mon intention / action
+    // setstateActiveRef(!stateActiveRef);
+    setstateActiveRef(false);
     dispatch(toggleIsOpen());
   }
   const openClassNames = cn('newteam__content', {
@@ -59,15 +66,27 @@ function Equipe() {
     event.preventDefault();
     // eslint-disable-next-line no-alert
     alert('Suppression de l\'equipe ! Vous allez être redirigé vers la page des equipes :)');
-    navigate('/equipes');
-    window.location.reload();
-    await dispatch(deleteEquipesForUser(equipeId));
+    // navigate('/equipes');
+    // window.location.reload();
+    // await dispatch(deleteEquipesForUser(equipeId));
   }
-  // console.log(filteredBYName);
+  function AddJoueurClickedButton(event: MouseEvent<HTMLButtonElement, MouseEvent>): void {
+    // console.log('Ok', event);
+    dispatch(toggleIsOpen());
+
+    setstateActiveRef(true);
+  }
+
+  // console.log(stateActiveRef);
 
   return (
     <div>
-      <NewTeam equipeId={equipeId} equipe={equipe} openClassNames={openClassNames} />
+      <NewTeam
+        equipeId={equipeId}
+        equipe={equipe}
+        openClassNames={openClassNames}
+        stateActiveRef={stateActiveRef}
+      />
       <Header />
       <div className="equipe__content">
         <div className="equipe__content__informations">
@@ -149,9 +168,21 @@ function Equipe() {
               <MdBolt />
               Actions
             </h3>
-            <button onClick={handleClickedButton} type="button">
-              Supprimer
-            </button>
+            <div>
+              <button onClick={handleClickedButton} type="button">
+                Supprimer
+                {' '}
+                {equipe.nom}
+
+              </button>
+              <button
+                className="buttonNewPlayer"
+                onClick={AddJoueurClickedButton}
+                type="button"
+              >
+                Ajoutez Nouveau Joueur
+              </button>
+            </div>
           </div>
         </div>
       </div>

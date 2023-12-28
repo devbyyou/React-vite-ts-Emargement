@@ -43,6 +43,15 @@
                     background-color: red;
                 }
             }
+            .buttonNewPlayer {
+                // background-color: rgba(194, 232, 217, 0.36);
+                background-color: vars.$button;
+                color: vars.$textColor;
+                &:hover{
+                    background-color: green;
+                    color: #f6f7f9;
+                }
+            }
         }
     }
 
@@ -99,6 +108,7 @@
                 background-color: vars.$buttonHover;
             }
         }
+        
     }
     &-effectif {
         width: 100%;
@@ -106,11 +116,10 @@
     }
 }
 
-.logo__search_members-equipe{
-position: absolute;
-width: 2em;
-height: 2em;
-margin-left: 12px;
-margin-top: 8px;
+.logo__search_members-equipe {
+    position: absolute;
+    width: 2em;
+    height: 2em;
+    margin-left: 12px;
+    margin-top: 8px;
 }
-

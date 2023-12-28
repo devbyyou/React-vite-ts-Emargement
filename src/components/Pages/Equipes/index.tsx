@@ -74,6 +74,7 @@ function Equipes() {
       <NewTeam
         openClassNames={openClassNames}
         equipe={undefined}
+        equipeId={undefined}
       />
     </div>
   );

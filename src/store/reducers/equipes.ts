@@ -1,18 +1,19 @@
 import { createAction, createReducer } from '@reduxjs/toolkit';
-// import { equipes } from '../../data/data2.json';
-// import { redirect } from 'react-router-dom';
-// import { useParams } from 'react-router-dom';
 import { Equipe } from '../../@types/user';
 import { createAppAsyncThunk } from '../../utils/redux';
 import { axiosInstance } from '../../utils/axios';
-// import { Equipe } from '../../@types/types2';
 
 interface EquipesState {
   equipes: Equipe[]
   isOpen: boolean,
   credentials: {
+    equipe_id:number
     nom: string,
-    categorieId: string | number,
+    prenom: string,
+    email:string,
+    tel:string,
+    age:number,
+    categorie_id: string | number,
     logo:string
     statut:string
   },
@@ -31,12 +32,20 @@ const initialState: EquipesState = {
       joueurs: [
         {
           id: 1,
-          nom: '',
-          prenom: '',
-          email: '',
-          derniere_activite: '',
+          nom: 'string',
+          prenom: 'string',
+          email: 'string',
+          tel: 0,
+          derniere_activite: 'string',
+          date_creation: 'string',
+          equipe: [],
+          statut: 'string',
+          logo: 'string',
+          categorie_id: 1,
+          role: 'string',
+          age: 1,
+          etat: 'string',
         },
-        // ... autres joueurs
       ],
       categories: {
         id: 1,
@@ -54,10 +63,15 @@ const initialState: EquipesState = {
   ],
   isOpen: true,
   credentials: {
+    equipe_id: 1,
     nom: '',
-    categorieId: '',
+    prenom: '',
+    categorie_id: 1,
     logo: '',
     statut: 'active',
+    email: '',
+    tel: '',
+    age: 20,
   },
 
 };
@@ -65,7 +79,7 @@ const initialState: EquipesState = {
 export const updateequipes = createAction('equipes/UPDATE_EQUIPES');
 export const toggleIsOpen = createAction('equipes/TOGGLE_IS_OPEN');
 export const changeCredentialsField = createAction<{
-  value:string;
+  value:never ;
   field: keyof EquipesState['credentials']
 }>('equipes/CHANGE_CREDENTIALS_FIELD');
 
@@ -76,11 +90,11 @@ export const createEquipe = createAppAsyncThunk(
     const state = thunkAPI.getState();
     // Je récupère mon email et mon mot de passe
     const {
-      nom, categorieId, logo, statut,
+      nom, categorie_id, logo, statut,
     } = state.equipes.credentials;
     const { data } = await axiosInstance.post('/equipes', {
       nom,
-      categorieId,
+      categorie_id,
       logo,
       statut,
     });
@@ -141,9 +155,9 @@ const equipeReducer = createReducer(initialState, (builder) => {
       // state
 
       // Je réinitialiser les credentials
-      state.credentials.nom = '';
-      state.credentials.categorieId = '';
-      state.credentials.logo = '';
+      // state.credentials.nom = '';
+      // state.credentials.categorieId = '';
+      // state.credentials.logo = '';
     })
     .addCase(changeCredentialsField, (state, action) => {
       const { field, value } = action.payload;
