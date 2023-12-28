@@ -6,7 +6,7 @@ import logo from '../../../assets/devbyou.png';
 
 function Joueur() {
   return (
-    <div>
+    <div className='joueur__content'>
       <Header />
       <div className="joueur__banniere">
         <img src={logo} alt="" />
@@ -19,7 +19,7 @@ function Joueur() {
             <div className="joueur__informations-title">
               <h3>Information Personnelles</h3>
               <button className="colorRed" type="button">Supprimer</button>
-              <button type="button">Modifier photo</button>
+              {/* <button type="button">Modifier photo</button> */}
               <button type="button">Modifier les informations</button>
             </div>
 
@@ -44,21 +44,11 @@ function Joueur() {
                 <div className="col-md-4">Mobile phone:</div>
                 <div className="col-md-8" />
               </div>
-              <div className="joueur__informations-row mb-2">
-                <div className="col-md-4">Password:</div>
-                <div className="col-md-8">
-                  <Link to="/">Click here to change cedric de password</Link>
-                </div>
-              </div>
-              <div className="joueur__informations-row mb-3">
-                <div className="col-md-4">Bio/Note:</div>
-                <div className="col-md-8" />
-              </div>
             </div>
 
           </div>
 
-          <div className="timeline-event-block block">
+          {/* <div className="timeline-event-block block">
             <div className="block-header block-header-default">
               <h3 className="block-title">Informations sur les parents/tuteurs</h3>
               <div className="block-options">
@@ -82,7 +72,7 @@ function Joueur() {
                 </tbody>
               </table>
             </div>
-          </div>
+          </div> */}
 
           <div className="timeline-event-block block">
             <div className="block-header block-header-default">

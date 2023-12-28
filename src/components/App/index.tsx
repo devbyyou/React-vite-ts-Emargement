@@ -14,6 +14,7 @@ import Inscription from '../Pages/Inscription';
 import Connexion from '../Connexion';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { fetchCoaches } from '../../store/reducers/coaches';
+import { fetchEquipesForUser } from '../../store/reducers/equipes';
 // import { findAllCategories } from '../../store/reducers/categories';
 
 function App() {
@@ -27,7 +28,9 @@ function App() {
         dispatch(fetchCoaches());
       }
     }, 20 * 60 * 1000); // 30 minutes en millisecondes
-    // dispatch(findAllCategories());
+    if (logged) {
+      dispatch(fetchEquipesForUser());
+    }
     // Nettoie l'intervalle lorsque le composant est démonté
     return () => clearInterval(intervalId);
   }, [dispatch, logged]);
