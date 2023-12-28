@@ -87,7 +87,7 @@ const joueursReducer = createReducer(initialState, (builder) => {
     .addCase(createJoueurForEquipe.fulfilled, (state, action) => {
     // state.loading = false; // Indiquez que le chargement est terminé
       state.joueurs = action.payload;
-      state.credentials.nom = '';
+      state. credentials.nom = '';
       state.credentials.prenom = '';
       state.credentials.email = '';
       state.credentials.tel = '';

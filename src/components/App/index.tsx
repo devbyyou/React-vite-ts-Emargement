@@ -19,7 +19,6 @@ import { fetchCoaches } from '../../store/reducers/coaches';
 function App() {
   const logged = useAppSelector((state) => state.user.logged);
   const equipes = useAppSelector((state) => state.equipes.equipes);
-  console.log(equipes);
 
   const dispatch = useAppDispatch();
   useEffect(() => {

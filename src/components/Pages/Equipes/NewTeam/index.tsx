@@ -73,7 +73,7 @@ function NewTeam({
       field,
     }));
   };
-  console.log(equipeId);
+  // console.log(equipeId);
 
   async function handleSubmitFormUpdate(event: FormEvent<HTMLFormElement>): Promise<void> {
     event.preventDefault();
@@ -86,11 +86,11 @@ function NewTeam({
   async function AddPlayerSubmitForm(event: FormEvent<HTMLFormElement>): Promise<void> {
     event.preventDefault();
 
-    // eslint-disable-next-line no-alert
-    alert('AddPlayerSubmitForm :)');
-    // navigate('/equipes');
     await dispatch(createJoueurForEquipe(equipeId));
-    // window.location.reload();
+    await dispatch(fetchEquipesForUser());
+    // eslint-disable-next-line no-alert
+    alert(`Ajout de ${prenom} ${nom} Avec succès ! :)`);
+    dispatch(toggleIsOpen());
   }
 
   return (

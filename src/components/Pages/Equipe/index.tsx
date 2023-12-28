@@ -10,7 +10,7 @@ import Header from '../Home/Header';
 import logo from '../../../assets/devbyyou.png';
 import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
 import functionConverteDate from '../Home/MembersList/ConverteDate';
-import { deleteEquipesForUser, toggleIsOpen } from '../../../store/reducers/equipes';
+import { deleteEquipesForUser, fetchEquipesForUser, toggleIsOpen } from '../../../store/reducers/equipes';
 import NewTeam from '../Equipes/NewTeam';
 
 function Equipe() {
@@ -20,8 +20,9 @@ function Equipe() {
   const dispatch = useAppDispatch();
   const params = useParams();
   const equipeId = Object.values(params)[0];
-  const categories = Object.values(params)[1];
   const equipes = useAppSelector((state) => state.equipes.equipes);
+
+  const categories = Object.values(params)[1];
   const token = useAppSelector((state) => state.user.token.user);
   const isOpen = useAppSelector((state) => state.equipes.isOpen);
   const equipe = equipes.find(
@@ -29,13 +30,12 @@ function Equipe() {
       eq.id.toString() === equipeId
     ),
   );
-
-  // console.log('ref =', ref);
-  // console.log('ref.current =', ref.current);
-
   useEffect(() => {
     // logique pour charger les données de l'équipe si elles ne sont pas déjà chargées
-  }, [equipeId]);
+    // dispatch(fetchEquipesForUser());
+  }, [dispatch, equipes, equipe]);
+  // console.log('ref =', ref);
+  // console.log('ref.current =', ref.current);
 
   if (!equipe) {
     // Gestion du cas où l'équipe n'est pas encore chargée
@@ -54,7 +54,6 @@ function Equipe() {
   }
   function handleClickToggle() {
     // J'emet mon intention / action
-    // setstateActiveRef(!stateActiveRef);
     setstateActiveRef(false);
     dispatch(toggleIsOpen());
   }
@@ -76,8 +75,6 @@ function Equipe() {
 
     setstateActiveRef(true);
   }
-
-  // console.log(stateActiveRef);
 
   return (
     <div>

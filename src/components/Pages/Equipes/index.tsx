@@ -75,6 +75,7 @@ function Equipes() {
         openClassNames={openClassNames}
         equipe={undefined}
         equipeId={undefined}
+        stateActiveRef={false}
       />
     </div>
   );

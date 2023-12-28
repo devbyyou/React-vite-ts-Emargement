@@ -64,13 +64,13 @@ const initialState: EquipesState = {
   isOpen: true,
   credentials: {
     equipe_id: 1,
-    nom: '',
+    nom: 'Ly',
     prenom: '',
     categorie_id: 1,
     logo: '',
     statut: 'active',
-    email: '',
-    tel: '',
+    email: 'joueur.exemple@gmail.com',
+    tel: '123456789',
     age: 20,
   },
 
