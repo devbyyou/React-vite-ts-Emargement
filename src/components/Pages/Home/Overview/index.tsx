@@ -20,24 +20,42 @@ function Overview() {
 
   return (
     <div className="overviews">
-      <div className="overview">
-        <div className="card">
-          <p className="card__title">
-            <BiFootball className="card__icons" />
-            Equipe
-          </p>
-          <p className="card__number">{nbEquipes}</p>
-        </div>
+      {/* <div className="overview"> */}
+      <div className="card">
+        <p className="card__title">
+          <BiFootball className="card__icons" />
+          Equipe
+        </p>
+        <p className="card__number">{nbEquipes}</p>
       </div>
-      <div className="overview">
+      {/* </div> */}
+      {/* <div className="overview"> */}
+      <div className="card">
+        <p className="card__title">
+          <BiFootball className="card__icons" />
+          Joueur
+        </p>
+        <p className="card__number">{totalJoueurs}</p>
+      </div>
+      {/* </div>  */}
+      {/* <div className="overview"> */}
+      <div className="card">
+        <p className="card__title">
+          <BiFootball className="card__icons" />
+          Categorie
+        </p>
+        <p className="card__number">{totalJoueurs}</p>
+      </div>
+      {/* </div> */}
+      {/* <div className="overview">
         <div className="card">
           <p className="card__title">
             <BiFootball className="card__icons" />
-            Joueur
+            Coaches
           </p>
           <p className="card__number">{totalJoueurs}</p>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 }

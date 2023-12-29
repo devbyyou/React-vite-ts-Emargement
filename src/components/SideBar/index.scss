@@ -1,63 +1,67 @@
 @use "../../styles/vars";
 
-@import url('https://fonts.googleapis.com/css2?family=Blinker&family=Fira+Sans:wght@200&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Blinker&family=Fira+Sans:wght@200&display=swap");
 .sidebar {
-
-  font-family: 'Blinker', sans-serif;
-  font-family: 'Fira Sans', sans-serif;
+    font-family: "Blinker", sans-serif;
+    font-family: "Fira Sans", sans-serif;
     display: flex;
     flex-direction: column;
     background-color: #f0fffb;
-    gap: 1.1rem;
+    gap: 65px;
     height: 100vh;
-    width: 225px;
+    width: 222px;
     position: fixed;
     top: 0;
     align-items: center;
     left: 0;
     // border-right: 2px solid rgb(146 146 146 / 10%);
     padding: 20px;
-    box-shadow: rgba(99, 99, 99, 0.47) 0px 2px 8px 0px;
+    // box-shadow: rgba(99, 99, 99, 0.47) 0px 2px 8px 0px;
     a {
         // text-align: center;
         padding: 1rem;
         padding-left: 1.5rem;
         color: rgb(37 37 37);
         font-family: vars.$fontText;
-        font-size: 18px;
+        font-size: 13px;
         transition: background-color 1s;
         transition: color 0.5s;
         width: 100%;
-        color: rgb(0 0 0);
+        color: rgb(0 0 0 / 82%);
         &:hover {
             color: vars.$textColorHover;
             background-color: vars.$bgContent;
             // padding: 1rem;
             border-radius: 20px;
-          background-color:   rgba(0, 0, 0, 0.09);
+            background-color: rgba(0, 0, 0, 0.09);
         }
     }
 
     &::after {
         content: "";
-        width: 85%;
+        width: 82%;
         height: 1px;
         background-color: #00000070;
         opacity: 0.3;
-        margin-top: 20%;
+        margin-top: 30%;
+    }
+    .sidebarLink {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
     }
 }
 
 .logo {
     width: 250px;
-    height: 6rem;
+    height: 4rem;
     object-fit: contain;
-    // margin-top: 19px;
+    margin-top: 19px;
 }
 
 .icons {
     display: flex;
-    gap: 1rem;
+    gap: 14px;
     align-items: center;
     flex-direction: row;
 }
@@ -65,6 +69,5 @@
     background-color: vars.$bgContent;
     // padding: 1rem;
     border-radius: 20px;
-    background-color:   rgba(0, 0, 0, 0.09);
-
+    background-color: rgba(0, 0, 0, 0.09);
 }

@@ -4,13 +4,15 @@
     display: flex;
     flex-direction: column;
     gap: 20px;
+    background-color: #fdf5e633;
     margin-right: 30px;
     border-radius: 10px;
-    width: 17rem;
-    height: 21rem;
+    min-width: 247.55px;
+    height: 22rem;
     box-shadow: 1px 1px 3px 1px rgba(225, 225, 225);
-    padding: 20px;
+    padding: 17px;
     // box-shadow: 7px 7px 12px #8e857ab8;
+    background-color: rgb(255 236 199 / 66%);
     h2 {
         font-family: vars.$fontTextCorp;
         font-weight: bold;
@@ -21,7 +23,7 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        gap: 20px;
+        gap: 7px;
         background-color: #fff;
         border-radius: 10px;
         cursor: pointer;
@@ -65,17 +67,16 @@
         }
         &::after {
             content: "";
-            width: 50px;
-            height: 50px;
-            background-color: rgb(194 232 217 / 36%);
+            width: 45px;
+            height: 45px;
+            background-color: rgba(194, 232, 217, 0.36);
             position: absolute;
-            left: 6px;
+            left: 4.4px;
             border-radius: 30px;
             opacity: 0.6;
         }
     }
 }
-
 
 .plannerLogo {
     height: 2em;

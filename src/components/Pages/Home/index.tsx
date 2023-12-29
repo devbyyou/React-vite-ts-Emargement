@@ -17,8 +17,7 @@ function Home() {
     dispatch(fetchEquipesForUser());
   }, [dispatch]);
   return (
-    <div>
-      <Header />
+    <>
       <div className="messageHome">
         { `
         Bienvenue à nouveau, 
@@ -26,16 +25,20 @@ function Home() {
         {' '}
         👋
       </div>
+      <Header />
       <h2 className="title">Vue d'ensemble</h2>
 
       <div className="content__displayChoice">
         <Overview />
+      </div>
+      <div className="homeDisplayAcces">
+
+        <MembersList />
         <ListChoice />
       </div>
-      <MembersList />
       <h3 className="title__graph">Pourcentage de fréquentation (par jour) </h3>
       <Graph />
-    </div>
+    </>
   );
 }
 

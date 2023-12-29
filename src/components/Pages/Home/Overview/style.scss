@@ -2,15 +2,18 @@
 .overviews {
     display: flex;
     align-items: center;
-    justify-content: flex-start;
-    flex-wrap: wrap;
+    // justify-content: flex-start;
+    // flex-wrap: wrap;
+    width: 100%;
+    gap: 2rem;
 }
 .title {
-    margin-left: 30px;
+    margin-left: 25px;
     font-family: vars.$fontTextCorp;
     font-weight: bold;
     font-size: 20px;
-    margin: 10px 0 10px 30px;
+    padding: 10px;
+    // margin: 10px 0 10px 30px;
 }
 .overview {
     display: flex;
@@ -21,18 +24,21 @@
 .card {
     background-color: rgb(255, 255, 255);
     border-radius: 10px;
-    width: 9rem;
-    height: 7rem;
+    width: 100%;
+    height: 10rem;
     box-shadow: 1px 1px 3px 1px rgb(225 225 225 / 67%);
     display: flex;
     flex-direction: column;
     gap: 20px;
     position: relative;
+    background-color: rgb(255 236 199 / 66%);
+    justify-content: space-between;
+    padding-left: 7px;
 
     &__title {
         display: flex;
         align-items: center;
-        padding-top: 9px;
+        padding-top: 20px;
         padding-left: 9px;
         gap: 7px;
         font-family: vars.$fontText;
@@ -45,6 +51,7 @@
         font-weight: bold;
         font-size: 35px;
         padding-left: 15px;
+        padding-bottom: 2rem;
         &::after {
             content: "";
             width: 42px;
@@ -52,7 +59,7 @@
             background-color: orange;
             position: absolute;
             bottom: 17px;
-            left: 10px;
+            left: 17.5px;
         }
     }
 

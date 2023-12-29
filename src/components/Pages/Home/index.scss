@@ -5,7 +5,7 @@
     align-items: center;
     justify-content: flex-start;
     flex-direction: row;
-    margin-top: 2rem;
+    // margin-top: 2rem;
 
     &__input {
         width: 30vh;
@@ -17,9 +17,17 @@
         margin-left: 30px;
     }
 }
+
+.homeDisplayAcces{
+    display: flex;
+    // gap: 2px ;
+    justify-content: space-between;
+    margin-top: 2rem;
+    gap: 2rem;
+}
 .logo__search {
     position: absolute;
-    left: 18.2rem;
+    left: 268px;
     opacity: 0.5;
     font-family: vars.$fontText;
     color: vars.$textColor;
@@ -33,7 +41,7 @@
 
 .messageHome {
     // background-color: aqua;
-    margin-left: 30px;
+    margin: 30px 30px 0px 30px;
     font-weight: bold;
     font-family: vars.$fontTextCorp;
     font-size: 25px;
@@ -43,6 +51,6 @@
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
-    height: 128px;
-    // background-color: aliceblue;
+    margin-left: 30px;
+    margin-right: 30px;
 }
