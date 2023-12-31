@@ -38,6 +38,7 @@ export interface Equipe {
   coaches_equipes: CoachesEquipes
 }
 export interface Joueur {
+  created_at: ReactNode
   categorie_id: number
   id: number
   nom: string

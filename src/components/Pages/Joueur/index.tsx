@@ -1,16 +1,42 @@
-import React from 'react';
+/* eslint-disable max-len */
+import React, { useEffect } from 'react';
 import './index.scss';
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import Header from '../Home/Header';
 import logo from '../../../assets/devbyou.png';
+import { useAppSelector } from '../../../hooks/redux';
 
 function Joueur() {
+  const params = useParams();
+  const joueurId = Object.values(params)[1];
+  // const equipeId = Object.values(params)[0];
+  const equipes = useAppSelector((state) => state.equipes.equipes);
+
+  const listesJoueur = equipes.map((equipe) => equipe.joueurs.map((player) => player));
+  const joueurs = listesJoueur.map((lesjoueurs) => lesjoueurs.find((joueur) => joueur.id.toString() === joueurId));
+  const joueur = joueurs.find((findJoueur) => findJoueur);
+  const findCategorieByPlayer = equipes.find((listEquipe) => listEquipe.categories.id.toString() === joueur?.categorie_id.toString());
+  useEffect(() => {
+    // logique pour charger les données de l'équipe si elles ne sont pas déjà chargées
+    // dispatch(fetchEquipesForUser());
+  }, [joueur, equipes]);
+
+  if (!joueur) {
+    // Gestion du cas où l'équipe n'est pas encore chargée
+    return <div>Loading...</div>;
+  }
+
   return (
-    <div className='joueur__content'>
+    <div className="joueur__content">
       <Header />
       <div className="joueur__banniere">
-        <img src={logo} alt="" />
-        <h1>Robbert Pirès</h1>
+        <img src={joueur.logo ? joueur.logo : logo} alt="" />
+        <h1>
+          {joueur.prenom}
+          {' '}
+          {joueur.nom}
+        </h1>
       </div>
       <div className="cts">
         <div className="joueur__content">
@@ -26,23 +52,30 @@ function Joueur() {
             <div className="block-content">
               <div className="joueur__informations-row mb-2">
                 <div className="col-md-4">Created:</div>
-                <div className="col-md-8">2023-02-12</div>
+                <div className="col-md-8">{joueur.created_at}</div>
               </div>
               <div className="joueur__informations-row mb-2">
                 <div className="col-md-4">Status:</div>
-                <div className="col-md-8"><span className="badge rounded-pill bg-primary">Active</span></div>
+                <div className="col-md-8"><span className="badge rounded-pill bg-primary">{joueur.statut}</span></div>
               </div>
               <div className="joueur__informations-row mb-2">
-                <div className="col-md-4">Email:</div>
-                <div className="col-md-8" />
+                <div className="col-md-4">Email: o</div>
+                <div className="col-md-8">
+                  {joueur.email}
+                </div>
               </div>
               <div className="joueur__informations-row mb-2">
                 <div className="col-md-4">Home phone:</div>
-                <div className="col-md-8" />
+                <div className="col-md-8">
+                  {' - '}
+
+                </div>
               </div>
               <div className="joueur__informations-row mb-2">
                 <div className="col-md-4">Mobile phone:</div>
-                <div className="col-md-8" />
+                <div className="col-md-8">
+                  {joueur.tel}
+                </div>
               </div>
             </div>
 
@@ -111,11 +144,13 @@ function Joueur() {
         <div className="joueur__div">
           <div className="joueur__div-card">
             <h3>
-              Club
+              Equipe
               <button type="button"> Modifier</button>
             </h3>
             <p>
-              Club
+              {findCategorieByPlayer?.categories.nom}
+              {' - '}
+              {findCategorieByPlayer?.nom}
             </p>
           </div>
         </div>

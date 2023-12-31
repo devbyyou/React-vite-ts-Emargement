@@ -21,7 +21,6 @@ function Equipe() {
   const params = useParams();
   const equipeId = Object.values(params)[0];
   const equipes = useAppSelector((state) => state.equipes.equipes);
-
   // const categories = Object.values(params)[1];
   const token = useAppSelector((state) => state.user.token.user);
   const isOpen = useAppSelector((state) => state.equipes.isOpen);
