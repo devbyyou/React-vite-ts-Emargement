@@ -22,7 +22,7 @@ function Equipe() {
   const equipeId = Object.values(params)[0];
   const equipes = useAppSelector((state) => state.equipes.equipes);
 
-  const categories = Object.values(params)[1];
+  // const categories = Object.values(params)[1];
   const token = useAppSelector((state) => state.user.token.user);
   const isOpen = useAppSelector((state) => state.equipes.isOpen);
   const equipe = equipes.find(
@@ -34,8 +34,6 @@ function Equipe() {
     // logique pour charger les données de l'équipe si elles ne sont pas déjà chargées
     // dispatch(fetchEquipesForUser());
   }, [dispatch, equipes, equipe]);
-  // console.log('ref =', ref);
-  // console.log('ref.current =', ref.current);
 
   if (!equipe) {
     // Gestion du cas où l'équipe n'est pas encore chargée
@@ -63,18 +61,20 @@ function Equipe() {
   // eslint-disable-next-line max-len
   async function handleClickedButton(event: MouseEvent<HTMLButtonElement, MouseEvent>): Promise<void> {
     event.preventDefault();
-    // eslint-disable-next-line no-alert
+    // eslint-disable-next-line no-restricted-globals, no-alert
     alert('Suppression de l\'equipe ! Vous allez être redirigé vers la page des equipes :)');
-    // navigate('/equipes');
     // window.location.reload();
-    // await dispatch(deleteEquipesForUser(equipeId));
+    await dispatch(deleteEquipesForUser(equipeId));
+    await dispatch(fetchEquipesForUser());
+
+    navigate('/equipes');
   }
-  function AddJoueurClickedButton(event: MouseEvent<HTMLButtonElement, MouseEvent>): void {
-    // console.log('Ok', event);
+  function AddJoueurClickedButton() {
     dispatch(toggleIsOpen());
 
     setstateActiveRef(true);
   }
+  // console.log(equipe);
 
   return (
     <div>
@@ -89,7 +89,7 @@ function Equipe() {
         <div className="equipe__content__informations">
           <div className="equipe__content__information-club">
             <div className="equipe__content__information-statut">
-              <h3>{categories}</h3>
+              <h3>{equipe.categories.nom}</h3>
               <p>
                 Nom:
                 {' '}

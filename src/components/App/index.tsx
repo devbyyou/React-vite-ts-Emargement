@@ -14,12 +14,12 @@ import Inscription from '../Pages/Inscription';
 import Connexion from '../Connexion';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { fetchCoaches } from '../../store/reducers/coaches';
-import { fetchEquipesForUser } from '../../store/reducers/equipes';
+import { deleteEquipesForUser, fetchEquipesForUser } from '../../store/reducers/equipes';
 // import { findAllCategories } from '../../store/reducers/categories';
 
 function App() {
   const logged = useAppSelector((state) => state.user.logged);
-  const equipes = useAppSelector((state) => state.equipes.equipes);
+  const equipes = useAppSelector((state) => state.equipes.equipes); // id de initialState === 0
 
   const dispatch = useAppDispatch();
   useEffect(() => {
@@ -27,13 +27,21 @@ function App() {
       if (logged) {
         dispatch(fetchCoaches());
       }
-    }, 20 * 60 * 1000); // 30 minutes en millisecondes
+    }, 20 * 60 * 1000); // 20 minutes en millisecondes
     if (logged) {
       dispatch(fetchEquipesForUser());
+      // dispatch(deleteEquipesForUser());
     }
     // Nettoie l'intervalle lorsque le composant est démonté
     return () => clearInterval(intervalId);
   }, [dispatch, logged]);
+
+  const listeEquipeId : number[] = equipes.map((listesEquipes) => listesEquipes.id);
+  if (logged) {
+    if (listeEquipeId.includes(0)) {
+      return <div>Loading...</div>;
+    }
+  }
   return (
     <div className="content__connexion">
       {

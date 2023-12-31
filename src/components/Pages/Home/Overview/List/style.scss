@@ -2,8 +2,9 @@
 .overviews {
     display: flex;
     align-items: center;
-    justify-content: flex-start;
+    // justify-content: flex-start;
     flex-wrap: wrap;
+    // justify-content: space-between;
 }
 .title {
     // margin-left: 30px;
@@ -28,6 +29,8 @@
     flex-direction: column;
     gap: 20px;
     position: relative;
+    max-width: 297px;
+
 
     &__title {
         display: flex;

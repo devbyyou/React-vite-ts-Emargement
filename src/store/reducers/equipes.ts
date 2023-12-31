@@ -23,7 +23,7 @@ interface EquipesState {
 const initialState: EquipesState = {
   equipes: [
     {
-      id: 1,
+      id: 0,
       nom: '',
       logo: '',
       statut: '',

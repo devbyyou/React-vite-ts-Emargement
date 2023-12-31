@@ -1,5 +1,5 @@
 import React, {
-  ChangeEvent, FormEvent, useState,
+  ChangeEvent, FormEvent, useEffect, useState,
 } from 'react';
 import './index.scss';
 import { RiTeamLine } from 'react-icons/ri';
@@ -12,6 +12,7 @@ import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
 import { Equipe } from '../../../@types/user';
 import NewTeam from './NewTeam';
 import {
+  fetchEquipesForUser,
   toggleIsOpen,
 } from '../../../store/reducers/equipes';
 
@@ -35,6 +36,9 @@ function Equipes() {
     // J'emet mon intention / action
     dispatch(toggleIsOpen());
   }
+  useEffect(() => {
+    dispatch(fetchEquipesForUser());
+  }, [dispatch]);
 
   const openClassNames = cn('newteam__content', {
     'newteam__content--closed': !isOpen,

@@ -78,9 +78,10 @@ function NewTeam({
   async function handleSubmitFormUpdate(event: FormEvent<HTMLFormElement>): Promise<void> {
     event.preventDefault();
     // eslint-disable-next-line no-alert
-    alert('Modification de l\'equipe ! Vous allez être redirigé vers la page des equipes :)');
+    alert('Modification de l\'equipe ! ');
     // navigate('/equipes');
-    // await dispatch(updateEquipesForUser(equipeId));
+    await dispatch(updateEquipesForUser(equipeId));
+    dispatch(toggleIsOpen());
     // window.location.reload();
   }
   async function AddPlayerSubmitForm(event: FormEvent<HTMLFormElement>): Promise<void> {

@@ -7,7 +7,7 @@
     background-color: #fdf5e633;
     margin-right: 30px;
     border-radius: 10px;
-    min-width: 247.55px;
+    min-width: 333px;
     height: 22rem;
     box-shadow: 1px 1px 3px 1px rgba(225, 225, 225);
     padding: 17px;
@@ -21,7 +21,7 @@
     }
     &__card {
         display: flex;
-        justify-content: center;
+        justify-content: space-around;
         align-items: center;
         gap: 7px;
         background-color: #fff;
