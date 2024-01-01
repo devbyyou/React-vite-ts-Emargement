@@ -19,11 +19,11 @@ axiosInstance.interceptors.response.use(
     if (status === 440) {
       removeUserDataFromLocalStorage();
       setTimeout(() => {
-        window.location.href = 'http://localhost:5173';
-        window.location.replace = 'http://localhost:5173';
         // eslint-disable-next-line no-alert
         alert('Token expiré. Déconnexion de l\'utilisateur.');
-        document.location.href = 'http://localhost:5173';
+        // document.location.href = 'http://localhost:5173';
+        window.location.href = 'http://localhost:5173';
+        window.location.replace = 'http://localhost:5173';
         window.location.reload();
       }, 0);
 

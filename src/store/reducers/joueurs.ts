@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/naming-convention */
 import { createReducer } from '@reduxjs/toolkit';
 import { Joueur } from '../../@types/user';
 import { createAppAsyncThunk } from '../../utils/redux';
@@ -21,6 +22,7 @@ interface JoueursState {
 
 const initialState: JoueursState = {
   joueurs: [{
+    created_at: '',
     id: 1,
     nom: 'string',
     prenom: 'string',
@@ -80,6 +82,40 @@ export const createJoueurForEquipe = createAppAsyncThunk(
 
     return data;
   },
+);
+export const updateJoueurForUser = createAppAsyncThunk(
+  'joueurs/UPDATE_JOUEURS_FOR_USER',
+  async (equipeId, thunkAPI) => {
+    // On va aller récupérer depuis le state les credentials
+    const state = thunkAPI.getState();
+    // const userID = state.user.token.user.id; // Récupérez l'ID de l'utilisateur depuis le state
+    // Je récupère mon email et mon mot de passe
+    const {
+      nom, categorie_id, logo, statut, age, prenom, email, tel, equipe_id,
+    } = state.equipes.credentials;
+    const { data } = await axiosInstance.put(`/joueurs/${equipeId}`, {
+      nom,
+      categorie_id,
+      logo,
+      statut,
+      age,
+      prenom,
+      email,
+      tel,
+      equipe_id,
+    });
+
+    return data;
+  },
+
+);
+export const deleteJoueurs = createAppAsyncThunk(
+  'joueurs/DELETE_JOUEURS',
+  async (joueurId) => {
+    const { data } = await axiosInstance.delete(`/joueurs/${joueurId}`);
+
+    return data;
+  },
 
 );
 const joueursReducer = createReducer(initialState, (builder) => {
@@ -87,13 +123,21 @@ const joueursReducer = createReducer(initialState, (builder) => {
     .addCase(createJoueurForEquipe.fulfilled, (state, action) => {
     // state.loading = false; // Indiquez que le chargement est terminé
       state.joueurs = action.payload;
-      state. credentials.nom = '';
+      state.credentials.nom = '';
       state.credentials.prenom = '';
       state.credentials.email = '';
       state.credentials.tel = '';
       state.credentials.logo = '';
       state.credentials.categorieId = '';
       state.credentials.logo = '';
+    })
+    .addCase(updateJoueurForUser.fulfilled, (state, action) => {
+      // state.loading = false; // Indiquez que le chargement est terminé
+      state.joueurs = action.payload;
+    })
+    .addCase(deleteJoueurs.fulfilled, (state, action) => {
+      // state.loading = false; // Indiquez que le chargement est terminé
+      state.joueurs = action.payload;
     });
 });
 

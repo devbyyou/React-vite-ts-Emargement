@@ -9,12 +9,12 @@ const functionConverteDate = {
     const minutesElapsed = now.diff(lastActivity, 'minutes');
     return minutesElapsed;
   },
-  convertDate: (derniere_activite: string | number) => {
+  chronoTime: (derniere_activite: string | number) => {
     const date = moment(derniere_activite).format('MM-DD-YYYY hh:mm:ss');
 
     return date;
   },
-  convertDatee: (derniere_activite: string | number) => {
+  calendaraDate: (derniere_activite: string | number) => {
     moment.locale('fr');
     const date = moment(derniere_activite).locale('fr').format('D MMMM YYYY');
 

@@ -1,22 +1,36 @@
 /* eslint-disable max-len */
-import React, { useEffect } from 'react';
+import React, {
+  FormEventHandler, MouseEventHandler, useEffect, useState,
+} from 'react';
 import './index.scss';
-// import { Link } from 'react-router-dom';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
+// import classNames from 'classnames';
+import cn from 'classnames';
 import Header from '../Home/Header';
 import logo from '../../../assets/devbyou.png';
-import { useAppSelector } from '../../../hooks/redux';
+import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
+import functionConverteDate from '../Home/MembersList/ConverteDate';
+import NewTeam from '../Equipes/NewTeam';
+import { fetchEquipesForUser, toggleIsOpen } from '../../../store/reducers/equipes';
+import { deleteJoueurs, updateJoueurForUser } from '../../../store/reducers/joueurs';
 
 function Joueur() {
+  const navigate = useNavigate();
+  const [stateActiveRef, setActiveRef] = useState(false);
+  // const [equipeId, setEquipeId] = useState<string | undefined>();
+
+  const dispatch = useAppDispatch();
   const params = useParams();
   const joueurId = Object.values(params)[1];
   // const equipeId = Object.values(params)[0];
   const equipes = useAppSelector((state) => state.equipes.equipes);
-
+  const isOpen = useAppSelector((state) => state.equipes.isOpen);
   const listesJoueur = equipes.map((equipe) => equipe.joueurs.map((player) => player));
   const joueurs = listesJoueur.map((lesjoueurs) => lesjoueurs.find((joueur) => joueur.id.toString() === joueurId));
   const joueur = joueurs.find((findJoueur) => findJoueur);
   const findCategorieByPlayer = equipes.find((listEquipe) => listEquipe.categories.id.toString() === joueur?.categorie_id.toString());
+  const equipeTrouvee = equipes.find((equipe) => equipe.joueurs.some((player) => player.id.toString() === joueurId?.toString()));
+
   useEffect(() => {
     // logique pour charger les données de l'équipe si elles ne sont pas déjà chargées
     // dispatch(fetchEquipesForUser());
@@ -27,8 +41,42 @@ function Joueur() {
     return <div>Loading...</div>;
   }
 
+  const handleDisplayCard : MouseEventHandler<HTMLButtonElement> = () => {
+    // throw new Error('Function not implemented.');
+    setActiveRef(true);
+    dispatch(toggleIsOpen());
+  };
+  const handleDeletePlayer: MouseEventHandler<HTMLButtonElement> = async () => {
+    // eslint-disable-next-line no-alert
+    alert('le joueur va etre supprimer. Riderectuion ');
+    await dispatch(deleteJoueurs(joueurId));
+    navigate(`/equipes/${findCategorieByPlayer?.categories.nom}/${equipeTrouvee?.id}`);
+  };
+  const handleUpdatingPlayer: FormEventHandler<HTMLFormElement> = async (event) => {
+    event.preventDefault();
+
+    setActiveRef(true);
+    try {
+      await dispatch(updateJoueurForUser(joueurId));
+      await dispatch(fetchEquipesForUser());
+      dispatch(toggleIsOpen());
+    } catch (error) {
+      console.error("Une erreur s'est produite lors de la mise à jour du joueur:", error);
+    }
+  };
+
+  const openClassNames = cn('newteam__content', {
+    'newteam__content--closed': !isOpen,
+  });
   return (
     <div className="joueur__content">
+      <NewTeam
+        openClassNames={openClassNames}
+        stateActiveRef={stateActiveRef}
+        handleUpdatingPlayer={handleUpdatingPlayer}
+        joueur={joueur}
+        // equipeId={equipeId}
+      />
       <Header />
       <div className="joueur__banniere">
         <img src={joueur.logo ? joueur.logo : logo} alt="" />
@@ -44,22 +92,22 @@ function Joueur() {
           <div className="joueur__informations">
             <div className="joueur__informations-title">
               <h3>Information Personnelles</h3>
-              <button className="colorRed" type="button">Supprimer</button>
+              <button onClick={handleDeletePlayer} className="colorRed" type="button">Supprimer</button>
               {/* <button type="button">Modifier photo</button> */}
-              <button type="button">Modifier les informations</button>
+              <button type="button" onClick={handleDisplayCard}>Modifier les informations</button>
             </div>
 
             <div className="block-content">
               <div className="joueur__informations-row mb-2">
-                <div className="col-md-4">Created:</div>
-                <div className="col-md-8">{joueur.created_at}</div>
+                <div className="col-md-4">Date de creation:</div>
+                <div className="col-md-8">{functionConverteDate.calendaraDate(joueur.created_at)}</div>
               </div>
               <div className="joueur__informations-row mb-2">
-                <div className="col-md-4">Status:</div>
+                <div className="col-md-4">Statut:</div>
                 <div className="col-md-8"><span className="badge rounded-pill bg-primary">{joueur.statut}</span></div>
               </div>
               <div className="joueur__informations-row mb-2">
-                <div className="col-md-4">Email: o</div>
+                <div className="col-md-4">Email: </div>
                 <div className="col-md-8">
                   {joueur.email}
                 </div>
@@ -72,7 +120,7 @@ function Joueur() {
                 </div>
               </div>
               <div className="joueur__informations-row mb-2">
-                <div className="col-md-4">Mobile phone:</div>
+                <div className="col-md-4">Telephone portable:</div>
                 <div className="col-md-8">
                   {joueur.tel}
                 </div>
@@ -81,7 +129,8 @@ function Joueur() {
 
           </div>
 
-          {/* <div className="timeline-event-block block">
+          {
+          /* <div className="timeline-event-block block">
             <div className="block-header block-header-default">
               <h3 className="block-title">Informations sur les parents/tuteurs</h3>
               <div className="block-options">
@@ -105,7 +154,8 @@ function Joueur() {
                 </tbody>
               </table>
             </div>
-          </div> */}
+          </div> */
+          }
 
           <div className="timeline-event-block block">
             <div className="block-header block-header-default">
@@ -119,19 +169,35 @@ function Joueur() {
                 <thead>
                   <tr>
                     <th>Date</th>
-                    <th>Classe</th>
+                    <th>Equipe</th>
                     <th>Présence</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
                     <td>2023-11-09</td>
-                    <td><a href="https://www.myattendancetracker.com/class/view/imMoozZzFcpCDL7rXWVScRXZXHOJmP">club</a></td>
+                    <td>
+                      <a href="https://www.myattendancetracker.com/class/view/imMoozZzFcpCDL7rXWVScRXZXHOJmP">
+                        {' '}
+                        {findCategorieByPlayer?.categories.nom}
+                        {' - '}
+                        {findCategorieByPlayer?.nom}
+                      </a>
+
+                    </td>
                     <td><span>Absent</span></td>
                   </tr>
                   <tr>
                     <td>2023-02-12</td>
-                    <td><a href="https://www.myattendancetracker.com/class/view/imMoozZzFcpCDL7rXWVScRXZXHOJmP">club</a></td>
+                    <td>
+                      <a href="https://www.myattendancetracker.com/class/view/imMoozZzFcpCDL7rXWVScRXZXHOJmP">
+                        {' '}
+                        {findCategorieByPlayer?.categories.nom}
+                        {' - '}
+                        {findCategorieByPlayer?.nom}
+                      </a>
+
+                    </td>
                     <td><span className="tardif">Tardif</span></td>
                   </tr>
                 </tbody>
@@ -145,7 +211,7 @@ function Joueur() {
           <div className="joueur__div-card">
             <h3>
               Equipe
-              <button type="button"> Modifier</button>
+              <button type="button" onClick={handleDisplayCard}> Modifier</button>
             </h3>
             <p>
               {findCategorieByPlayer?.categories.nom}

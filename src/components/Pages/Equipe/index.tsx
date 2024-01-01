@@ -1,5 +1,5 @@
 import React, {
-  ChangeEvent, FormEvent, MouseEvent, useEffect, useState,
+  ChangeEvent, FormEvent, useEffect, useState,
 } from 'react';
 import './index.scss';
 import { MdBolt } from 'react-icons/md';
@@ -20,8 +20,10 @@ function Equipe() {
   const dispatch = useAppDispatch();
   const params = useParams();
   const equipeId = Object.values(params)[0];
+  // console.log(equipeId);
+
   const equipes = useAppSelector((state) => state.equipes.equipes);
-  // const categories = Object.values(params)[1];
+  // const equipeId = Object.values(params)[1];
   const token = useAppSelector((state) => state.user.token.user);
   const isOpen = useAppSelector((state) => state.equipes.isOpen);
   const equipe = equipes.find(
@@ -58,7 +60,7 @@ function Equipe() {
     'newteam__content--closed': !isOpen,
   });
   // eslint-disable-next-line max-len
-  async function handleClickedButton(event: MouseEvent<HTMLButtonElement, MouseEvent>): Promise<void> {
+  const handleClickedButton : React.MouseEventHandler<HTMLButtonElement> = async (event) => {
     event.preventDefault();
     // eslint-disable-next-line no-restricted-globals, no-alert
     alert('Suppression de l\'equipe ! Vous allez être redirigé vers la page des equipes :)');
@@ -67,13 +69,12 @@ function Equipe() {
     await dispatch(fetchEquipesForUser());
 
     navigate('/equipes');
-  }
+  };
   function AddJoueurClickedButton() {
     dispatch(toggleIsOpen());
 
     setstateActiveRef(true);
   }
-  // console.log(equipe);
 
   return (
     <div>
@@ -98,7 +99,7 @@ function Equipe() {
                 {' '}
                 Crée :
                 {' '}
-                {`${functionConverteDate.convertDatee(equipe.created_at)} `}
+                {`${functionConverteDate.calendaraDate(equipe.created_at)} `}
                 {/* {equipe.created_at} */}
               </p>
               <p>
@@ -183,6 +184,7 @@ function Equipe() {
         </div>
       </div>
     </div>
+
   );
 }
 

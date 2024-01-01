@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/naming-convention */
 import { createAction, createReducer } from '@reduxjs/toolkit';
 import { Equipe } from '../../@types/user';
 import { createAppAsyncThunk } from '../../utils/redux';
@@ -31,6 +32,7 @@ const initialState: EquipesState = {
       created_at: '',
       joueurs: [
         {
+          created_at: '',
           id: 1,
           nom: 'string',
           prenom: 'string',
@@ -48,7 +50,7 @@ const initialState: EquipesState = {
         },
       ],
       categories: {
-        id: 1,
+        id: '',
         nom: '',
         tranche_age: '',
         nombre_total: 0,
@@ -120,11 +122,11 @@ export const updateEquipesForUser = createAppAsyncThunk(
     // const userID = state.user.token.user.id; // Récupérez l'ID de l'utilisateur depuis le state
     // Je récupère mon email et mon mot de passe
     const {
-      nom, categorieId, logo, statut,
+      nom, categorie_id, logo, statut,
     } = state.equipes.credentials;
     const { data } = await axiosInstance.put(`/equipes/${equipeId}`, {
       nom,
-      categorieId,
+      categorie_id,
       logo,
       statut,
     });

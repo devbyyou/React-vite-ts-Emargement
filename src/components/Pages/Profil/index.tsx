@@ -44,12 +44,12 @@ function Profil() {
         <p>
           Inscrit le
           {' '}
-          {functionConverteDate.convertDate(created_at)}
+          {functionConverteDate.chronoTime(created_at)}
         </p>
         <p>
           Derniere activité le
           {' '}
-          {functionConverteDate.convertDatee(last_activity)}
+          {functionConverteDate.calendaraDate(last_activity)}
 
         </p>
       </div>
