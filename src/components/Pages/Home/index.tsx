@@ -8,14 +8,17 @@ import Graph from './Graph';
 import Header from './Header';
 import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
 import { fetchEquipesForUser } from '../../../store/reducers/equipes';
+import { fetchCoaches } from '../../../store/reducers/coaches';
 
 function Home() {
-  const user = useAppSelector((state) => state.user.token.user);
+  const user = useAppSelector((state) => state.coaches.user);
   const { prenom } = user;
   const dispatch = useAppDispatch();
   useEffect(() => {
     dispatch(fetchEquipesForUser());
+    dispatch(fetchCoaches());
   }, [dispatch]);
+
   return (
     <>
       <div className="messageHome">

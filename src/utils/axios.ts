@@ -18,8 +18,8 @@ axiosInstance.interceptors.response.use(
     // Si la réponse a un statut 440, le token est probablement expiré
     if (status === 440) {
       removeUserDataFromLocalStorage();
+      // eslint-disable-next-line no-alert
       setTimeout(() => {
-        // eslint-disable-next-line no-alert
         alert('Token expiré. Déconnexion de l\'utilisateur.');
         // document.location.href = 'http://localhost:5173';
         window.location.href = 'http://localhost:5173';

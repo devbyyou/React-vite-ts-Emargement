@@ -7,7 +7,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 // import classNames from 'classnames';
 import cn from 'classnames';
 import Header from '../Home/Header';
-import logo from '../../../assets/devbyou.png';
+import logo from '../../../assets/avatar0.jpg';
 import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
 import functionConverteDate from '../Home/MembersList/ConverteDate';
 import NewTeam from '../Equipes/NewTeam';
@@ -28,12 +28,13 @@ function Joueur() {
   const listesJoueur = equipes.map((equipe) => equipe.joueurs.map((player) => player));
   const joueurs = listesJoueur.map((lesjoueurs) => lesjoueurs.find((joueur) => joueur.id.toString() === joueurId));
   const joueur = joueurs.find((findJoueur) => findJoueur);
-  const findCategorieByPlayer = equipes.find((listEquipe) => listEquipe.categories.id.toString() === joueur?.categorie_id.toString());
+  // const equipeTrouvee = equipes.find((listEquipe) => listEquipe.categories.id.toString() === joueur?.categorie_id.toString());
+  // const equipeTrouvee = equipes.find((equipe) => equipe.joueurs.some((player) => player.id.toString() === joueurId?.toString()));
   const equipeTrouvee = equipes.find((equipe) => equipe.joueurs.some((player) => player.id.toString() === joueurId?.toString()));
 
   useEffect(() => {
     // logique pour charger les données de l'équipe si elles ne sont pas déjà chargées
-    // dispatch(fetchEquipesForUser());
+    // dispatch(updateEquipesForUser());
   }, [joueur, equipes]);
 
   if (!joueur) {
@@ -50,7 +51,7 @@ function Joueur() {
     // eslint-disable-next-line no-alert
     alert('le joueur va etre supprimer. Riderectuion ');
     await dispatch(deleteJoueurs(joueurId));
-    navigate(`/equipes/${findCategorieByPlayer?.categories.nom}/${equipeTrouvee?.id}`);
+    navigate(`/equipes/${equipeTrouvee?.categories.nom}/${equipeTrouvee?.id}`);
   };
   const handleUpdatingPlayer: FormEventHandler<HTMLFormElement> = async (event) => {
     event.preventDefault();
@@ -179,9 +180,9 @@ function Joueur() {
                     <td>
                       <a href="https://www.myattendancetracker.com/class/view/imMoozZzFcpCDL7rXWVScRXZXHOJmP">
                         {' '}
-                        {findCategorieByPlayer?.categories.nom}
+                        {equipeTrouvee?.categories.nom}
                         {' - '}
-                        {findCategorieByPlayer?.nom}
+                        {equipeTrouvee?.nom}
                       </a>
 
                     </td>
@@ -192,9 +193,9 @@ function Joueur() {
                     <td>
                       <a href="https://www.myattendancetracker.com/class/view/imMoozZzFcpCDL7rXWVScRXZXHOJmP">
                         {' '}
-                        {findCategorieByPlayer?.categories.nom}
+                        {equipeTrouvee?.categories.nom}
                         {' - '}
-                        {findCategorieByPlayer?.nom}
+                        {equipeTrouvee?.nom}
                       </a>
 
                     </td>
@@ -214,9 +215,9 @@ function Joueur() {
               <button type="button" onClick={handleDisplayCard}> Modifier</button>
             </h3>
             <p>
-              {findCategorieByPlayer?.categories.nom}
+              {equipeTrouvee?.categories.nom}
               {' - '}
-              {findCategorieByPlayer?.nom}
+              {equipeTrouvee?.nom}
             </p>
           </div>
         </div>

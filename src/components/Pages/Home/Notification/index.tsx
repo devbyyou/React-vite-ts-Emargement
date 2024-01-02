@@ -6,10 +6,10 @@ import { Link } from 'react-router-dom';
 import { useAppSelector } from '../../../../hooks/redux';
 
 function Notification() {
-  const token = useAppSelector((state) => state.user.token.user);
+  const user = useAppSelector((state) => state.coaches.user);
   const {
     nom, prenom, id, logo,
-  } = token;
+  } = user;
   return (
     <Link to="/profil" className="content__notification">
       {/* <IoMdNotificationsOutline className="notif" /> */}

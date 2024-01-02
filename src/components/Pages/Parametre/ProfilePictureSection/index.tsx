@@ -1,24 +1,24 @@
-import React from 'react';
-// import './ProfilePictureSection.scss';
+import React, { MouseEventHandler } from 'react';
 import './index.scss';
 
-function ProfilePictureSection() {
+interface Imessage {
+  message :string | undefined
+  banniere :string | undefined
+}
+function ProfilePictureSection({ message, banniere } :Imessage) {
+  const handleClickedButton: MouseEventHandler<HTMLButtonElement> = () => {
+
+  };
   return (
     <div className="profile-section">
       <div className="titleProfilePictureSection">
 
-        <h3>Photo de profil</h3>
+        <h3>{message || 'Photo de profil'}</h3>
       </div>
+
       <div className="profile-image">
-        <img
-          alt="Youssouf"
-          loading="lazy"
-          width="150"
-          height="150"
-          decoding="async"
-          data-nimg="1"
-          src="https://osakalehusky.com/pictures/default.png"
-        />
+        <img src={banniere || 'https://previews.123rf.com/images/sevalv/sevalv1801/sevalv180101462/94340988-joli-mec-barbu-avec-un-sourire-brillant-et-joyeux-regardant-la-cam%C3%A9ra-tout-en-se-tenant-sur-un-fond.jpg'} alt="" srcSet="" />
+
       </div>
       <div className="file-input-section">
         <div className="dashed-box">
@@ -35,7 +35,7 @@ function ProfilePictureSection() {
         </div>
       </div>
       <div className="edit-button">
-        <button type="button">
+        <button onClick={handleClickedButton} type="button">
           <div className="flex items-center justify-center">Modifier</div>
         </button>
       </div>

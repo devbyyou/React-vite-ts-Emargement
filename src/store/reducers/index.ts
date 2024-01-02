@@ -1,4 +1,5 @@
 import coachesReducer from './coaches';
+import ApiReducer from './api';
 import equipesReducer from './equipes';
 import categoriesReducer from './categories';
 import joueursReducer from './joueurs';
@@ -14,6 +15,7 @@ const reducer = {
   user: userReducer,
   inscription: inscriptionReducer,
   qrCode: qrCodeReducer,
+  api: ApiReducer,
 };
 
 export default reducer;

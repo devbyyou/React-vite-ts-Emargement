@@ -10,14 +10,21 @@ function Overview() {
   useEffect(() => {
     dispatch(fetchEquipesForUser());
   }, [dispatch]);
-
   const equipes = useAppSelector((state) => state.equipes.equipes);
-  const nbEquipes = equipes.length;
-
   const nbJoueursParEquipe = equipes.map((listeJoueurs) => listeJoueurs.joueurs.length);
+  const categories = equipes.map((listEquipes) => listEquipes.categories);
   // eslint-disable-next-line no-return-assign, no-param-reassign
   const totalJoueurs = nbJoueursParEquipe.reduce((nbA, nbB) => nbA += nbB, 0);
-
+  const nbEquipes = equipes.length;
+  const newCategorie = [];
+  const categorieUnique = new Set();
+  categories.forEach((element) => {
+    if (!categorieUnique.has(element.id)) {
+      categorieUnique.add(element.id);
+      newCategorie.push(element);
+    }
+  });
+  const totalCategories = newCategorie.length;
   return (
     <div className="overviews">
       {/* <div className="overview"> */}
@@ -44,7 +51,7 @@ function Overview() {
           <BiFootball className="card__icons" />
           Categorie
         </p>
-        <p className="card__number">{totalJoueurs}</p>
+        <p className="card__number">{totalCategories}</p>
       </div>
       {/* </div> */}
       {/* <div className="overview">

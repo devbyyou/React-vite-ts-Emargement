@@ -74,6 +74,7 @@ function NewTeam({
     alert('Modification de l\'equipe ! ');
     // navigate('/equipes');
     await dispatch(updateEquipesForUser(equipeId));
+    await dispatch(fetchEquipesForUser());
     dispatch(toggleIsOpen());
     // window.location.reload();
   }
@@ -86,7 +87,6 @@ function NewTeam({
     alert(`Ajout de ${prenom} ${nom} Avec succès ! :)`);
     dispatch(toggleIsOpen());
   }
-  // const joueur = 0;
   return (
     <div className={openClassNames}>
       <div onClick={handleClickedClose} onKeyDown={handleKeyDown} role="button" tabIndex={0} className="modal-header">

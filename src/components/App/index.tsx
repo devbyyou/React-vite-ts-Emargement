@@ -13,8 +13,9 @@ import QRCodeReader from '../QrCode/QRCodeReader';
 import Inscription from '../Pages/Inscription';
 import Connexion from '../Connexion';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
-import { fetchCoaches } from '../../store/reducers/coaches';
-import { deleteEquipesForUser, fetchEquipesForUser } from '../../store/reducers/equipes';
+// import { fetchCoaches } from '../../store/reducers/coaches';
+import { fetchEquipesForUser } from '../../store/reducers/equipes';
+import { fetchApi } from '../../store/reducers/api';
 // import { findAllCategories } from '../../store/reducers/categories';
 
 function App() {
@@ -25,7 +26,7 @@ function App() {
   useEffect(() => {
     const intervalId = setInterval(() => {
       if (logged) {
-        dispatch(fetchCoaches());
+        dispatch(fetchApi());
       }
     }, 20 * 60 * 1000); // 20 minutes en millisecondes
     if (logged) {

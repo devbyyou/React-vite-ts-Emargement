@@ -3,6 +3,11 @@
 .parametre__content {
     font-family: vars.$fontText;
     // margin: 10px;
+    .photo__profil{
+        display: flex;
+        flex-direction: row;
+        gap: 2rem;
+    }
 }
 .parametre__content-title {
     font-size: 23px;
@@ -37,6 +42,8 @@
     margin-bottom: 30px;
     border-radius: 10px;
     box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+    margin-right: 0.8rem;
+
 }
 
 .parametre__content-form {
@@ -45,6 +52,7 @@
     justify-content: center;
     align-items: center;
     gap: 2rem;
+
 }
 
 .parametre__content-form-nom-prenom {
@@ -63,12 +71,13 @@
     width: 100%;
 }
 
-.parametre__content-logout {
-    display: flex;
-    justify-content: flex-end;
-    flex-direction: row;
-    margin-bottom: 1rem;
-}
+// .parametre__content-logout {
+//     width: 100%;
+//     display: flex;
+//     justify-content:center;
+//     flex-direction: row;
+//     // margin-bottom: 1rem;
+// }
 .parametre__content-label {
     display: flex;
     flex-direction: column;
@@ -105,14 +114,15 @@
     }
 }
 .parametre__content-logout {
-    
+    width: 100%;
     display: flex;
     // align-items: center;
-    justify-content: flex-start;
+    justify-content: flex-end;
     gap: 2rem;
-    flex-direction: column;
-    margin-right:2rem ;
+    flex-direction: row;
+    // margin-right:2rem ;
     button {
+        // width: 30px;
         border: none;
         padding: 15px;
         border-radius: 10px;
