@@ -1,5 +1,6 @@
+/* eslint-disable no-nested-ternary */
 import { useEffect } from 'react';
-import { Route, Routes } from 'react-router-dom';
+import { Route, Routes, useNavigate } from 'react-router-dom';
 import SideBar from '../SideBar';
 import './styles.scss';
 import Home from '../Pages/Home';
@@ -10,7 +11,7 @@ import Profil from '../Pages/Profil';
 import Equipe from '../Pages/Equipe';
 import Joueur from '../Pages/Joueur';
 import QRCodeReader from '../QrCode/QRCodeReader';
-import Inscription from '../Pages/Inscription';
+// import Inscription from '../Pages/Inscription';
 import Connexion from '../Connexion';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 // import { fetchCoaches } from '../../store/reducers/coaches';
@@ -19,8 +20,12 @@ import { fetchApi } from '../../store/reducers/api';
 // import { findAllCategories } from '../../store/reducers/categories';
 
 function App() {
+  const navigate = useNavigate();
   const logged = useAppSelector((state) => state.user.logged);
-  const equipes = useAppSelector((state) => state.equipes.equipes); // id de initialState === 0
+  const token = useAppSelector((state) => state.user.token);
+  const equipes = useAppSelector((state) => state.equipes.equipes);
+  const { joueur, user } = token;
+  // console.log(joueur);
 
   const dispatch = useAppDispatch();
   useEffect(() => {
@@ -38,56 +43,65 @@ function App() {
   }, [dispatch, logged]);
 
   const listeEquipeId : number[] = equipes.map((listesEquipes) => listesEquipes.id);
-  if (logged) {
+  if (logged && user) {
     if (listeEquipeId.includes(0)) {
       return <div>Loading...</div>;
     }
   }
+  const hasRedirected = localStorage.getItem('hasRedirected');
+
+  if (logged && joueur && !hasRedirected) {
+    navigate('/pageJoueur');
+    localStorage.setItem('hasRedirected', 'true');
+  }
   return (
     <div className="content__connexion">
-      {
-        logged
-
-          ? (
-            <div className="content">
-              <SideBar />
-              <Routes>
-                <Route path="/" element={<Home />} />
-                <Route path="/equipes" element={<Equipes />} />
-                <Route path="/presents" element={<Presents />} />
-                <Route path="/parametre" element={<Parametre />} />
-                <Route path="/inscription" element={<Inscription />} />
-                <Route path="/profil" element={<Profil />} />
-                { equipes.map((listesEquipes) => (
-                  <Route
-                    key={listesEquipes.id}
-                    path={`/equipes/:${listesEquipes.categories.nom}/:${listesEquipes.id}`}
-                    element={<Equipe />}
-                  />
-                ))}
-                {
+      { logged && user ? (
+        <div className="content">
+          <SideBar />
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/equipes" element={<Equipes />} />
+            <Route path="/presents" element={<Presents />} />
+            <Route path="/parametre" element={<Parametre />} />
+            {/* <Route path="/inscription" element={<Inscription />} /> */}
+            <Route path="/profil" element={<Profil />} />
+            { equipes.map((listesEquipes) => (
+              <Route
+                key={listesEquipes.id}
+                path={`/equipes/:${listesEquipes.categories.nom}/:${listesEquipes.id}`}
+                element={<Equipe />}
+              />
+            ))}
+            {
 
                 equipes.map((listesEquipes) => {
                   const { joueurs } = listesEquipes;
-                  return joueurs.map((joueur) => <Route key={joueur.id} path={`/equipes/joueur/:${joueur.categorie_id}/:${joueur.id}`} element={<Joueur />} />);
+                  return joueurs.map((player) => <Route key={player.id} path={`/equipes/joueur/:${player.categorie_id}/:${player.id}`} element={<Joueur />} />);
                 })
 
               }
 
-                <Route path="/pageJoueur" element={<QRCodeReader />} />
-                <Route path="*" element={<div>404</div>} />
-              </Routes>
-            </div>
-          )
-          : (
-            <Routes>
-              <Route path="/" element={<Connexion />} />
-              <Route path="*" element={<div>404</div>} />
-            </Routes>
-          )
-
-            }
-
+            {/* <Route path="/pageJoueur" element={<QRCodeReader />} /> */}
+            <Route path="*" element={<div>404</div>} />
+          </Routes>
+        </div>
+      ) : logged && joueur ? (
+        <div className="content">
+          <SideBar />
+          <Routes>
+            <Route path="/parametre" element={<Parametre />} />
+            <Route path="/profil" element={<Profil />} />
+            <Route path="/pageJoueur" element={<QRCodeReader />} />
+            <Route path="*" element={<div>404</div>} />
+          </Routes>
+        </div>
+      ) : (
+        <Routes>
+          <Route path="/" element={<Connexion />} />
+          <Route path="*" element={<div>404</div>} />
+        </Routes>
+      )}
     </div>
   );
 }

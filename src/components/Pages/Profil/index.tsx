@@ -6,7 +6,12 @@ import { useAppSelector } from '../../../hooks/redux';
 import functionConverteDate from '../Home/MembersList/ConverteDate';
 
 function Profil() {
-  const user = useAppSelector((state) => state.coaches.user);
+  const token = useAppSelector((state) => state.user.token);
+  const { joueur, user } = token;
+  // console.log(joueur);
+  // console.log(user);
+
+  const userCoache = useAppSelector((state) => state.coaches.user);
   const {
     prenom,
     nom,
@@ -14,7 +19,8 @@ function Profil() {
     logo,
     created_at,
     last_activity,
-  } = user;
+  } = userCoache;
+  // console.log(prenom);
 
   return (
     <div className="profil__content">
@@ -24,9 +30,9 @@ function Profil() {
           <div className="profil__banniere-dec-name-pic">
             <img className="profil__banniere-logo" src="https://previews.123rf.com/images/sevalv/sevalv1801/sevalv180101462/94340988-joli-mec-barbu-avec-un-sourire-brillant-et-joyeux-regardant-la-cam%C3%A9ra-tout-en-se-tenant-sur-un-fond.jpg" alt="" />
             <p>
-              {prenom}
+              {user ? prenom : joueur.prenom}
               {' '}
-              {nom}
+              {user ? nom : joueur.nom}
             </p>
           </div>
 
@@ -43,12 +49,12 @@ function Profil() {
         <p>
           Inscrit le
           {' '}
-          {functionConverteDate.chronoTime(created_at)}
+          {functionConverteDate.chronoTime(user ? created_at : joueur.created_at)}
         </p>
         <p>
           Derniere activité le
           {' '}
-          {functionConverteDate.calendaraDate(last_activity)}
+          {functionConverteDate.calendaraDate(user ? last_activity : joueur.derniere_activite)}
 
         </p>
       </div>

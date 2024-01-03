@@ -1,0 +1,31 @@
+.content__qr {
+    height: 100%;
+    width: 100%;
+    background-image: url("https://img.freepik.com/photos-premium/fond-gris-nature-elegance-abstraite_127755-912.jpg");
+    background-size: cover;
+    // border: 6px solid red;
+    background-repeat: no-repeat;
+}
+
+.qrCode__reader {
+    // height: 100 !important;
+    border-top: 1px solid white;
+    div {
+        width: auto !important;
+        padding-top: 360px !important;
+        overflow: auto !important;
+        position: relative;
+        top: 7.5rem;
+    }
+    #video {
+        width: auto !important;
+        // min-height: 200px !important;
+        // height: 500px !important;
+        position: absolute !important;
+        top: 50% !important;
+        left: 50% !important;
+        transform: translate(-50%, -50%) !important;
+        border-radius: 40px;
+        border: 1px solid #00b281;
+    }
+}

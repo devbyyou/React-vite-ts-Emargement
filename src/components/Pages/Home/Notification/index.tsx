@@ -6,10 +6,13 @@ import { Link } from 'react-router-dom';
 import { useAppSelector } from '../../../../hooks/redux';
 
 function Notification() {
-  const user = useAppSelector((state) => state.coaches.user);
+  const userCoaches = useAppSelector((state) => state.coaches.user);
+  const token = useAppSelector((state) => state.user.token);
+  const { joueur, user } = token;
   const {
     nom, prenom, id, logo,
-  } = user;
+  } = userCoaches;
+
   return (
     <Link to="/profil" className="content__notification">
       {/* <IoMdNotificationsOutline className="notif" /> */}
@@ -23,14 +26,14 @@ function Notification() {
       <div className="name-id">
         <p className="name">
           {`
-        ${prenom}
-        ${nom}
+        ${user ? prenom : joueur.prenom}
+        ${user ? nom : joueur.nom}
         `}
 
         </p>
         <p className="id">
           {`#
-        ${id}
+        ${user ? id : joueur.id}
         `}
         </p>
       </div>

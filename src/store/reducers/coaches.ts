@@ -42,7 +42,7 @@ const initialState: UserState = {
     prenom: '',
     nom: '',
     tel: '',
-    role: 'Entraineur',
+    role: '',
     logo: '',
     banniere: '',
 

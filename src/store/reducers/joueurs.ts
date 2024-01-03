@@ -5,7 +5,7 @@ import { createAppAsyncThunk } from '../../utils/redux';
 import { axiosInstance } from '../../utils/axios';
 
 interface JoueursState {
-  joueurs: Joueur[]
+  joueurs: Joueur
   credentials: {
     equipe_id:number
     nom: string,
@@ -21,7 +21,7 @@ interface JoueursState {
 }
 
 const initialState: JoueursState = {
-  joueurs: [{
+  joueurs: {
     created_at: '',
     id: 1,
     nom: 'string',
@@ -43,7 +43,7 @@ const initialState: JoueursState = {
     // dates_heures_absence: [],
     // mot_de_passe: 'string',
     // nombre_total_joueur: 1,
-  }],
+  },
   credentials: {
     equipe_id: 1,
     nom: '',
@@ -118,6 +118,35 @@ export const deleteJoueurs = createAppAsyncThunk(
   },
 
 );
+export const updateJoueurs = createAppAsyncThunk(
+  'joueurs/UPDATE_JOUEURS',
+  async (_, thunkAPI) => {
+    // On va aller récupérer depuis le state les credentials
+    const state = thunkAPI.getState();
+    // Je récupère mon email et mon mot de passe
+    const userId = state.user.token.joueur.id;
+    const {
+      email, password, prenom,
+      nom,
+      tel,
+      role,
+      logo,
+      banniere,
+    } = state.coaches.credentials;
+    const { data } = await axiosInstance.put(`/player/${userId}`, {
+      email,
+      password,
+      prenom,
+      nom,
+      tel,
+      role,
+      logo,
+      banniere,
+    });
+
+    return data;
+  },
+);
 const joueursReducer = createReducer(initialState, (builder) => {
   builder
     .addCase(createJoueurForEquipe.fulfilled, (state, action) => {
@@ -137,6 +166,9 @@ const joueursReducer = createReducer(initialState, (builder) => {
     })
     .addCase(deleteJoueurs.fulfilled, (state, action) => {
       // state.loading = false; // Indiquez que le chargement est terminé
+      state.joueurs = action.payload;
+    })
+    .addCase(updateJoueurs.fulfilled, (state, action) => {
       state.joueurs = action.payload;
     });
 });

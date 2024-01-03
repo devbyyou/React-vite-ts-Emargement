@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 import React from 'react';
 import './index.scss';
 import { NavLink } from 'react-router-dom';
@@ -6,17 +7,33 @@ import { PiUsersThreeLight } from 'react-icons/pi';
 import { LuClipboardSignature } from 'react-icons/lu';
 import { AiOutlineSetting } from 'react-icons/ai';
 import cn from 'classnames';
-import logo from '../../assets/devbyyou.png';
+import { useAppSelector } from '../../hooks/redux';
+// import logo from '../../assets/devbyyou.png';
 
 interface NavLinkParams {
   isActive: boolean;
 }
 
 function SideBar() {
+  const token = useAppSelector((state) => state.user.token);
+  const { joueur, user } = token;
+  // console.log(joueur);
+  // console.log(user);
   const classNameLink = ({ isActive }: NavLinkParams) => cn('icons', {
     'menu-link--active': isActive,
   });
 
+  // : player === true ? (
+  //   <div className="content">
+  //     <SideBar />
+  //     <Routes>
+  //       <Route path="/parametre" element={<Parametre />} />
+  //       <Route path="/profil" element={<Profil />} />
+  //       <Route path="/pageJoueur" element={<QRCodeReader />} />
+  //       <Route path="*" element={<div>404</div>} />
+  //     </Routes>
+  //   </div>
+  // )
   return (
     <nav className="sidebar">
       {/* <img className="logo" src={logo} alt="logo" /> */}
@@ -93,36 +110,44 @@ function SideBar() {
           transform="matrix(1.98818 0 0 1.98818 -7.476 127.676)"
         />
       </svg>
-      <div className="sidebarLink">
 
-        <NavLink className={classNameLink} to="/">
-          <GoHome />
-          Home
-        </NavLink>
-        <NavLink className={classNameLink} to="/equipes">
-          <PiUsersThreeLight />
-          Equipes
-        </NavLink>
-        <NavLink className={classNameLink} to="/presents">
-          <LuClipboardSignature />
-          Presents
-        </NavLink>
-        <NavLink className={classNameLink} to="/parametre">
-          <AiOutlineSetting />
-          Paramètre
+      { user ? (
+        <div className="sidebarLink">
+          <NavLink className={classNameLink} to="/">
+            <GoHome />
+            Home
+          </NavLink>
+          <NavLink className={classNameLink} to="/equipes">
+            <PiUsersThreeLight />
+            Equipes
+          </NavLink>
+          <NavLink className={classNameLink} to="/presents">
+            <LuClipboardSignature />
+            Presents
+          </NavLink>
+          <NavLink className={classNameLink} to="/parametre">
+            <AiOutlineSetting />
+            Paramètre
+          </NavLink>
+        </div>
+      ) : (
+        <div className="sidebarLink">
 
-        </NavLink>
-        <NavLink className={classNameLink} to="/pageJoueur">
-          <GoHome />
-          Page Joueur
-
-        </NavLink>
-        <NavLink className={classNameLink} to="/inscription">
+          <NavLink className={classNameLink} to="/pageJoueur">
+            <GoHome />
+            Page Joueur
+          </NavLink>
+          <NavLink className={classNameLink} to="/parametre">
+            <AiOutlineSetting />
+            Paramètre
+          </NavLink>
+        </div>
+      )}
+      {/* <NavLink className={classNameLink} to="/inscription">
           <GoHome />
           Inscription
 
-        </NavLink>
-      </div>
+        </NavLink> */}
 
     </nav>
   );

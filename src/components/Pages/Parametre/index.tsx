@@ -7,6 +7,7 @@ import ProfilePictureSection from './ProfilePictureSection';
 import './index.scss';
 import { changeCredentialsField, updateCoache } from '../../../store/reducers/coaches';
 import { removeUserDataFromLocalStorage } from '../../../utils/user';
+import { updateJoueurs } from '../../../store/reducers/joueurs';
 
 function Parametre() {
   const dispatch = useAppDispatch();
@@ -19,6 +20,9 @@ function Parametre() {
   // const tel = useAppSelector((state) => state.coaches.credentials.tel);
   // const logo = useAppSelector((state) => state.coaches.credentials.logo);
   // const banniere = useAppSelector((state) => state.coaches.credentials.banniere);
+  console.log(email);
+  const token = useAppSelector((state) => state.user.token);
+  const { joueur, user } = token;
 
   const handleChangeCredentials = (field:'email' | 'password' | 'prenom' | 'nom' | 'tel' | 'role' | 'logo' | 'banniere') => (event: ChangeEvent<HTMLInputElement>) => {
     const { value } = event.target;
@@ -30,7 +34,11 @@ function Parametre() {
 
   const handleSubmitUpdate = async (event: FormEvent<HTMLButtonElement> | FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    await dispatch(updateCoache());
+    if (user) {
+      await dispatch(updateCoache());
+    } else {
+      await dispatch(updateJoueurs());
+    }
   };
 
   const handleClickedButton: MouseEventHandler<HTMLButtonElement> = async () => {

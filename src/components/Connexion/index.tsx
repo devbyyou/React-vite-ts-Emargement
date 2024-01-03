@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router-dom';
 import React from 'react';
 import LoginForm from '../Pages/LoginForm';
 import { changeCredentialsField, login } from '../../store/reducers/user';
@@ -17,6 +18,8 @@ function Connexion() {
   };
 
   const handleLogin = () => {
+    // setInterval(() => {
+    // }, 1000);
     dispatch(login());
   };
   return (

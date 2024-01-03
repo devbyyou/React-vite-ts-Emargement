@@ -1,7 +1,9 @@
 import { createAction, createReducer } from '@reduxjs/toolkit';
 import { createAppAsyncThunk } from '../../utils/redux';
 import { axiosInstance } from '../../utils/axios';
-import { Equipe, LoginResponse, User } from '../../@types/user';
+import {
+  Equipe, Joueur, LoginResponse, User,
+} from '../../@types/user';
 import { getUserDataFromLocalStorage } from '../../utils/user';
 
 interface UserState {
@@ -14,6 +16,7 @@ interface UserState {
   token: {
     token:string,
     user: User,
+    joueur:Joueur
   };
   errorLogin: string | null;
   isLoading: boolean;
@@ -74,6 +77,37 @@ export const initialState: UserState = {
       updated_at: '',
       id: 0,
       session_id: null,
+    },
+    joueur: {
+      age: 20,
+      categorie_id:
+3,
+      created_at:
+'',
+      derniere_activite:
+'',
+      email:
+'',
+      equipe_id:
+44,
+      id:
+0,
+      logo:
+'',
+      nom:
+'',
+      nom_prenom_tel_parent:
+null,
+      password:
+'',
+      prenom:
+'',
+      statut:
+'',
+      tel:
+'',
+      updated_at:
+'',
     },
   },
   filteredEquipes: [],
