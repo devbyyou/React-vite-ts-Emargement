@@ -1,5 +1,5 @@
 import React, {
-  ChangeEvent, FormEvent, useEffect, useState,
+  ChangeEvent, FormEvent, MouseEvent, useEffect, useRef, useState,
 } from 'react';
 import './index.scss';
 import { MdBolt } from 'react-icons/md';
@@ -16,12 +16,12 @@ import NewTeam from '../Equipes/NewTeam';
 function Equipe() {
   const navigate = useNavigate();
   const [stateInput, setStateInput] = useState('');
-  const [stateActiveRef, setstateActiveRef] = useState(false);
+  const [stateActiveRef, setstateActiveRef] = useState<boolean | undefined>(false);
+  const [buttonSession, setbuttonSession] = useState('');
   const dispatch = useAppDispatch();
+  const button1Ref = useRef();
   const params = useParams();
   const equipeId = Object.values(params)[0];
-  // console.log(equipeId);
-
   const equipes = useAppSelector((state) => state.equipes.equipes);
   // const equipeId = Object.values(params)[1];
   const token = useAppSelector((state) => state.user.token.user);
@@ -71,18 +71,24 @@ function Equipe() {
     navigate('/equipes');
   };
   function AddJoueurClickedButton() {
-    dispatch(toggleIsOpen());
-
     setstateActiveRef(true);
+    dispatch(toggleIsOpen());
+  }
+
+  function AddSeanceClickedButton(event) {
+    dispatch(toggleIsOpen());
+    setstateActiveRef(undefined);
+    setbuttonSession(event.target.value);
   }
 
   return (
-    <div>
+    <div className="content__equipe">
       <NewTeam
         equipeId={equipeId}
         equipe={equipe}
         openClassNames={openClassNames}
         stateActiveRef={stateActiveRef}
+        buttonSession={buttonSession}
       />
       <Header />
       <div className="equipe__content">
@@ -122,38 +128,72 @@ function Equipe() {
           </div>
 
           <div className="equipe__content__information-effectif">
-            <div className="header">
-              <h2 className="titleMembre">Membres</h2>
-            </div>
+            <div>
 
-            <form onSubmit={handleSubmitForm} className="search-bar">
-              <CiSearch className="logo__search_members-equipe" />
-              <input value={stateInput} onChange={handleChangeInput} type="text" placeholder="Rechercher par nom" />
-            </form>
-            <div className="table tablenoScrool">
-              <div className="row label noScrool">
-                <div className="cell">Nom</div>
-                <div className="cell">Catégories</div>
-                <div className="cell">Dernière Activité</div>
+              <div className="header">
+                <h2 className="titleMembre">Membres</h2>
               </div>
-              {
-            filteredBYName.map((joueur) => (
-              <Link key={joueur.id} to={`/equipes/joueur/${joueur.categorie_id}/${joueur.id}`} className="row">
-                <div className="cell">
-                  {joueur.nom}
-                  {' '}
-                  {joueur.prenom}
-                  <div className="table__email">{joueur.email}</div>
+              <form onSubmit={handleSubmitForm} className="search-bar">
+                <CiSearch className="logo__search_members-equipe" />
+                <input value={stateInput} onChange={handleChangeInput} type="text" placeholder="Rechercher par nom" />
+              </form>
+              <div className="table tablenoScrool">
+                <div className="row label noScrool">
+                  <div className="cell">Nom</div>
+                  <div className="cell">Catégories</div>
+                  <div className="cell">Dernière Activité</div>
                 </div>
-                <div className="cell owner">
-                  .
-                  {' '}
-                  {equipe.categories.nom}
+                { filteredBYName.map((joueur) => (
+                  <Link key={joueur.id} to={`/equipes/joueur/${joueur.categorie_id}/${joueur.id}`} className="row">
+
+                    <div className="cell">
+                      {joueur.nom}
+                      {' '}
+                      {joueur.prenom}
+                      <div className="table__email">{joueur.email}</div>
+                    </div>
+
+                    <div className="cell owner">
+                      .
+                      {' '}
+                      {equipe.categories.nom}
+                    </div>
+
+                    <div className="cell">
+                      {`${functionConverteDate.convertDateToDelay(joueur.derniere_activite)} min ago`}
+                    </div>
+
+                  </Link>
+                ))}
+              </div>
+
+              <div className="content__ListSeance">
+                {/* <div> */}
+                <header className="header">
+                  <h2 className="titleMembre">Séances</h2>
+                </header>
+                <div className="table tablenoScrool">
+                  <div className="row label noScrool">
+                    <div className="cell">Id</div>
+                    <div className="cell">Equipe/Catégorie</div>
+                    <div className="cell">Localisation</div>
+                    <div className="cell">Jours/Heure</div>
+                    <div className="cell">Coach</div>
+                  </div>
+                  <div className="row">
+                    <div className="cell">
+                      1
+                      <div className="table__email">test</div>
+                    </div>
+                    <div className="cell owner">Boulogne A - Senior</div>
+                    <div className="cell"> 12 place du stade - Boulogne</div>
+                    <div className="cell"> Lundi - 19h00/21h00</div>
+                    <div className="cell"> Pierre Dupont</div>
+                  </div>
                 </div>
-                <div className="cell">{`${functionConverteDate.convertDateToDelay(joueur.derniere_activite)} min ago`}</div>
-              </Link>
-            ))
-          }
+                {/* </div> */}
+              </div>
+
             </div>
           </div>
         </div>
@@ -165,19 +205,27 @@ function Equipe() {
               <MdBolt />
               Actions
             </h3>
-            <div>
-              <button onClick={handleClickedButton} type="button">
-                Supprimer
-                {' '}
-                {equipe.nom}
-
-              </button>
+            <div className="content__button">
               <button
                 className="buttonNewPlayer"
                 onClick={AddJoueurClickedButton}
                 type="button"
               >
                 Ajoutez Nouveau Joueur
+              </button>
+              <button
+                className="buttonNewPlayer"
+                onClick={AddSeanceClickedButton}
+                type="button"
+                value="AddSeance"
+              >
+                Ajoutez une Seance
+              </button>
+              <button onClick={handleClickedButton} type="button">
+                Supprimer
+                {' '}
+                {equipe.nom}
+
               </button>
             </div>
           </div>
