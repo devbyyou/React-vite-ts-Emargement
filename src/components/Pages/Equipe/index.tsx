@@ -1,5 +1,5 @@
 import React, {
-  ChangeEvent, FormEvent, MouseEvent, useEffect, useRef, useState,
+  ChangeEvent, FormEvent, useEffect, useRef, useState,
 } from 'react';
 import './index.scss';
 import { MdBolt } from 'react-icons/md';
@@ -19,7 +19,7 @@ function Equipe() {
   const [stateActiveRef, setstateActiveRef] = useState<boolean | undefined>(false);
   const [buttonSession, setbuttonSession] = useState('');
   const dispatch = useAppDispatch();
-  const button1Ref = useRef();
+  // const button1Ref = useRef();
   const params = useParams();
   const equipeId = Object.values(params)[0];
   const equipes = useAppSelector((state) => state.equipes.equipes);

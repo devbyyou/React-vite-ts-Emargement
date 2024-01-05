@@ -6,6 +6,7 @@ import joueursReducer from './joueurs';
 import userReducer from './user';
 import inscriptionReducer from './inscription';
 import qrCodeReducer from './qrCode';
+import seanceReducer from './seance';
 
 const reducer = {
   coaches: coachesReducer,
@@ -16,6 +17,7 @@ const reducer = {
   inscription: inscriptionReducer,
   qrCode: qrCodeReducer,
   api: ApiReducer,
+  seance: seanceReducer,
 };
 
 export default reducer;
