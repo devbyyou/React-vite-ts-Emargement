@@ -1,5 +1,5 @@
 import React, {
-  ChangeEvent, FormEvent, useEffect, useRef, useState,
+  ChangeEvent, FormEvent, useEffect, useState,
 } from 'react';
 import './index.scss';
 import { MdBolt } from 'react-icons/md';
@@ -12,6 +12,7 @@ import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
 import functionConverteDate from '../Home/MembersList/ConverteDate';
 import { deleteEquipesForUser, fetchEquipesForUser, toggleIsOpen } from '../../../store/reducers/equipes';
 import NewTeam from '../Equipes/NewTeam';
+// import { fetchSeancesForUser } from '../../../store/reducers/seance';
 
 function Equipe() {
   const navigate = useNavigate();
@@ -19,21 +20,26 @@ function Equipe() {
   const [stateActiveRef, setstateActiveRef] = useState<boolean | undefined>(false);
   const [buttonSession, setbuttonSession] = useState('');
   const dispatch = useAppDispatch();
-  // const button1Ref = useRef();
   const params = useParams();
   const equipeId = Object.values(params)[0];
   const equipes = useAppSelector((state) => state.equipes.equipes);
   // const equipeId = Object.values(params)[1];
   const token = useAppSelector((state) => state.user.token.user);
   const isOpen = useAppSelector((state) => state.equipes.isOpen);
+  // const credentials = useAppSelector((state) => state.seance.credentials);
+
   const equipe = equipes.find(
     (eq) => (
       eq.id.toString() === equipeId
     ),
   );
+
+  // console.log(equipes);
+  // console.log(equipe);
+
   useEffect(() => {
     // logique pour charger les données de l'équipe si elles ne sont pas déjà chargées
-    // dispatch(fetchEquipesForUser());
+    // dispatch(fetchSeancesForUser());
   }, [dispatch, equipes, equipe]);
 
   if (!equipe) {
@@ -47,6 +53,10 @@ function Equipe() {
   const filteredBYName = equipe.joueurs.filter(
     (joueur) => joueur.nom.toLowerCase().includes(stateInput.toLowerCase()),
   );
+  const filteredBYid = equipe.seances;
+
+  // console.log(filteredBYid);
+  // console.log(equipes);
 
   function handleSubmitForm(event: FormEvent<HTMLFormElement>): void {
     event.preventDefault();
@@ -66,7 +76,7 @@ function Equipe() {
     alert('Suppression de l\'equipe ! Vous allez être redirigé vers la page des equipes :)');
     // window.location.reload();
     await dispatch(deleteEquipesForUser(equipeId));
-    await dispatch(fetchEquipesForUser());
+    // await dispatch(fetchEquipesForUser());
 
     navigate('/equipes');
   };
@@ -168,7 +178,6 @@ function Equipe() {
               </div>
 
               <div className="content__ListSeance">
-                {/* <div> */}
                 <header className="header">
                   <h2 className="titleMembre">Séances</h2>
                 </header>
@@ -180,20 +189,42 @@ function Equipe() {
                     <div className="cell">Jours/Heure</div>
                     <div className="cell">Coach</div>
                   </div>
-                  <div className="row">
-                    <div className="cell">
-                      1
-                      <div className="table__email">test</div>
-                    </div>
-                    <div className="cell owner">Boulogne A - Senior</div>
-                    <div className="cell"> 12 place du stade - Boulogne</div>
-                    <div className="cell"> Lundi - 19h00/21h00</div>
-                    <div className="cell"> Pierre Dupont</div>
-                  </div>
-                </div>
-                {/* </div> */}
-              </div>
+                  {filteredBYid.map((seance) => (
+                    <div key={seance.id} className="row">
+                      <div className="cell">
+                        {seance.id}
+                        {/* <div className="table__email">test</div> */}
+                      </div>
+                      <div className="cell owner">
+                        {equipe.nom}
+                        {' '}
+                        -
+                        {' '}
+                        {equipe.categories.nom}
+                      </div>
+                      <div className="cell">
+                        {' '}
+                        {seance.lieu}
+                        {' '}
+                      </div>
+                      <div className="cell">
+                        {functionConverteDate.calendaraDate(seance.date)}
+                        {' - '}
+                        {seance.heure}
+                        {' '}
 
+                      </div>
+                      <div className="cell">
+                        {' '}
+                        {token.prenom}
+                        {' '}
+                        {token.nom}
+                      </div>
+                    </div>
+                  ))}
+
+                </div>
+              </div>
             </div>
           </div>
         </div>

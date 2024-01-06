@@ -1,6 +1,5 @@
 /* eslint-disable max-len */
 /* eslint-disable @typescript-eslint/naming-convention */
-import { useParams } from 'react-router-dom';
 import React, { ChangeEvent, useState } from 'react';
 import { format, addDays, parseISO } from 'date-fns';
 import { useAppDispatch, useAppSelector } from '../../../../../hooks/redux';
@@ -53,7 +52,7 @@ function SeanceForm() {
     const recurringDates = generateRecurringDates(selectedDay, selectedTime);
 
     // Envoyer les données au backend
-    await dispatch(addSeance({
+    const response = await dispatch(addSeance({
       equipe_id,
       categorie_id,
       statut,
@@ -62,6 +61,13 @@ function SeanceForm() {
       recurringDates,
     }));
 
+    // Récupérer le QR code en base64 depuis la réponse
+    const qrCodeBase64 = response.payload.qrCodeImage;
+    // Créer un lien de téléchargement pour le QR code
+    const downloadLink = document.createElement('a');
+    downloadLink.href = `data:image/png;base64,${qrCodeBase64}`;
+    downloadLink.download = `qr-code-${recurringDates[0]}.png`;
+    downloadLink.click();
     // Réinitialiser les champs après l'ajout de la séance
     setSelectedDay('');
     setSelectedTime(new Date());

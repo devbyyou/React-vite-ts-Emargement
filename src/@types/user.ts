@@ -34,6 +34,7 @@ export interface Equipe {
   statut: string
   categorie_id: number
   joueurs: Joueur[]
+  seances: Seances[]
   categories: Categories
   coaches_equipes: CoachesEquipes
 }
@@ -53,6 +54,14 @@ export interface Joueur {
   role:string
   age:number
   etat:string
+}
+export interface Seances {
+  id:number
+  categorie_id: number
+  date:string
+  equipe_id: number
+  heure:string
+  lieu:string
 }
 
 export interface Categories {

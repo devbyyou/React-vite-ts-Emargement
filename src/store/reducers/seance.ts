@@ -42,6 +42,7 @@ export const addSeance = createAppAsyncThunk(
     return response.data;
   },
 );
+
 const seanceReducer = createReducer(initialState, (builder) => {
   builder
 
