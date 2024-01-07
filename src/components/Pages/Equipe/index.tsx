@@ -35,7 +35,7 @@ function Equipe() {
   );
 
   // console.log(equipes);
-  // console.log(equipe);
+  console.log(equipe);
 
   useEffect(() => {
     // logique pour charger les données de l'équipe si elles ne sont pas déjà chargées
