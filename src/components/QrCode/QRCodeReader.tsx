@@ -19,12 +19,20 @@ function QRCodeReader() {
         seanceId, equipe_id, horaire,
       } = JSON.parse(data);
       const now = new Date();
-      const creneau = new Date(horaire);
+      now.setSeconds(0);
+      now.setMilliseconds(0);
+      // const crenau = new Date(horaire);
+      const horaireParis = new Date(horaire);
+      const horaireLocal = new Date(horaireParis.setHours(horaireParis.getHours() + 1));
+      horaireLocal.setMilliseconds(0);
+      horaireLocal.setSeconds(0);
       try {
         // A prevoir :
         // --- : Possibilité de scanné le qr seleument une fois et que 30min avant la seance et 3h plus tard uniquement Pour ajouter un délais d'expiration au qr et eviter des value étrange
         // --- : Ajouter 30min minutes à ${heure} pour éviter de mettre le joueur absent alors qu'il est en avance
-        if (now > creneau) {
+      
+
+        if (now > horaireLocal) {
           const statut = '--';
           const absence = '--';
           const retard = 'RETARD';
@@ -35,7 +43,7 @@ function QRCodeReader() {
             absence,
             retard,
           }));
-        } else if (now < creneau) {
+        } else if (now < horaireLocal) {
           const statut = '--';
           const absence = 'ABSENT';
           const retard = '--';
@@ -59,13 +67,6 @@ function QRCodeReader() {
           }));
         }
         dispatch(setQRCodeData({ seance_id: seanceId, equipe_id }));
-        // dispatch(updateLastActivityAndManagePresence({
-        //   seanceId,
-        //   joueurId: joueur.id,
-        //   statut,
-        //   absence,
-        //   retard,
-        // }));
       } catch (error) {
         console.error('Error parsing QR Code data:', error);
       }
