@@ -13,16 +13,27 @@ const initialState: QRCodeState = {
 export const setQRCodeData = createAction<{ seanceId: number; joueurId: number }>('qrCode/setData');
 export const updateLastActivityAndManagePresence = createAppAsyncThunk(
   'qrCode/updateLastActivityAndManagePresence',
-  async ({ seanceId, joueurId }: { seanceId: number; joueurId: number }, thunkAPI) => {
+  async ({
+    seanceId,
+    joueurId,
+    statut,
+    absence,
+    retard,
+  }: {
+    seanceId: number;
+    joueurId: number ;
+    statut:string;
+    absence:string;
+    retard:string; }, thunkAPI) => {
     // Mettre à jour derniere_activite
     await axiosInstance.post(`/update-last-activity/${joueurId}`);
     // Gérer la présence
     await axiosInstance.post(`/presences/${joueurId}/${seanceId}`, {
       seanceId,
       joueurId,
-      statut: 'Présent', // Vous pouvez ajouter la logique pour déterminer le statut
-      absence: 'Absent', // Logique pour déterminer l'absence
-      retard: 'En retard', // Logique pour déterminer le retard
+      statut,
+      absence,
+      retard,
     });
   },
 );

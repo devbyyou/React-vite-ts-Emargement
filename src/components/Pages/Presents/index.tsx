@@ -10,7 +10,6 @@ function Presents() {
       <BanniereMessage />
       <ListPresents />
       <Calendrier />
-
     </div>
   );
 }

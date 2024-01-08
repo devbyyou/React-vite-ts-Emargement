@@ -20,7 +20,7 @@ function Parametre() {
   // const tel = useAppSelector((state) => state.coaches.credentials.tel);
   // const logo = useAppSelector((state) => state.coaches.credentials.logo);
   // const banniere = useAppSelector((state) => state.coaches.credentials.banniere);
-  console.log(email);
+  // console.log(email);
   const token = useAppSelector((state) => state.user.token);
   const { joueur, user } = token;
 

@@ -1,7 +1,13 @@
 import React from 'react';
 import './index.scss';
+import { useAppSelector } from '../../../../hooks/redux';
 
 function ListPresents() {
+  const equipes = useAppSelector((state) => state.equipes.equipes);
+
+  // const = equipes;
+  // console.log(seances);
+
   return (
     <div className="listPresents">
 
