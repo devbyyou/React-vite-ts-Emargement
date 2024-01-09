@@ -1,12 +1,41 @@
+/* eslint-disable max-len */
 import React from 'react';
 import './index.scss';
+import cn from 'classnames';
 import { useAppSelector } from '../../../../hooks/redux';
+import functionConverteDate from '../../Home/MembersList/ConverteDate';
 
 function ListPresents() {
   const equipes = useAppSelector((state) => state.equipes.equipes);
+  const findAllSeances = equipes.map((seances) => seances.seances);
+  const findAllJoueurs = equipes.map((seances) => seances.joueurs);
 
-  // const = equipes;
-  // console.log(seances);
+  const findAllPresences = findAllSeances.map((seances) => seances.map((findpresences) => {
+    const presence = findpresences.presences;
+    return presence.filter((present) => present);
+  }));
+  const findSeances = (seanceId: number) => {
+    const filteredHeures = findAllSeances
+      .flatMap((seance) => seance
+        .filter((seances) => seances.id === seanceId))
+      .map((seance) => seance.heure);
+
+    return filteredHeures.length > 0 ? filteredHeures.join(', ') : 'No matching seances found';
+  };
+  const findPlayer = (playerId: number) => {
+    const filteredPlayer = findAllJoueurs
+      .flatMap((joueur) => joueur
+        .filter((joueurs) => joueurs.id === playerId))
+      .map((joueur) => `${joueur.prenom} ${joueur.nom}`);
+    return filteredPlayer.length > 0 ? filteredPlayer.join(', ') : 'No matching seances found';
+  };
+  const findPlayerTel = (playerId: number) => {
+    const filteredPlayer = findAllJoueurs
+      .flatMap((joueur) => joueur
+        .filter((joueurs) => joueurs.id === playerId))
+      .map((joueur) => joueur.tel);
+    return filteredPlayer.length > 0 ? filteredPlayer.join(', ') : 'No matching seances found';
+  };
 
   return (
     <div className="listPresents">
@@ -23,44 +52,45 @@ function ListPresents() {
 
         <div className="listPresents__row listPresents__label">
           <div className="listPresents__cell">Nom</div>
+          <div className="listPresents__cell">Séance Prévu à</div>
           <div className="listPresents__cell">Vu à</div>
           <div className="listPresents__cell">Présent</div>
           <div className="listPresents__cell">Absent</div>
-          <div className="listPresents__cell">En retard</div>
+          <div className="listPresents__cell">Retard</div>
         </div>
 
-        <div className="listPresents__row present">
-          <div className="listPresents__cell">
-            John Doe
-            <div className="listPresents__table__email">066666666</div>
-          </div>
-          <div className="listPresents__cell ">18:00</div>
-          <div className="listPresents__cell">PRESENT</div>
-          <div className="listPresents__cell">_</div>
-          <div className="listPresents__cell">_</div>
-        </div>
+        {findAllPresences.map((sessions, index) => (
+          // eslint-disable-next-line react/no-array-index-key
+          <React.Fragment key={index}>
+            {sessions.map((players) => players.map((player) => (
+              <div
+                key={player.id}
+                className={cn('listPresents__row', {
+                  present: player.statut === 'PRESENT',
+                  retard: player.retard === 'RETARD',
+                  absent: player.absence === 'ABSENT',
+                })}
+              >
+                <div className="listPresents__cell">
+                  {findPlayer(player.joueur_id)}
+                  <div className="listPresents__table__email">{findPlayerTel(player.joueur_id)}</div>
+                </div>
+                <div className="listPresents__cell">
+                  { findSeances(player.seance_id)}
+                </div>
+                <div className="listPresents__cell">
+                  {functionConverteDate.heureHiver(player.updated_at, 1, 'HH:mm:ss')}
+                </div>
+                <div className="listPresents__cell">
+                  {player.statut}
+                </div>
+                <div className="listPresents__cell">{player.absence}</div>
+                <div className="listPresents__cell">{player.retard}</div>
 
-        <div className="listPresents__row retard">
-          <div className="listPresents__cell">
-            John Doe
-            <div className="listPresents__table__email">066666666</div>
-          </div>
-          <div className="listPresents__cell ">18:10</div>
-          <div className="listPresents__cell">_</div>
-          <div className="listPresents__cell">_</div>
-          <div className="listPresents__cell">RETARD</div>
-        </div>
-
-        <div className="listPresents__row absent">
-          <div className="listPresents__cell">
-            John Doe
-            <div className="listPresents__table__email">066666666</div>
-          </div>
-          <div className="listPresents__cell ">_</div>
-          <div className="listPresents__cell">_</div>
-          <div className="listPresents__cell">ABSENT</div>
-          <div className="listPresents__cell">_</div>
-        </div>
+              </div>
+            )))}
+          </React.Fragment>
+        ))}
 
       </div>
     </div>

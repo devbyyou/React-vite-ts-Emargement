@@ -30,8 +30,6 @@ function QRCodeReader() {
         // A prevoir :
         // --- : Possibilité de scanné le qr seleument une fois et que 30min avant la seance et 3h plus tard uniquement Pour ajouter un délais d'expiration au qr et eviter des value étrange
         // --- : Ajouter 30min minutes à ${heure} pour éviter de mettre le joueur absent alors qu'il est en avance
-      
-
         if (now > horaireLocal) {
           const statut = '--';
           const absence = '--';
@@ -72,7 +70,6 @@ function QRCodeReader() {
       }
     }
   };
-  // console.log(functionConverteDate.calendaraDate(joueur.derniere_activite));
   return (
     <div className="content__qr">
       <Header />

@@ -1,4 +1,6 @@
 import moment from 'moment';
+import { format, addHours } from 'date-fns';
+
 // import 'moment/locale/fr';
 
 const functionConverteDate = {
@@ -19,6 +21,18 @@ const functionConverteDate = {
     const date = moment(derniere_activite).locale('fr').format('D MMMM YYYY');
 
     return date;
+  },
+  heureHiver: (originalDateString :string, timeZoneOffset:number, formatString:string) => {
+    // Parse the original date string
+    const originalDate = new Date(originalDateString);
+
+    // Adjust the date based on the provided timeZoneOffset
+    const adjustedDate = addHours(originalDate, timeZoneOffset);
+
+    // Format the adjusted date using the provided formatString
+    const formattedDate = format(adjustedDate, formatString);
+
+    return formattedDate;
   },
 };
 export default functionConverteDate;

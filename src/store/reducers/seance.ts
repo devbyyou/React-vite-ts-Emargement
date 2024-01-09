@@ -36,7 +36,6 @@ export const addSeance = createAppAsyncThunk(
     const state = thunkAPI.getState();
     const {
       equipe_id,
-
     } = state.seance.credentials;
     const response = await axiosInstance.post(`/seances/${equipe_id}`, seanceData);
     return response.data;

@@ -62,6 +62,19 @@ export interface Seances {
   equipe_id: number
   heure:string
   lieu:string
+  presences: Presences[]
+}
+export interface Presences {
+  statut: string,
+  id: number,
+  joueur_id: number,
+  seance_id: number,
+  absence: string,
+  retard: string,
+  created_at: string,
+  updated_at:string,
+  JoueurId: number
+
 }
 
 export interface Categories {
