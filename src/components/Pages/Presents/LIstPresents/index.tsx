@@ -6,7 +6,10 @@ import cn from 'classnames';
 import { useAppSelector } from '../../../../hooks/redux';
 import functionConverteDate from '../../Home/MembersList/ConverteDate';
 
-function ListPresents() {
+interface IDate {
+  selectedDate: object
+}
+function ListPresents({ selectedDate }:IDate) {
   const [valueOption, setvalueOption] = useState('');
   const equipes = useAppSelector((state) => state.equipes.equipes);
   const findAllSeances = equipes.map((seances) => seances.seances);
@@ -35,14 +38,16 @@ function ListPresents() {
   };
   const filteredByEquipe = findAllSeances
     .flatMap((seances) => seances
-      .filter((seance) => seance.equipe_id.toString() === valueOption.toString()));
+      .filter((seance) => seance.equipe_id.toString() === valueOption.toString()
+      && functionConverteDate.calendaraDate(seance.horaire) === functionConverteDate.calendaraDate(selectedDate)));
   const handleChangeOption = (event: ChangeEvent<HTMLSelectElement>) => {
     const valueSelect = event.target.value;
     setvalueOption(valueSelect);
   };
+  console.log(filteredByEquipe);
+  console.log(functionConverteDate.calendaraDate(selectedDate));
   return (
     <div className="listPresents">
-
       <div className="listPresents__timer">
         Début du prochaine entrainement dans : 3:05 min
       </div>
@@ -54,7 +59,7 @@ function ListPresents() {
               value={equipe.id}
               key={equipe.id}
             >
-              {equipe.nom}
+              {`${equipe.nom} - ${equipe.categories.nom} `}
             </option>
           ))}
         </select>

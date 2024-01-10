@@ -61,6 +61,7 @@ export interface Seances {
   date:string
   equipe_id: number
   heure:string
+  horaire:string
   lieu:string
   presences: Presences[]
 }
