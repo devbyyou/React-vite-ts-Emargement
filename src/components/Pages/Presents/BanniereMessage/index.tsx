@@ -1,14 +1,21 @@
 import React from 'react';
 import './index.scss';
+import functionConverteDate from '../../Home/MembersList/ConverteDate';
 
-function BanniereMessage() {
+interface IselectDate {
+  selectedDate :string
+}
+function BanniereMessage({ selectedDate }:IselectDate) {
   return (
     <div className="BanniereMessage">
       <h1>Tableau de bord des présences</h1>
       <p>
         Présence du :
       </p>
-      <div>Dimanche 12 Février </div>
+      <div>
+        {functionConverteDate.calendaraDate(selectedDate)}
+        {' '}
+      </div>
     </div>
   );
 }

@@ -1,15 +1,19 @@
 /* eslint-disable @typescript-eslint/naming-convention */
 /* eslint-disable max-len */
-import React, { ChangeEvent, useState } from 'react';
+import React, { ChangeEvent, useEffect, useState } from 'react';
 import './index.scss';
 import cn from 'classnames';
 import { useAppSelector } from '../../../../hooks/redux';
 import functionConverteDate from '../../Home/MembersList/ConverteDate';
+import { Seances } from '../../../../@types/user';
 
 interface IDate {
-  selectedDate: object
+  selectedDate: any
+  setStatefilteredByEquipe : React.Dispatch<React.SetStateAction<any>>
+  statefilteredByEquipe:Seances[]
+
 }
-function ListPresents({ selectedDate }:IDate) {
+function ListPresents({ selectedDate, setStatefilteredByEquipe, statefilteredByEquipe }:IDate) {
   const [valueOption, setvalueOption] = useState('');
   const equipes = useAppSelector((state) => state.equipes.equipes);
   const findAllSeances = equipes.map((seances) => seances.seances);
@@ -44,13 +48,20 @@ function ListPresents({ selectedDate }:IDate) {
     const valueSelect = event.target.value;
     setvalueOption(valueSelect);
   };
-  console.log(filteredByEquipe);
-  console.log(functionConverteDate.calendaraDate(selectedDate));
+  // useEffect(() => {
+  //   if (filteredByEquipe.length > 0) {
+  //     setStatefilteredByEquipe(filteredByEquipe);
+  //   }
+  // },[filteredByEquipe]);
+  useEffect(() => {
+    // Ajouter une condition pour comparer l'état actuel avec le nouvel état
+    if (JSON.stringify(filteredByEquipe) !== JSON.stringify(statefilteredByEquipe)) {
+      setStatefilteredByEquipe(filteredByEquipe);
+    }
+  }, [filteredByEquipe, setStatefilteredByEquipe, statefilteredByEquipe]);
+
   return (
     <div className="listPresents">
-      <div className="listPresents__timer">
-        Début du prochaine entrainement dans : 3:05 min
-      </div>
       <div className="listPresents__table">
         <select onChange={handleChangeOption} value={valueOption} className="teamSelect" name="teamSelect" id="teamSelect">
           <option value="">Choisi ton équipe</option>

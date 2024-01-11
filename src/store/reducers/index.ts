@@ -7,6 +7,7 @@ import userReducer from './user';
 import inscriptionReducer from './inscription';
 import qrCodeReducer from './qrCode';
 import seanceReducer from './seance';
+import attendanceReducer from './graph';
 
 const reducer = {
   coaches: coachesReducer,
@@ -18,6 +19,7 @@ const reducer = {
   qrCode: qrCodeReducer,
   api: ApiReducer,
   seance: seanceReducer,
+  graph: attendanceReducer,
 };
 
 export default reducer;

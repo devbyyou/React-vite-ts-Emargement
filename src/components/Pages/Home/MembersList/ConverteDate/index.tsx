@@ -16,6 +16,11 @@ const functionConverteDate = {
 
     return date;
   },
+  heureTime: (derniere_activite: string | number) => {
+    const date = moment(derniere_activite).format('HH:mm:ss');
+
+    return date;
+  },
   calendaraDate: (derniere_activite: string | number) => {
     moment.locale('fr');
     const date = moment(derniere_activite).locale('fr').format('D MMMM YYYY');
