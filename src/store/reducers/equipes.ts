@@ -30,6 +30,7 @@ const initialState: EquipesState = {
       statut: '',
       categorie_id: 1,
       created_at: '',
+      seances: [],
       joueurs: [
         {
           created_at: '',
@@ -87,20 +88,17 @@ export const changeCredentialsField = createAction<{
 
 export const createEquipe = createAppAsyncThunk(
   'equipes/CREATE_EQUIPE',
-  async (_, thunkAPI) => {
+  async (logo, thunkAPI) => {
     // On va aller récupérer depuis le state les credentials
     const state = thunkAPI.getState();
     // Je récupère mon email et mon mot de passe
     const {
-      nom, categorie_id, logo, statut,
+      nom, categorie_id, statut,
     } = state.equipes.credentials;
-    const { data } = await axiosInstance.post('/equipes', {
-      nom,
-      categorie_id,
-      logo,
-      statut,
-    });
 
+    const { data } = await axiosInstance.post('/equipes', {
+      logo, nom, categorie_id, statut,
+    });
     return data;
   },
 );
@@ -149,7 +147,7 @@ const equipeReducer = createReducer(initialState, (builder) => {
     .addCase(toggleIsOpen, (state) => {
       state.isOpen = !state.isOpen;
     })
-    .addCase(createEquipe.fulfilled, (state) => {
+    .addCase(createEquipe.fulfilled, () => {
       // J'enregistre les informations retourner par mon API
       // state.equipe = action.payload.equipe;
       // state.categorie = action.payload.categorie;
@@ -163,7 +161,13 @@ const equipeReducer = createReducer(initialState, (builder) => {
     })
     .addCase(changeCredentialsField, (state, action) => {
       const { field, value } = action.payload;
-      state.credentials[field] = value;
+      // Traitez le champ logo différemment (stockez la chaîne de base64)
+      if (field === 'logo') {
+        state.credentials[field] = value;
+      } else {
+        // Traitez les autres champs normalement
+        state.credentials[field] = value;
+      }
     })
     .addCase(fetchEquipesForUser.fulfilled, (state, action) => {
       // state.loading = false; // Indiquez que le chargement est terminé

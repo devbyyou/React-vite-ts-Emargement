@@ -1,7 +1,9 @@
+/* eslint-disable max-len */
 /* eslint-disable no-nested-ternary */
 import React, {
-  ChangeEvent, FormEvent, KeyboardEvent, useEffect,
+  ChangeEvent, FormEvent, KeyboardEvent, useEffect, useState, useCallback,
 } from 'react';
+import { useDropzone } from 'react-dropzone';
 import './index.scss';
 import { useAppDispatch, useAppSelector } from '../../../../hooks/redux';
 import {
@@ -25,21 +27,21 @@ interface IopenClassNames {
 function NewTeam({
   openClassNames, equipe, equipeId, stateActiveRef, handleUpdatingPlayer, joueur, buttonSession,
 } :IopenClassNames) {
+  const dispatch = useAppDispatch();
   const nom = useAppSelector((state) => state.equipes.credentials.nom);
   const prenom = useAppSelector((state) => state.equipes.credentials.prenom);
   const email = useAppSelector((state) => state.equipes.credentials.email);
   const tel = useAppSelector((state) => state.equipes.credentials.tel);
   const age = useAppSelector((state) => state.equipes.credentials.age);
   const categories = useAppSelector((state) => state.categories.categories);
-  const logo = useAppSelector((state) => state.equipes.credentials.logo);
+  // const logo = useAppSelector((state) => state.equipes.credentials.logo);
   const statut = useAppSelector((state) => state.equipes.credentials.statut);
   const equipes = useAppSelector((state) => state.equipes.equipes);
-
-  const dispatch = useAppDispatch();
   useEffect(() => {
     dispatch(fetchEquipesForUser());
     dispatch(findAllCategories());
   }, [dispatch]);
+
   function handleClickedClose() {
     dispatch(toggleIsOpen());
   }
@@ -49,22 +51,52 @@ function NewTeam({
       dispatch(toggleIsOpen());
     }
   }
+  // const [file, setFile] = useState<File | undefined>();
+  const [preview, setPreview] = useState<string | ArrayBuffer | null>(null);
+  const onDrop = useCallback((acceptedFiles : FileList) => {
+    // eslint-disable-next-line new-parens
+    const file = new FileReader;
+    file.onload = function () {
+      setPreview(file.result);
+    };
+    file.readAsDataURL(acceptedFiles[0]);
+  }, []);
+  const {
+    acceptedFiles, getRootProps, getInputProps, isDragActive,
+  } = useDropzone({ onDrop });
 
   async function handleSubmitForm(event: FormEvent<HTMLFormElement>): Promise<void> {
     event.preventDefault();
-    await dispatch(createEquipe());
+    // ----------------------partie du test --------------------------//
+    if (typeof acceptedFiles[0] === 'undefined') return;
+    const formData = new FormData();
+    formData.append('file', acceptedFiles[0]);
+    formData.append('upload_preset', 'react-uploads-unsigned');
+    formData.append('api_key', import.meta.env.VITE_CLOUDINATY_API_KEY);
+    const results = await fetch('https://api.cloudinary.com/v1_1/dvj8v54gi/image/upload', {
+      method: 'POST',
+      body: formData,
+    }).then((r) => r.json());
+    const logo = results.secure_url;
+    // ----------------------partie du test --------------------------//
+    await dispatch(createEquipe(logo));
     await dispatch(fetchEquipesForUser());
     dispatch(toggleIsOpen());
   }
-
   const handleChangeInput = (field: 'nom' | 'equipe_id' | 'categorieId' | 'categorie_id' | 'logo' | 'statut' | 'prenom' | 'email' | 'tel' | 'age') => (event: ChangeEvent<HTMLInputElement>) => {
     const { value } = event.target;
+    // if (field === 'logo') {
+    //   const target = event.target as HTMLInputElement & {
+    //     files: FileList;
+    //   };
+    //   setFile(target.files[0]);
+    // } else {
     dispatch(changeCredentialsField({
       value,
       field,
     }));
+    // }
   };
-  // console.log(equipeId);
 
   async function handleSubmitFormUpdate(event: FormEvent<HTMLFormElement>): Promise<void> {
     event.preventDefault();
@@ -93,7 +125,6 @@ function NewTeam({
           x
         </button>
       </div>
-
       <div className="newteam__content__card ">
         {
         stateActiveRef === true && equipe ? (
@@ -162,7 +193,13 @@ function NewTeam({
                   </svg>
                   <span>Choisir un fichier</span>
                 </div>
-                <input onChange={handleChangeInput('logo')} value={logo} type="file" name="logo" accept="image/png, image/jpg, image/jpeg" />
+                <input
+                  onChange={handleChangeInput('logo')}
+                  // value={logo}
+                  type="file"
+                  name="logo"
+                  accept="image/png, image/jpg, image/jpeg"
+                />
               </div>
             </div>
             <div className="my-form--button">
@@ -172,7 +209,7 @@ function NewTeam({
             </div>
           </form>
         ) : stateActiveRef === false && equipe ? (
-          <form onSubmit={handleSubmitFormUpdate} action="submbit" className="my-form updateteam">
+          <form onSubmit={handleSubmitFormUpdate} action="submit" className="my-form updateteam">
             <h2> Modification de L&apos;Equipe</h2>
 
             <label>
@@ -208,7 +245,13 @@ function NewTeam({
                   </svg>
                   <span>Choisir un fichier</span>
                 </div>
-                <input onChange={handleChangeInput('logo')} value={logo} type="file" name="logo" accept="image/png, image/jpg, image/jpeg" />
+                <input
+                  onChange={handleChangeInput('logo')}
+                // value={logo}
+                  type="file"
+                  name="logo"
+                  accept="image/png, image/jpg, image/jpeg"
+                />
               </div>
             </div>
             <div className="my-form--button">
@@ -220,7 +263,7 @@ function NewTeam({
         ) : buttonSession ? (
           <SeanceForm />
         ) : stateActiveRef === false && equipe ? (
-          <form onSubmit={handleSubmitFormUpdate} action="submbit" className="my-form updateteam">
+          <form onSubmit={handleSubmitFormUpdate} action="submit" className="my-form updateteam">
             <h2> Modification de L&apos;Equipe</h2>
 
             <label>
@@ -256,7 +299,13 @@ function NewTeam({
                   </svg>
                   <span>Choisir un fichier</span>
                 </div>
-                <input onChange={handleChangeInput('logo')} value={logo} type="file" name="logo" accept="image/png, image/jpg, image/jpeg" />
+                <input
+                  onChange={handleChangeInput('logo')}
+                //  value={logo}
+                  type="file"
+                  name="logo"
+                  accept="image/png, image/jpg, image/jpeg"
+                />
               </div>
             </div>
             <div className="my-form--button">
@@ -266,7 +315,7 @@ function NewTeam({
             </div>
           </form>
         ) : stateActiveRef === true && joueur ? (
-          <form onSubmit={handleUpdatingPlayer} action="submbit" className="my-form updatePlayer">
+          <form onSubmit={handleUpdatingPlayer} action="submit" className="my-form updatePlayer">
             <h2>Modification Joueur</h2>
             <label>
               Nom Joueur
@@ -331,7 +380,13 @@ function NewTeam({
                   </svg>
                   <span>Choisir un fichier</span>
                 </div>
-                <input onChange={handleChangeInput('logo')} value={logo} type="file" name="logo" accept="image/png, image/jpg, image/jpeg" />
+                <input
+                  onChange={handleChangeInput('logo')}
+                // value={logo}
+                  type="file"
+                  name="logo"
+                  accept="image/png, image/jpg, image/jpeg"
+                />
               </div>
             </div>
             <div className="my-form--button">
@@ -341,7 +396,7 @@ function NewTeam({
             </div>
           </form>
         ) : (
-          <form onSubmit={handleSubmitForm} action="submbit" className="my-form newteam">
+          <form onSubmit={handleSubmitForm} action="submit" className="my-form newteam">
             <h2> Nouvelle Equipe</h2>
             <label>
               Nom Equipe
@@ -376,7 +431,22 @@ function NewTeam({
                   </svg>
                   <span>Choisir un fichier</span>
                 </div>
-                <input onChange={handleChangeInput('logo')} value={logo} type="file" name="logo" accept="image/png, image/jpg, image/jpeg" />
+                {/* <input
+                  onChange={handleChangeInput('logo')}
+                  // value={logo}
+                  type="file"
+                  name="logo"
+                  accept="image/png, image/jpg, image/jpeg"
+                /> */}
+                <div {...getRootProps()}>
+                  <input {...getInputProps()} />
+                  {
+        isDragActive
+          ? <p>Drop the files here ...</p>
+          : <p>Drag 'n' drop some files here, or click to select files</p>
+      }
+                </div>
+                <img src={preview} />
               </div>
             </div>
             <div className="my-form--button">

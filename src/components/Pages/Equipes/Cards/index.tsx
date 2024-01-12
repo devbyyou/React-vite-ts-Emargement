@@ -48,7 +48,7 @@ function Cards({
     <Link key={listesEquipes.id} to={`/equipes/${listesEquipes.categories.nom}/${listesEquipes.id}`} className="cards__containers-card">
       <div className="cards__containers-logo-name-logo">
         <div className="cards__containers-logo-name">
-          <img className="cards__containers-logo" src={logo} alt="" />
+          <img className="cards__containers-logo" src={listesEquipes.logo} alt="" />
           <div className="name">
             {listesEquipes.categories.nom}
             {' - '}
