@@ -1,9 +1,8 @@
 /* eslint-disable max-len */
 /* eslint-disable no-nested-ternary */
 import React, {
-  ChangeEvent, FormEvent, KeyboardEvent, useEffect, useState, useCallback,
+  ChangeEvent, FormEvent, KeyboardEvent, useEffect,
 } from 'react';
-import { useDropzone } from 'react-dropzone';
 import './index.scss';
 import { useAppDispatch, useAppSelector } from '../../../../hooks/redux';
 import {
@@ -14,6 +13,8 @@ import { findAllCategories } from '../../../../store/reducers/categories';
 import { Equipe } from '../../../../@types/user';
 import { createJoueurForEquipe } from '../../../../store/reducers/joueurs';
 import SeanceForm from './SeanceForm';
+import uploadImage from '../../../../utils/cloudinary';
+import useInputManager from '../../../../utils/useInputManager';
 
 interface IopenClassNames {
   openClassNames:string,
@@ -51,57 +52,38 @@ function NewTeam({
       dispatch(toggleIsOpen());
     }
   }
-  // const [file, setFile] = useState<File | undefined>();
-  const [preview, setPreview] = useState<string | ArrayBuffer | null>(null);
-  const onDrop = useCallback((acceptedFiles : FileList) => {
-    // eslint-disable-next-line new-parens
-    const file = new FileReader;
-    file.onload = function () {
-      setPreview(file.result);
-    };
-    file.readAsDataURL(acceptedFiles[0]);
-  }, []);
   const {
-    acceptedFiles, getRootProps, getInputProps, isDragActive,
-  } = useDropzone({ onDrop });
-
+    preview,
+    getRootProps,
+    getInputProps,
+    isDragActive,
+    createFormData,
+  } = useInputManager();
   async function handleSubmitForm(event: FormEvent<HTMLFormElement>): Promise<void> {
     event.preventDefault();
-    // ----------------------partie du test --------------------------//
-    if (typeof acceptedFiles[0] === 'undefined') return;
-    const formData = new FormData();
-    formData.append('file', acceptedFiles[0]);
-    formData.append('upload_preset', 'react-uploads-unsigned');
-    formData.append('api_key', import.meta.env.VITE_CLOUDINATY_API_KEY);
-    const results = await fetch('https://api.cloudinary.com/v1_1/dvj8v54gi/image/upload', {
-      method: 'POST',
-      body: formData,
-    }).then((r) => r.json());
-    const logo = results.secure_url;
-    // ----------------------partie du test --------------------------//
-    await dispatch(createEquipe(logo));
-    await dispatch(fetchEquipesForUser());
-    dispatch(toggleIsOpen());
+    const formData = createFormData();
+    if (!formData) return;
+    try {
+      const logo = await uploadImage(formData);
+      await dispatch(createEquipe(logo));
+      await dispatch(fetchEquipesForUser());
+      dispatch(toggleIsOpen());
+    } catch (error) {
+      // eslint-disable-next-line no-console
+      console.error('Error during form submission:', error);
+    }
   }
   const handleChangeInput = (field: 'nom' | 'equipe_id' | 'categorieId' | 'categorie_id' | 'logo' | 'statut' | 'prenom' | 'email' | 'tel' | 'age') => (event: ChangeEvent<HTMLInputElement>) => {
     const { value } = event.target;
-    // if (field === 'logo') {
-    //   const target = event.target as HTMLInputElement & {
-    //     files: FileList;
-    //   };
-    //   setFile(target.files[0]);
-    // } else {
     dispatch(changeCredentialsField({
       value,
       field,
     }));
-    // }
   };
 
   async function handleSubmitFormUpdate(event: FormEvent<HTMLFormElement>): Promise<void> {
     event.preventDefault();
-    // eslint-disable-next-line no-alert
-    alert('Modification de l\'equipe ! ');
+
     // navigate('/equipes');
     await dispatch(updateEquipesForUser(equipeId));
     await dispatch(fetchEquipesForUser());
@@ -113,8 +95,7 @@ function NewTeam({
 
     await dispatch(createJoueurForEquipe(equipeId));
     await dispatch(fetchEquipesForUser());
-    // eslint-disable-next-line no-alert
-    alert(`Ajout de ${prenom} ${nom} Avec succès ! :)`);
+
     dispatch(toggleIsOpen());
   }
 
@@ -429,24 +410,21 @@ function NewTeam({
                       <path d="m11 4l-.55-.55c-.274-.274-.41-.41-.554-.53a4 4 0 0 0-2.18-.903C7.53 2 7.336 2 6.95 2c-.883 0-1.324 0-1.692.07A4 4 0 0 0 2.07 5.257C2 5.626 2 6.068 2 6.95V10h20l-.047-.75c-.072-1.049-.256-1.737-.723-2.256a2.984 2.984 0 0 0-.224-.225C20.151 6 18.834 6 16.202 6h-.374c-1.153 0-1.73 0-2.268-.153a4 4 0 0 1-.848-.352C12.224 5.224 11.816 4.815 11 4Z" opacity=".5" />
                     </g>
                   </svg>
-                  <span>Choisir un fichier</span>
                 </div>
-                {/* <input
-                  onChange={handleChangeInput('logo')}
-                  // value={logo}
-                  type="file"
-                  name="logo"
-                  accept="image/png, image/jpg, image/jpeg"
-                /> */}
                 <div {...getRootProps()}>
                   <input {...getInputProps()} />
-                  {
-        isDragActive
-          ? <p>Drop the files here ...</p>
-          : <p>Drag 'n' drop some files here, or click to select files</p>
-      }
+                  {isDragActive
+                    ? <p>Déposez les fichiers ici...</p>
+                    : (
+                      <p>
+                        Faites glisser et déposez fichiers ici
+                        <br />
+                        {' '}
+                        ou cliquez pour sélectionner des fichiers
+                      </p>
+                    )}
                 </div>
-                <img src={preview} />
+                <img src={preview} alt="" />
               </div>
             </div>
             <div className="my-form--button">

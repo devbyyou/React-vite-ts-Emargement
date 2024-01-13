@@ -67,13 +67,13 @@ const initialState: EquipesState = {
   isOpen: true,
   credentials: {
     equipe_id: 1,
-    nom: 'Ly',
+    nom: '',
     prenom: '',
     categorie_id: 1,
     logo: '',
     statut: 'active',
-    email: 'joueur.exemple@gmail.com',
-    tel: '123456789',
+    email: '',
+    tel: '',
     age: 20,
   },
 
@@ -175,6 +175,8 @@ const equipeReducer = createReducer(initialState, (builder) => {
     })
     .addCase(updateEquipesForUser.fulfilled, (state, action) => {
       // state.loading = false; // Indiquez que le chargement est terminé
+      // eslint-disable-next-line no-alert
+      alert('Modification de l\'equipe ! ');
       state.equipes = action.payload;
     })
     .addCase(deleteEquipesForUser.fulfilled, (state, action) => {

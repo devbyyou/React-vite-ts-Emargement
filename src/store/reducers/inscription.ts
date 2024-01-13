@@ -29,12 +29,12 @@ export const initialState: UserState = {
   errorLogin: null,
   isLoading: false,
   credentials: {
-    email: 'lyy.pro@gmail.com',
-    password: 'motdepasse123',
-    prenom: 'youssouf',
-    nom: 'ly',
-    tel: '123456789',
-    role: 'Entraineur',
+    email: '',
+    password: '',
+    prenom: '',
+    nom: '',
+    tel: '',
+    role: '',
   },
   ...userData,
 };

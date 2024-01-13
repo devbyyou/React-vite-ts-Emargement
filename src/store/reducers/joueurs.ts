@@ -24,19 +24,19 @@ const initialState: JoueursState = {
   joueurs: {
     created_at: '',
     id: 1,
-    nom: 'string',
-    prenom: 'string',
-    email: 'string',
+    nom: '',
+    prenom: '',
+    email: '',
     tel: 0,
-    derniere_activite: 'string',
-    date_creation: 'string',
+    derniere_activite: '',
+    date_creation: '',
     equipe: [],
-    statut: 'string',
-    logo: 'string',
+    statut: '',
+    logo: '',
     categorie_id: 1,
-    role: 'string',
+    role: '',
     age: 1,
-    etat: 'string',
+    etat: '',
     // categorie: [],
     // nom_prenom_tel_parent: 'string',
     // total_presence: 1,
@@ -150,7 +150,9 @@ export const updateJoueurs = createAppAsyncThunk(
 const joueursReducer = createReducer(initialState, (builder) => {
   builder
     .addCase(createJoueurForEquipe.fulfilled, (state, action) => {
-    // state.loading = false; // Indiquez que le chargement est terminé
+      // eslint-disable-next-line no-alert
+      alert(`Ajout de ${state.credentials.prenom} ${state.credentials.nom} Avec succès ! :)`);
+      // state.loading = false; // Indiquez que le chargement est terminé
       state.joueurs = action.payload;
       state.credentials.nom = '';
       state.credentials.prenom = '';
