@@ -170,17 +170,20 @@ const equipeReducer = createReducer(initialState, (builder) => {
       }
     })
     .addCase(fetchEquipesForUser.fulfilled, (state, action) => {
-      // state.loading = false; // Indiquez que le chargement est terminé
+      // state.loading = false;
+      // alert('fetchEquipesForUser 1 fulfilled');
       state.equipes = action.payload;
+      // alert('fetchEquipesForUser 2 fulfilled');
     })
     .addCase(updateEquipesForUser.fulfilled, (state, action) => {
-      // state.loading = false; // Indiquez que le chargement est terminé
+      // state.loading = false;
       // eslint-disable-next-line no-alert
       alert('Modification de l\'equipe ! ');
       state.equipes = action.payload;
+      // alert('1');
     })
     .addCase(deleteEquipesForUser.fulfilled, (state, action) => {
-      // state.loading = false; // Indiquez que le chargement est terminé
+      // state.loading = false;
       state.equipes = action.payload;
     });
 });

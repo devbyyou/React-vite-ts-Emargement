@@ -86,9 +86,14 @@ function NewTeam({
     if (!formData) return;
     try {
       const logo = await uploadImage(formData);
+      // alert('0');
       await dispatch(updateEquipesForUser({ logo, equipeId }));
+      // alert('2');
+      // alert('2.5');
       await dispatch(fetchEquipesForUser());
+      // alert('3');
       dispatch(toggleIsOpen());
+      // alert('4');
     } catch (error) {
       // eslint-disable-next-line no-console
       console.error('Error during form submission:', error);
@@ -222,7 +227,7 @@ function NewTeam({
                 categories.map((categorie) => (
                   <label key={categorie.id}>
                     {categorie.nom}
-                    <input name="categorieId" onChange={handleChangeInput('categorieId')} value={categorie.id} type="radio" />
+                    <input name="categorie_id" onChange={handleChangeInput('categorie_id')} value={categorie.id} type="radio" />
                   </label>
                 ))
               }

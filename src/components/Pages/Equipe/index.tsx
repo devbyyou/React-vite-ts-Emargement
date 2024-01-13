@@ -1,3 +1,4 @@
+/* eslint-disable no-alert */
 import React, {
   ChangeEvent, FormEvent, useEffect, useState,
 } from 'react';
@@ -53,11 +54,18 @@ function Equipe() {
   const filteredBYName = equipe.joueurs.filter(
     (joueur) => joueur.nom.toLowerCase().includes(stateInput.toLowerCase()),
   );
-  const filteredBYid = equipe.seances;
-
-  // console.log(filteredBYid);
-  // console.log(equipes);
-
+  if (!equipe.seances) {
+    // Gestion du cas où l'équipe n'est pas encore chargée
+    return <div>Loading...</div>;
+  }
+  const filteredBYid = equipe.seances.filter((seance) => seance);
+  // const test = equipes.filter(
+  //   (eq) => (
+  //     eq.id.toString() === equipeId
+  //   ),
+  // );
+  // console.log('equipe', filteredBYid);
+  // console.log('test', test);
   function handleSubmitForm(event: FormEvent<HTMLFormElement>): void {
     event.preventDefault();
   }
@@ -90,6 +98,7 @@ function Equipe() {
     setstateActiveRef(undefined);
     setbuttonSession(event.target.value);
   }
+ 
 
   return (
     <div className="content__equipe">
@@ -154,6 +163,7 @@ function Equipe() {
                   <div className="cell">Dernière Activité</div>
                 </div>
                 { filteredBYName.map((joueur) => (
+
                   <Link key={joueur.id} to={`/equipes/joueur/${joueur.categorie_id}/${joueur.id}`} className="row">
 
                     <div className="cell">
