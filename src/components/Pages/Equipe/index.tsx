@@ -132,7 +132,7 @@ function Equipe() {
               </p>
             </div>
             <div className="equipe__content__information-logo">
-              <img src={logo} alt="" />
+              <img src={equipe.logo} alt="" />
               <button onClick={handleClickToggle} type="button">Modifier</button>
             </div>
           </div>

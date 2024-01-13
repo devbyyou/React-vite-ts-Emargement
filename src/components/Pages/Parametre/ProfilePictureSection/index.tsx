@@ -1,11 +1,21 @@
 import React, { MouseEventHandler } from 'react';
 import './index.scss';
+import { useAppSelector } from '../../../../hooks/redux';
 
 interface Imessage {
   message :string | undefined
-  banniere :string | undefined
+  bannieres :string | undefined
 }
-function ProfilePictureSection({ message, banniere } :Imessage) {
+function ProfilePictureSection({ message, bannieres } :Imessage) {
+  const userCoache = useAppSelector((state) => state.coaches.user);
+  const {
+    // prenom,
+    // nom,
+    // banniere,
+    logo,
+    // created_at,
+    // last_activity,
+  } = userCoache;
   const handleClickedButton: MouseEventHandler<HTMLButtonElement> = () => {
 
   };
@@ -17,7 +27,7 @@ function ProfilePictureSection({ message, banniere } :Imessage) {
       </div>
 
       <div className="profile-image">
-        <img src={banniere || 'https://previews.123rf.com/images/sevalv/sevalv1801/sevalv180101462/94340988-joli-mec-barbu-avec-un-sourire-brillant-et-joyeux-regardant-la-cam%C3%A9ra-tout-en-se-tenant-sur-un-fond.jpg'} alt="" srcSet="" />
+        <img src={bannieres || logo} alt="" srcSet="" />
 
       </div>
       <div className="file-input-section">

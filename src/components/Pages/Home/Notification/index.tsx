@@ -19,7 +19,7 @@ function Notification() {
       {/* 2 */}
       <div className="pics">
         <img
-          src="https://previews.123rf.com/images/sevalv/sevalv1801/sevalv180101462/94340988-joli-mec-barbu-avec-un-sourire-brillant-et-joyeux-regardant-la-cam%C3%A9ra-tout-en-se-tenant-sur-un-fond.jpg"
+          src={logo}
           alt="profile"
         />
       </div>

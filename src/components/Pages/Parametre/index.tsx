@@ -19,7 +19,7 @@ function Parametre() {
   const role = useAppSelector((state) => state.coaches.credentials.role);
   // const tel = useAppSelector((state) => state.coaches.credentials.tel);
   // const logo = useAppSelector((state) => state.coaches.credentials.logo);
-  // const banniere = useAppSelector((state) => state.coaches.credentials.banniere);
+  const banniere = useAppSelector((state) => state.coaches.credentials.banniere);
   // console.log(email);
   const token = useAppSelector((state) => state.user.token);
   const { joueur, user } = token;
@@ -120,8 +120,8 @@ function Parametre() {
           </div> */}
 
           <div className="photo__profil">
-            <ProfilePictureSection message={undefined} banniere={undefined} />
-            <ProfilePictureSection message="Photo de la banniere" banniere="https://assets.goal.com/v3/assets/bltcc7a7ffd2fbf71f5/blta5430aa84eaf12ac/60dc1336d9a5243b669e0a4e/908c03edb3472af2dd58ae3fee29c9569c5aefb2.jpg?auto=webp&format=pjpg&width=1080&quality=60" />
+            <ProfilePictureSection message={undefined} bannieres={undefined} />
+            <ProfilePictureSection message="Photo de la banniere" bannieres={banniere} />
           </div>
 
         </div>

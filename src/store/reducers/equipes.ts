@@ -114,13 +114,13 @@ export const fetchEquipesForUser = createAppAsyncThunk(
 );
 export const updateEquipesForUser = createAppAsyncThunk(
   'equipes/UPDATE_EQUIPES_FOR_USER',
-  async (equipeId, thunkAPI) => {
+  async ({ logo, equipeId }: { logo: string, equipeId: string | undefined }, thunkAPI) => {
     // On va aller récupérer depuis le state les credentials
     const state = thunkAPI.getState();
     // const userID = state.user.token.user.id; // Récupérez l'ID de l'utilisateur depuis le state
     // Je récupère mon email et mon mot de passe
     const {
-      nom, categorie_id, logo, statut,
+      nom, categorie_id, statut,
     } = state.equipes.credentials;
     const { data } = await axiosInstance.put(`/equipes/${equipeId}`, {
       nom,

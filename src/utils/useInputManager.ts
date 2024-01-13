@@ -5,7 +5,6 @@ import React, { useCallback, useState } from 'react';
 
 const useInputManager = () => {
   const [preview, setPreview] = useState<string | ArrayBuffer | null | undefined>(null);
-
   const onDrop = useCallback((acceptedFiles: FileList | any) => {
     const file = new FileReader();
     file.onload = () => {
