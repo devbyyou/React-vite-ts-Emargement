@@ -106,10 +106,12 @@ section {
 body {
   line-height: 1;
 }
+
 ol,
 ul {
   list-style: none;
 }
+
 blockquote,
 q {
   quotes: none;
@@ -122,6 +124,7 @@ q:after {
   content: '';
   content: none;
 }
+
 table {
   border-collapse: collapse;
   border-spacing: 0;
@@ -131,6 +134,12 @@ table {
 
 html {
   box-sizing: border-box;
+}
+
+@media (max-width: 600px) {
+  html {
+    width: 100vh;
+  }
 }
 
 *,
@@ -144,6 +153,7 @@ del,
 ins {
   text-decoration: none;
 }
+
 a {
   color: inherit;
 }

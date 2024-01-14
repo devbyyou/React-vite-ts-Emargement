@@ -26,7 +26,7 @@ interface IopenClassNames {
   buttonSession: string
 }
 function NewTeam({
-  openClassNames, equipe, equipeId, stateActiveRef, handleUpdatingPlayer, joueur, buttonSession,
+  openClassNames, equipe, equipeId, stateActiveRef, buttonSession,
 } :IopenClassNames) {
   const dispatch = useAppDispatch();
   const nom = useAppSelector((state) => state.equipes.credentials.nom);

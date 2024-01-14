@@ -15,10 +15,11 @@
         border-radius: 30px;
         padding-left: 40px;
         margin-left: 30px;
+        position: relative;
     }
 }
 
-.homeDisplayAcces{
+.homeDisplayAcces {
     display: flex;
     // gap: 2px ;
     justify-content: space-between;
@@ -26,21 +27,29 @@
     gap: 2rem;
 }
 .logo__search {
+    z-index: 2;
     position: absolute;
     left: 268px;
     opacity: 0.5;
     font-family: vars.$fontText;
     color: vars.$textColor;
 }
-.header__page--home{
+@media (max-width: 600px) {
+    .logo__search {
+        position: absolute;
+        left: 44px;
+        z-index: 2;
+    }
+}
+
+.header__page--home {
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
 }
-.backgroundHeader{
+.backgroundHeader {
     background: radial-gradient(circle, rgb(255, 255, 255) 0%, rgb(245, 251, 249) 40%);
-
 }
 
 .messageHome {
@@ -51,7 +60,7 @@
     font-size: 25px;
 }
 
-.content__displayChoice{
+.content__displayChoice {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;

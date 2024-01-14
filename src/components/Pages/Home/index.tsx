@@ -18,15 +18,20 @@ function Home() {
     dispatch(fetchEquipesForUser());
     dispatch(fetchCoaches());
   }, [dispatch]);
-
+  // console.log(user);
+  if (user.id === 0) {
+    return <div>Merci de patienter</div>;
+  }
   return (
     <>
       <div className="messageHome">
-        { `
+        <h2>
+          { `
         Bienvenue à nouveau, 
         ${prenom}`}
-        {' '}
-        👋
+          {' '}
+          👋
+        </h2>
       </div>
       <Header />
       <h2 className="title">Vue d'ensemble</h2>

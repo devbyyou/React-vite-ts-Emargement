@@ -1,10 +1,19 @@
 .content__qr {
-    height: 100%;
+    // height: 100vh;
     width: 100%;
-    background-image: url("https://img.freepik.com/photos-premium/fond-gris-nature-elegance-abstraite_127755-912.jpg");
-    background-size: cover;
-    // border: 6px solid red;
-    background-repeat: no-repeat;
+    // background-image: url("https://img.freepik.com/photos-premium/fond-gris-nature-elegance-abstraite_127755-912.jpg");
+    // background-size: cover;
+    // // border: 6px solid red;
+    // background-repeat: no-repeat;
+    position: relative;
+
+    img {
+        img {
+            width: 100%;
+            position: absolute;
+            object-fit: cover;
+        }
+    }
 }
 
 .qrCode__reader {
@@ -20,12 +29,17 @@
     #video {
         width: auto !important;
         // min-height: 200px !important;
-        // height: 500px !important;
+        // height: 600px !important;
         position: absolute !important;
         top: 50% !important;
         left: 50% !important;
         transform: translate(-50%, -50%) !important;
         border-radius: 40px;
         border: 1px solid #00b281;
+    }
+}
+@media (max-width: 600px) {
+    .content__qr {
+        // height: 100vh;
     }
 }

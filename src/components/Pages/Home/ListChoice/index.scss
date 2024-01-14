@@ -14,6 +14,7 @@
     background-color: rgba(255, 236, 199, 0.66);
     width: 100%;
     max-width: 330px;
+
     h2 {
         font-family: vars.$fontTextCorp;
         font-weight: bold;
@@ -86,4 +87,10 @@
 .editLogo {
     height: 27px;
     width: 27px;
+}
+
+@media (max-width: 600px) {
+    .listChoice {
+        display: none;
+    }
 }

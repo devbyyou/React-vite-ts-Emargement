@@ -85,6 +85,7 @@ function QRCodeReader() {
         // style={{ width: '90%' }}
         className="qrCode__reader"
       />
+
     </div>
   );
 }

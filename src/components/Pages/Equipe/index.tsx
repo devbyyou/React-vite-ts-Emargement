@@ -8,11 +8,12 @@ import { CiSearch } from 'react-icons/ci';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import cn from 'classnames';
 import Header from '../Home/Header';
-import logo from '../../../assets/devbyyou.png';
+// import logo from '../../../assets/devbyyou.png';
 import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
 import functionConverteDate from '../Home/MembersList/ConverteDate';
-import { deleteEquipesForUser, fetchEquipesForUser, toggleIsOpen } from '../../../store/reducers/equipes';
+import { deleteEquipesForUser, toggleIsOpen } from '../../../store/reducers/equipes';
 import NewTeam from '../Equipes/NewTeam';
+import { fetchCoaches } from '../../../store/reducers/coaches';
 // import { fetchSeancesForUser } from '../../../store/reducers/seance';
 
 function Equipe() {
@@ -39,7 +40,7 @@ function Equipe() {
   // console.log(equipe);
 
   useEffect(() => {
-    // logique pour charger les données de l'équipe si elles ne sont pas déjà chargées
+    dispatch(fetchCoaches());
     // dispatch(fetchSeancesForUser());
   }, [dispatch, equipes, equipe]);
 
