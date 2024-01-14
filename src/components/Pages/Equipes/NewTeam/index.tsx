@@ -64,7 +64,7 @@ function NewTeam({
     if (!formData) return;
     try {
       const logo = await uploadImage(formData);
-      await dispatch(createEquipe(logo));
+      await dispatch(createEquipe({ logo }));
       await dispatch(fetchEquipesForUser());
       dispatch(toggleIsOpen());
     } catch (error) {

@@ -58,13 +58,11 @@ const initialState: JoueursState = {
 export const createJoueurForEquipe = createAppAsyncThunk(
   'joueurs/CREATE_JOUEURS_FOR_USER',
   async ({ logo, equipeId }: { logo: string, equipeId: string | undefined }, thunkAPI) => {
-    // On va aller récupérer depuis le state les credentials
     const state = thunkAPI.getState();
-    // const userID = state.user.token.user.id; // Récupérez l'ID de l'utilisateur depuis le state
-    // Je récupère mon email et mon mot de passe
+
     const {
       nom, categorie_id, statut, age, prenom, email, tel, equipe_id,
-    } = { ...state.equipes.credentials };
+    } = state.equipes.credentials;
     const { data } = await axiosInstance.post(`/joueurs/${equipeId}`, {
       nom,
       categorie_id,

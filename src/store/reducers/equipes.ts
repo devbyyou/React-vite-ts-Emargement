@@ -92,7 +92,7 @@ export const changeCredentialsField = createAction<{
 
 export const createEquipe = createAppAsyncThunk(
   'equipes/CREATE_EQUIPE',
-  async (logo, thunkAPI) => {
+  async ({ logo }:{ logo:string }, thunkAPI) => {
     // On va aller récupérer depuis le state les credentials
     const state = thunkAPI.getState();
     // Je récupère mon email et mon mot de passe
