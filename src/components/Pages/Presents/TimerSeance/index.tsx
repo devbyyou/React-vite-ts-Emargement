@@ -7,7 +7,6 @@ interface Itarget {
 }
 
 function TimerSeance({ laseance } :Itarget) {
-  // vérification pour confirmer que laseance est bien une instance de Date
   if (!(laseance instanceof Date)) {
     return (
       <div className="listPresents__timer red">

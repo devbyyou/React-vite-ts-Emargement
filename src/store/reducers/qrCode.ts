@@ -10,7 +10,12 @@ interface QRCodeState {
 const initialState: QRCodeState = {
   data: null,
 };
-export const setQRCodeData = createAction<{ seanceId: number; joueurId: number }>('qrCode/setData');
+export const setQRCodeData = createAction<{
+  seanceId: number | any ;
+  joueurId: number | any ;
+  seance_id:number | any ;
+  equipe_id:number | any ;
+}>('qrCode/setData');
 export const updateLastActivityAndManagePresence = createAppAsyncThunk(
   'qrCode/updateLastActivityAndManagePresence',
   async ({
@@ -25,9 +30,7 @@ export const updateLastActivityAndManagePresence = createAppAsyncThunk(
     statut:string;
     absence:string;
     retard:string; }, thunkAPI) => {
-    // Mettre à jour derniere_activite
     await axiosInstance.post(`/update-last-activity/${joueurId}`);
-    // Gérer la présence
     await axiosInstance.post(`/presences/${joueurId}/${seanceId}`, {
       seanceId,
       joueurId,
@@ -43,7 +46,6 @@ const qrCodeReducer = createReducer(initialState, (builder) => {
       state.data = action.payload;
     })
     .addCase(updateLastActivityAndManagePresence.rejected, (state, action) => {
-      state.error = action.error.message;
     });
 });
 

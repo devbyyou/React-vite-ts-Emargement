@@ -10,9 +10,7 @@ interface Istate {
 
 function Calendrier({ selectedDate, setSelectedDate }:Istate) {
   const handleDateChange = (value: Value) => {
-    // Check if the value is a Date
     if (value instanceof Date) {
-      // Set the time part of the selected date to the current time
       const currentTime = new Date();
       value.setHours(currentTime.getHours());
       value.setMinutes(currentTime.getMinutes());

@@ -31,7 +31,3 @@ function FormSearchMembers({ inputState, inputSetState }: IinputSetState) {
 }
 
 export default FormSearchMembers;
-// 1.Recuperer l'event dans le state au change
-// 2.utiliser le filter pour afficher seulement la valeur de l'input
-
-// utiliser redux

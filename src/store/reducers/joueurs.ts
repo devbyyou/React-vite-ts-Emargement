@@ -37,12 +37,9 @@ const initialState: JoueursState = {
     role: '',
     age: 1,
     etat: '',
-    // categorie: [],
-    // nom_prenom_tel_parent: 'string',
-    // total_presence: 1,
-    // dates_heures_absence: [],
-    // mot_de_passe: 'string',
-    // nombre_total_joueur: 1,
+    equipe_id: 0,
+    password: '',
+    updated_at: 0,
   },
   credentials: {
     equipe_id: 1,
@@ -86,10 +83,8 @@ export const createJoueurForEquipe = createAppAsyncThunk(
 export const updateJoueurForUser = createAppAsyncThunk(
   'joueurs/UPDATE_JOUEURS_FOR_USER',
   async ({ logo, joueurId }: { logo: string, joueurId: string | undefined }, thunkAPI) => {
-    // On va aller récupérer depuis le state les credentials
     const state = thunkAPI.getState();
-    // const userID = state.user.token.user.id; // Récupérez l'ID de l'utilisateur depuis le state
-    // Je récupère mon email et mon mot de passe
+
     const {
       nom, categorie_id, statut, age, prenom, email, tel, equipe_id,
     } = state.equipes.credentials;
@@ -121,9 +116,7 @@ export const deleteJoueurs = createAppAsyncThunk(
 export const updateJoueurs = createAppAsyncThunk(
   'joueurs/UPDATE_JOUEURS',
   async (_, thunkAPI) => {
-    // On va aller récupérer depuis le state les credentials
     const state = thunkAPI.getState();
-    // Je récupère mon email et mon mot de passe
     const userId = state.user.token.joueur.id;
     const {
       email, password, prenom,
@@ -152,7 +145,6 @@ const joueursReducer = createReducer(initialState, (builder) => {
     .addCase(createJoueurForEquipe.fulfilled, (state, action) => {
       // eslint-disable-next-line no-alert
       alert(`Ajout de ${state.credentials.prenom} ${state.credentials.nom} Avec succès ! :)`);
-      // state.loading = false; // Indiquez que le chargement est terminé
       state.joueurs = action.payload;
       state.credentials.nom = '';
       state.credentials.prenom = '';
@@ -163,11 +155,9 @@ const joueursReducer = createReducer(initialState, (builder) => {
       state.credentials.logo = '';
     })
     .addCase(updateJoueurForUser.fulfilled, (state, action) => {
-      // state.loading = false; // Indiquez que le chargement est terminé
       state.joueurs = action.payload;
     })
     .addCase(deleteJoueurs.fulfilled, (state, action) => {
-      // state.loading = false; // Indiquez que le chargement est terminé
       state.joueurs = action.payload;
     })
     .addCase(updateJoueurs.fulfilled, (state, action) => {

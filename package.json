@@ -25,6 +25,7 @@
     "dotenv": "^16.3.1",
     "flowbite": "^2.0.0",
     "flowbite-react": "^0.6.4",
+    "immer": "^10.0.3",
     "jsonwebtoken": "^9.0.2",
     "luxon": "^3.4.4",
     "moment": "^2.29.4",

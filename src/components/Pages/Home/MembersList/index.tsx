@@ -40,7 +40,6 @@ function MembersList() {
     const { joueurs } = listeJoueurs;
     // eslint-disable-next-line max-len
     const filterdJoueur = joueurs.filter((joueur) => joueur.nom.toLowerCase().includes(inputState.toLowerCase()));
-    // console.log(filterdJoueur);
 
     return filterdJoueur.map((joueur) => (
       <div key={joueur.id} className="row">

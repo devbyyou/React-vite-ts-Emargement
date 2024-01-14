@@ -18,7 +18,6 @@ function Home() {
     dispatch(fetchEquipesForUser());
     dispatch(fetchCoaches());
   }, [dispatch]);
-  // console.log(user);
   if (user.id === 0) {
     return <div>Merci de patienter</div>;
   }

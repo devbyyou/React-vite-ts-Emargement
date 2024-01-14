@@ -1,6 +1,7 @@
+/* eslint-disable react/jsx-no-bind */
 /* eslint-disable no-alert */
 import React, {
-  ChangeEvent, FormEvent, useEffect, useState,
+  ChangeEvent, FormEvent, MouseEvent, useEffect, useState,
 } from 'react';
 import './index.scss';
 import { MdBolt } from 'react-icons/md';
@@ -19,7 +20,7 @@ import { fetchCoaches } from '../../../store/reducers/coaches';
 function Equipe() {
   const navigate = useNavigate();
   const [stateInput, setStateInput] = useState('');
-  const [stateActiveRef, setstateActiveRef] = useState<boolean | undefined>(false);
+  const [stateActiveRef, setstateActiveRef] = useState<boolean | undefined | any>(false);
   const [buttonSession, setbuttonSession] = useState('');
   const dispatch = useAppDispatch();
   const params = useParams();
@@ -36,16 +37,12 @@ function Equipe() {
     ),
   );
 
-  // console.log(equipes);
-  // console.log(equipe);
-
   useEffect(() => {
     dispatch(fetchCoaches());
     // dispatch(fetchSeancesForUser());
   }, [dispatch, equipes, equipe]);
 
   if (!equipe) {
-    // Gestion du cas où l'équipe n'est pas encore chargée
     return <div>Loading...</div>;
   }
   function handleChangeInput(event: ChangeEvent<HTMLInputElement>): void {
@@ -56,22 +53,14 @@ function Equipe() {
     (joueur) => joueur.nom.toLowerCase().includes(stateInput.toLowerCase()),
   );
   if (!equipe.seances) {
-    // Gestion du cas où l'équipe n'est pas encore chargée
     return <div>Loading...</div>;
   }
   const filteredBYid = equipe.seances.filter((seance) => seance);
-  // const test = equipes.filter(
-  //   (eq) => (
-  //     eq.id.toString() === equipeId
-  //   ),
-  // );
-  // console.log('equipe', filteredBYid);
-  // console.log('test', test);
+
   function handleSubmitForm(event: FormEvent<HTMLFormElement>): void {
     event.preventDefault();
   }
   function handleClickToggle() {
-    // J'emet mon intention / action
     setstateActiveRef(false);
     dispatch(toggleIsOpen());
   }
@@ -84,7 +73,7 @@ function Equipe() {
     // eslint-disable-next-line no-restricted-globals, no-alert
     alert('Suppression de l\'equipe ! Vous allez être redirigé vers la page des equipes :)');
     // window.location.reload();
-    await dispatch(deleteEquipesForUser(equipeId));
+    await dispatch(deleteEquipesForUser({ equipeId }));
     // await dispatch(fetchEquipesForUser());
 
     navigate('/equipes');
@@ -94,12 +83,11 @@ function Equipe() {
     dispatch(toggleIsOpen());
   }
 
-  function AddSeanceClickedButton(event) {
+  const AddSeanceClickedButton = (event: MouseEvent<HTMLButtonElement, MouseEvent> | any) => {
     dispatch(toggleIsOpen());
     setstateActiveRef(undefined);
     setbuttonSession(event.target.value);
-  }
- 
+  };
 
   return (
     <div className="content__equipe">
@@ -109,6 +97,10 @@ function Equipe() {
         openClassNames={openClassNames}
         stateActiveRef={stateActiveRef}
         buttonSession={buttonSession}
+        joueur={[]}
+        handleUpdatingPlayer={function (): Promise<void> {
+          throw new Error('Function not implemented.');
+        }}
       />
       <Header />
       <div className="equipe__content">

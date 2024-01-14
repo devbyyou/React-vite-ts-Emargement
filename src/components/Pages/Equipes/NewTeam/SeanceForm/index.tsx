@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-shadow */
 /* eslint-disable max-len */
 /* eslint-disable @typescript-eslint/naming-convention */
 import React, { ChangeEvent, useState } from 'react';
@@ -35,7 +36,6 @@ function SeanceForm() {
   const generateRecurringDates = (selectedDay: string, selectedTime: Date) => {
     const recurringDate = [];
 
-    // Utiliser date-fns pour obtenir la prochaine occurrence du jour sélectionné
     const currentDate = new Date();
     const nextDayDate = addDays(currentDate, (daysOfWeek.indexOf(selectedDay) - currentDate.getDay() + 7) % 7);
     nextDayDate.setHours(selectedTime.getHours(), selectedTime.getMinutes());
@@ -48,10 +48,8 @@ function SeanceForm() {
   const AddSeanceSubmitForm = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    // Générer les dates des séances récurrentes
     const recurringDates = generateRecurringDates(selectedDay, selectedTime);
 
-    // Envoyer les données au backend
     const response = await dispatch(addSeance({
       equipe_id,
       categorie_id,
@@ -61,14 +59,11 @@ function SeanceForm() {
       recurringDates,
     }));
 
-    // Récupérer le QR code en base64 depuis la réponse
     const qrCodeBase64 = response.payload.qrCodeImage;
-    // Créer un lien de téléchargement pour le QR code
     const downloadLink = document.createElement('a');
     downloadLink.href = `data:image/png;base64,${qrCodeBase64}`;
     downloadLink.download = `qr-code-${recurringDates[0]}.png`;
     downloadLink.click();
-    // Réinitialiser les champs après l'ajout de la séance
     setSelectedDay('');
     setSelectedTime(new Date());
   };
@@ -124,7 +119,6 @@ function SeanceForm() {
             ))}
           </select>
         </label>
-
         <label>
           Heure
           <input name="time" onChange={handleChangeInput('time')} value={format(selectedTime, 'HH:mm')} type="time" />

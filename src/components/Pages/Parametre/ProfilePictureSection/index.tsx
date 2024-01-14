@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 import React, { FormEvent } from 'react';
 import './index.scss';
 import { useAppDispatch, useAppSelector } from '../../../../hooks/redux';

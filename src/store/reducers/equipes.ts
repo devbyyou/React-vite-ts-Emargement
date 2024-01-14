@@ -7,17 +7,18 @@ import { axiosInstance } from '../../utils/axios';
 interface EquipesState {
   equipes: Equipe[]
   isOpen: boolean,
-  credentials: {
-    equipe_id:number
-    nom: string,
-    prenom: string,
-    email:string,
-    tel:string,
-    age:number,
-    categorie_id: string | number,
-    logo:string
-    statut:string
-  },
+  // credentials: {
+  //   equipe_id:number
+  //   nom: string,
+  //   prenom: string,
+  //   email:string,
+  //   tel:string,
+  //   age:number,
+  //   categorie_id: string | number,
+  //   logo:string
+  //   statut:string
+  // },
+  credentials: any,
 
 }
 
@@ -48,6 +49,9 @@ const initialState: EquipesState = {
           role: 'string',
           age: 1,
           etat: 'string',
+          equipe_id: 1,
+          password: '',
+          updated_at: 1,
         },
       ],
       categories: {
@@ -82,7 +86,7 @@ const initialState: EquipesState = {
 export const updateequipes = createAction('equipes/UPDATE_EQUIPES');
 export const toggleIsOpen = createAction('equipes/TOGGLE_IS_OPEN');
 export const changeCredentialsField = createAction<{
-  value:never ;
+  value:any ;
   field: keyof EquipesState['credentials']
 }>('equipes/CHANGE_CREDENTIALS_FIELD');
 
@@ -102,12 +106,11 @@ export const createEquipe = createAppAsyncThunk(
     return data;
   },
 );
-// Action asynchrone pour charger les équipes associées à l'ID de l'utilisateur
 export const fetchEquipesForUser = createAppAsyncThunk(
   'equipes/FETCH_EQUIPES_FOR_USER',
   async (_, thunkAPI) => {
     const state = thunkAPI.getState();
-    const userID = state.user.token.user.id; // Récupérez l'ID de l'utilisateur depuis le state
+    const userID = state.user.token.user.id;
     const { data } = await axiosInstance.get(`/equipes?userID=${userID}`);
     return data;
   },
@@ -115,10 +118,8 @@ export const fetchEquipesForUser = createAppAsyncThunk(
 export const updateEquipesForUser = createAppAsyncThunk(
   'equipes/UPDATE_EQUIPES_FOR_USER',
   async ({ logo, equipeId }: { logo: string, equipeId: string | undefined }, thunkAPI) => {
-    // On va aller récupérer depuis le state les credentials
     const state = thunkAPI.getState();
-    // const userID = state.user.token.user.id; // Récupérez l'ID de l'utilisateur depuis le state
-    // Je récupère mon email et mon mot de passe
+
     const {
       nom, categorie_id, statut,
     } = state.equipes.credentials;
@@ -135,7 +136,7 @@ export const updateEquipesForUser = createAppAsyncThunk(
 );
 export const deleteEquipesForUser = createAppAsyncThunk(
   'equipes/DELETE_EQUIPES_FOR_USER',
-  async (equipeId) => {
+  async ({ equipeId }:{ equipeId: string | undefined }) => {
     const { data } = await axiosInstance.delete(`/equipes/${equipeId}`);
 
     return data;
@@ -148,16 +149,7 @@ const equipeReducer = createReducer(initialState, (builder) => {
       state.isOpen = !state.isOpen;
     })
     .addCase(createEquipe.fulfilled, () => {
-      // J'enregistre les informations retourner par mon API
-      // state.equipe = action.payload.equipe;
-      // state.categorie = action.payload.categorie;
-      // state.logo = action.payload.logo;
-      // state
-
-      // Je réinitialiser les credentials
-      // state.credentials.nom = '';
-      // state.credentials.categorieId = '';
-      // state.credentials.logo = '';
+      alert('Creation de l\'equipe ! ');
     })
     .addCase(changeCredentialsField, (state, action) => {
       const { field, value } = action.payload;

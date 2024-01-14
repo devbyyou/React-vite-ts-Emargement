@@ -80,6 +80,12 @@ function Equipes() {
         equipe={undefined}
         equipeId={undefined}
         stateActiveRef={false}
+        joueur={[]}
+        // eslint-disable-next-line react/jsx-no-bind
+        handleUpdatingPlayer={function (): Promise<void> {
+          throw new Error('Function not implemented.');
+        }}
+        buttonSession=""
       />
     </div>
   );

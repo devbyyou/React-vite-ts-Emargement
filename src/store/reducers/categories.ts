@@ -19,7 +19,6 @@ export const findAllCategories = createAppAsyncThunk(
       const response = await axiosInstance.get('/categories');
       return response.data;
     } catch (error) {
-      // Gérer les erreurs ici
       console.error(error);
       throw error;
     }

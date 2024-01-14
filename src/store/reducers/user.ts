@@ -49,11 +49,24 @@ export const initialState: UserState = {
               prenom: '',
               email: '',
               derniere_activite: '',
+              created_at: 0,
+              categorie_id: 1,
+              tel: 1,
+              date_creation: '',
+              equipe: [],
+              statut: '',
+              logo: '',
+              role: '',
+              age: 1,
+              etat: '',
+              equipe_id: 0,
+              password: '',
+              updated_at: 1,
             },
-            // ... autres joueurs
           ],
+          seances: [],
           categories: {
-            id: 1,
+            id: '1',
             nom: '',
             tranche_age: '',
             nombre_total: 0,
@@ -80,34 +93,23 @@ export const initialState: UserState = {
     },
     joueur: {
       age: 20,
-      categorie_id:
-3,
-      created_at:
-'',
-      derniere_activite:
-'',
-      email:
-'',
-      equipe_id:
-44,
-      id:
-0,
-      logo:
-'',
-      nom:
-'',
-      nom_prenom_tel_parent:
-null,
-      password:
-'',
-      prenom:
-'',
-      statut:
-'',
-      tel:
-'',
-      updated_at:
-'',
+      categorie_id: 3,
+      created_at: '',
+      derniere_activite: '',
+      email: '',
+      equipe_id: 44,
+      id: 0,
+      logo: '',
+      nom: '',
+      password: '',
+      prenom: '',
+      statut: '',
+      tel: 1,
+      updated_at: 0,
+      date_creation: '',
+      equipe: [],
+      role: '',
+      etat: '',
     },
   },
   filteredEquipes: [],
@@ -154,13 +156,10 @@ const userReducer = createReducer(initialState, (builder) => {
       state.credentials[field] = value;
     })
     .addCase(login.fulfilled, (state, action) => {
-      // J'enregistre les informations retourner par mon API
       state.logged = action.payload.logged;
       state.pseudo = action.payload.pseudo;
       state.token = action.payload.token;
-      // state
 
-      // Je réinitialiser les credentials
       state.credentials.email = '';
       state.credentials.password = '';
       state.isLoading = false;

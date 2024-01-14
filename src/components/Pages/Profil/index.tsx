@@ -8,8 +8,6 @@ import functionConverteDate from '../Home/MembersList/ConverteDate';
 function Profil() {
   const token = useAppSelector((state) => state.user.token);
   const { joueur, user } = token;
-  // console.log(joueur);
-  // console.log(user);
 
   const userCoache = useAppSelector((state) => state.coaches.user);
   const {

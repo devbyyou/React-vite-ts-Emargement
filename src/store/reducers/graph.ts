@@ -15,7 +15,7 @@ const initialState : GraphState = {
 };
 export const fetchMonthlyData = createAppAsyncThunk(
   'attendance/fetchMonthlyData',
-  async (seance_id, _) => {
+  async ({ seance_id }:{ seance_id:number }, _) => {
     const response = await axiosInstance.get(`/presences/${seance_id}`);
     return response.data;
   },
@@ -31,7 +31,6 @@ const attendanceReducer = createReducer(initialState, (builder) => {
     })
     .addCase(fetchMonthlyData.rejected, (state, action) => {
       state.status = 'failed';
-    //   state.error = action.error.message;
     });
 });
 

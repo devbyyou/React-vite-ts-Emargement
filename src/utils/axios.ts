@@ -22,12 +22,10 @@ axiosInstance.interceptors.response.use(
       setTimeout(() => {
         alert('Token expiré. Déconnexion de l\'utilisateur.');
         // document.location.href = 'http://localhost:5173';
-        window.location.href = 'http://localhost:5173';
-        window.location.replace = 'http://localhost:5173';
+        // window.location.href = 'http://localhost:5173';
+        // window.location.replace = 'http://localhost:5173';
         window.location.reload();
       }, 0);
-
-      // navigate('/');
     }
 
     // Propagez l'erreur pour que le code appelant puisse également la gérer

@@ -1,5 +1,3 @@
-// == Import : npm
-// == Import : local
 import { ChangeEvent, useId } from 'react';
 import './styles.scss';
 
@@ -9,7 +7,6 @@ interface FieldProps {
   placeholder: string;
   onChange: (value: string) => void;
 }
-// == Composant
 function Field({
   value,
   type,

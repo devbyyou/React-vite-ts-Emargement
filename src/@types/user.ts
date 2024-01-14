@@ -6,6 +6,7 @@ export interface LoginResponse {
 
 export interface Token {
   user: User
+  joueur: Joueur
   token: string
 }
 export interface User {
@@ -54,6 +55,9 @@ export interface Joueur {
   role:string
   age:number
   etat:string
+  equipe_id:number
+  password:string
+  updated_at:number
 }
 export interface Seances {
   id:number

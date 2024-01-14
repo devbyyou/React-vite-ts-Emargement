@@ -4,14 +4,7 @@ import { createAppAsyncThunk } from '../../utils/redux';
 import { axiosInstance } from '../../utils/axios';
 
 interface SeanceState {
-  credentials:{
-    equipe_id: number;
-    adresse: string;
-    ville: string;
-    categorie_id: string | number;
-    statut: string;
-    recurringDates:[]
-  }
+  credentials:any
 }
 
 const initialState: SeanceState = {
@@ -26,18 +19,38 @@ const initialState: SeanceState = {
 };
 
 export const changeCredentialsField = createAction<{
-  value:never ;
+  value:any ;
   field: keyof SeanceState['credentials']
 }>('equipes/CHANGE_CREDENTIALS_FIELD');
 
 export const addSeance = createAppAsyncThunk(
   'seance/ADD_SEANCE',
-  async (seanceData, thunkAPI) => {
+  async ({
+    categorie_id,
+    statut,
+    adresse,
+    ville,
+    recurringDates,
+  }:{
+    equipe_id: number,
+    categorie_id:number,
+    statut:string,
+    adresse:string,
+    ville:string,
+    recurringDates:any,
+  }, thunkAPI) => {
     const state = thunkAPI.getState();
     const {
       equipe_id,
     } = state.seance.credentials;
-    const response = await axiosInstance.post(`/seances/${equipe_id}`, seanceData);
+    const response = await axiosInstance.post(`/seances/${equipe_id}`, {
+      equipe_id,
+      categorie_id,
+      statut,
+      adresse,
+      ville,
+      recurringDates,
+    });
     return response.data;
   },
 );

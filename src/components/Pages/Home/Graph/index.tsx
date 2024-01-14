@@ -23,7 +23,7 @@ function Graph() {
   useEffect(() => {
     if (status === 'idle') {
       seanceIds.forEach((seance_id) => {
-        dispatch(fetchMonthlyData(seance_id));
+        dispatch(fetchMonthlyData({ seance_id }));
       });
     }
   }, [status, dispatch, seanceIds]);

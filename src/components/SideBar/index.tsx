@@ -17,23 +17,11 @@ interface NavLinkParams {
 function SideBar() {
   const token = useAppSelector((state) => state.user.token);
   const { joueur, user } = token;
-  // console.log(joueur);
-  // console.log(user);
+
   const classNameLink = ({ isActive }: NavLinkParams) => cn('icons', {
     'menu-link--active': isActive,
   });
 
-  // : player === true ? (
-  //   <div className="content">
-  //     <SideBar />
-  //     <Routes>
-  //       <Route path="/parametre" element={<Parametre />} />
-  //       <Route path="/profil" element={<Profil />} />
-  //       <Route path="/pageJoueur" element={<QRCodeReader />} />
-  //       <Route path="*" element={<div>404</div>} />
-  //     </Routes>
-  //   </div>
-  // )
   return (
     <div className="responsive__sidebar">
 

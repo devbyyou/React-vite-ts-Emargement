@@ -56,18 +56,14 @@ function Joueur() {
   const equipeTrouvee = equipes.find((equipe) => equipe.joueurs.some((player) => player.id.toString() === joueurId?.toString()));
 
   useEffect(() => {
-    // logique pour charger les données de l'équipe si elles ne sont pas déjà chargées
-    // dispatch(updateEquipesForUser());
+
   }, [joueur, equipes]);
 
   if (!joueur) {
-    // Gestion du cas où l'équipe n'est pas encore chargée
     return <div>Loading...</div>;
   }
 
   const handleDisplayCard : MouseEventHandler<HTMLButtonElement> = () => {
-    // throw new Error('Function not implemented.');
-    // setActiveRef(true);
     dispatch(toggleIsOpen());
   };
   const handleDeletePlayer: MouseEventHandler<HTMLButtonElement> = async () => {
@@ -80,10 +76,7 @@ function Joueur() {
   const handleUpdatingPlayer: FormEventHandler<HTMLFormElement> = async (event) => {
     event.preventDefault();
     const formData = createFormData();
-    console.log('test 1');
     if (!formData) return;
-    console.log('test 2');
-    // setActiveRef(true);
     try {
       const logo = await uploadImage(formData);
       await dispatch(updateJoueurForUser({ logo, joueurId }));

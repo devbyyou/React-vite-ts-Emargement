@@ -10,7 +10,6 @@ interface EquipesState {
 const initialState: EquipesState = {
   presences: [],
 };
-// Action asynchrone pour charger les équipes associées à l'ID de l'utilisateur
 export const fetchPresencesForUser = createAppAsyncThunk(
   'presences/FETCH_PRESENCES_FOR_USER',
   async (_, thunkAPI) => {
@@ -24,7 +23,6 @@ export const fetchPresencesForUser = createAppAsyncThunk(
 const presencesReducer = createReducer(initialState, (builder) => {
   builder
     .addCase(fetchPresencesForUser.fulfilled, (state, action) => {
-      // state.loading = false; // Indiquez que le chargement est terminé
       state.presences = action.payload;
     });
 });

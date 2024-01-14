@@ -64,7 +64,12 @@ function QRCodeReader() {
             retard,
           }));
         }
-        dispatch(setQRCodeData({ seance_id: seanceId, equipe_id }));
+        dispatch(setQRCodeData({
+          seance_id: seanceId,
+          equipe_id,
+          seanceId: undefined,
+          joueurId: undefined,
+        }));
       } catch (error) {
         console.error('Error parsing QR Code data:', error);
       }
