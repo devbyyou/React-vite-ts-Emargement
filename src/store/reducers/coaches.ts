@@ -78,6 +78,24 @@ export const updateCoache = createAppAsyncThunk(
     return data;
   },
 );
+export const updateCoacheBanniere = createAppAsyncThunk(
+  'coaches/UPDATE_COACHE_BANNIERE',
+  async ({ labanniere } : { labanniere:string }, thunkAPI) => {
+    const state = thunkAPI.getState();
+    const userId = state.user.token.user.id;
+    const { data } = await axiosInstance.put(`/coaches/${userId}/banniere`, { labanniere });
+    return data;
+  },
+);
+export const updateCoacheLogo = createAppAsyncThunk(
+  'coaches/UPDATE_COACHE_LOGO',
+  async ({ lelogo } :{ lelogo:string }, thunkAPI) => {
+    const state = thunkAPI.getState();
+    const userId = state.user.token.user.id;
+    const { data } = await axiosInstance.put(`/coaches/${userId}/logo`, { lelogo });
+    return data;
+  },
+);
 export const fetchCoaches = createAppAsyncThunk(
   'coaches/GET_COACHE',
   async (_, thunkAPI) => {
@@ -102,6 +120,17 @@ const coachesReducer = createReducer(initialState, (builder) => {
     })
     .addCase(updateCoache.fulfilled, (state, action) => {
       state.user = action.payload;
+      alert('Mise à jour réussi');
+      state.credentials = {
+        email: '',
+        password: '',
+        prenom: '',
+        nom: '',
+        tel: '',
+        role: '',
+        logo: '',
+        banniere: '',
+      };
     })
     .addCase(updateCoache.rejected, () => {
       // state.error = action.error.message;
@@ -114,6 +143,37 @@ const coachesReducer = createReducer(initialState, (builder) => {
     .addCase(fetchCoaches.fulfilled, (state, action) => {
       state.user = action.payload;
       // state.user.nom = action.payload;
+      // alert('Mise à jour réussi');
+    })
+    .addCase(updateCoacheBanniere.fulfilled, (state, action) => {
+      state.user = action.payload;
+      // state.user.nom = action.payload;
+      alert('Mise à jour réussi');
+      state.credentials = {
+        email: '',
+        password: '',
+        prenom: '',
+        nom: '',
+        tel: '',
+        role: '',
+        logo: '',
+        banniere: '',
+      };
+    })
+    .addCase(updateCoacheLogo.fulfilled, (state, action) => {
+      state.user = action.payload;
+      // state.user.nom = action.payload;
+      alert('Mise à jour réussi');
+      state.credentials = {
+        email: '',
+        password: '',
+        prenom: '',
+        nom: '',
+        tel: '',
+        role: '',
+        logo: '',
+        banniere: '',
+      };
     });
 });
 

@@ -11,7 +11,7 @@ function TimerSeance({ laseance } :Itarget) {
   if (!(laseance instanceof Date)) {
     return (
       <div className="listPresents__timer red">
-        <span> Prochaine Séance aura lieu dans ? Choisi une date et une Equipe :) </span>
+        <span> Choisi ta date et une equipe </span>
       </div>
     );
   }

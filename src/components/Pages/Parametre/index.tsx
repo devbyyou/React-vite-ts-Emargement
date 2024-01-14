@@ -8,6 +8,7 @@ import './index.scss';
 import { changeCredentialsField, updateCoache } from '../../../store/reducers/coaches';
 import { removeUserDataFromLocalStorage } from '../../../utils/user';
 import { updateJoueurs } from '../../../store/reducers/joueurs';
+import ProfileBanniereSection from './ProfileBanniereSection';
 
 function Parametre() {
   const dispatch = useAppDispatch();
@@ -120,8 +121,8 @@ function Parametre() {
           </div> */}
 
           <div className="photo__profil">
-            <ProfilePictureSection message={undefined} bannieres={undefined} />
-            <ProfilePictureSection message="Photo de la banniere" bannieres={banniere} />
+            <ProfilePictureSection />
+            <ProfileBanniereSection />
           </div>
 
         </div>

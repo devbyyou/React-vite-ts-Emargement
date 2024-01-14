@@ -95,99 +95,100 @@
         }
     }
 
-    .my-form {
+
+.my-form {
+    width: 100%;
+    padding: 20px;
+    border-radius: 15px;
+    height: 100%;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    flex-direction: column;
+    gap: 0.5rem;
+    border: none;
+
+    // label {
+    //     // display: block;
+    //     margin-bottom: 10px;
+
+    //     width: 100%;
+    //     input {
+    //         width: 100%;
+    //         padding: 8px;
+    //         margin-top: 4px;
+    //         box-sizing: border-box;
+    //         border-radius: 0.2rem;
+    //         border: 1px solid #89bfaa82;
+    //     }
+    // }
+    .file-input-section {
+        border-radius: 0.5rem;
+        overflow: hidden;
+        // margin-top: 1.25rem;
         width: 100%;
-        padding: 20px;
-        border-radius: 15px;
-        height: 100%;
-        display: flex;
-        align-items: flex-start;
-        justify-content: center;
-        flex-direction: column;
-        gap: 0.5rem;
-        border: none;
 
-        // label {
-        //     // display: block;
-        //     margin-bottom: 10px;
-
-        //     width: 100%;
-        //     input {
-        //         width: 100%;
-        //         padding: 8px;
-        //         margin-top: 4px;
-        //         box-sizing: border-box;
-        //         border-radius: 0.2rem;
-        //         border: 1px solid #89bfaa82;
-        //     }
-        // }
-        .file-input-section {
-            border-radius: 0.5rem;
-            overflow: hidden;
-            // margin-top: 1.25rem;
-            width: 100%;
-
-            svg {
-                cursor: pointer;
-                color: #67a1919e;
-                &:hover {
-                    cursor: pointer;
-                }
-            }
-            .dashed-box {
-                width: 100%;
-                margin-top: 1.25rem;
-                position: relative;
-                height: 6rem;
-                border-radius: 0.5rem;
-                border: 2px dashed vars.$logoSidebar;
-                // background-color: #f3f4f6;
-                display: flex;
-                flex-direction: column;
-                justify-content: center;
-                align-items: center;
-
-                .items-center {
-                    display: flex;
-                    flex-direction: column;
-                    align-items: center;
-                }
-                input {
-                    width: 100%;
-                    height: 100%;
-                    opacity: 0;
-                    // background-color: #3490dc;
-                    position: absolute;
-                    // background-color: red;
-                }
-            }
-        }
-        &--file {
-            // background-color: red;
-            height: 100%;
-            width: 100%;
-            opacity: 0;
-            position: absolute;
+        svg {
+            cursor: pointer;
+            color: #67a1919e;
             &:hover {
                 cursor: pointer;
             }
         }
-        &--button {
-            display: flex;
+        .dashed-box {
             width: 100%;
-            flex-direction: row;
-            justify-content: flex-end;
-            button {
-                background-color: #67a1919e;
-                color: white;
-                padding: 10px 15px;
-                border: none;
-                border-radius: 5px;
-                &:hover {
-                    background-color: vars.$logoSidebar;
-                    cursor: pointer;
-                }
+            margin-top: 1.25rem;
+            position: relative;
+            height: 6rem;
+            border-radius: 0.5rem;
+            border: 2px dashed vars.$logoSidebar;
+            // background-color: #f3f4f6;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+
+            .items-center {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+            input {
+                width: 100%;
+                height: 100%;
+                opacity: 0;
+                // background-color: #3490dc;
+                position: absolute;
+                // background-color: red;
             }
         }
     }
+    &--file {
+        // background-color: red;
+        height: 100%;
+        width: 100%;
+        opacity: 0;
+        position: absolute;
+        &:hover {
+            cursor: pointer;
+        }
+    }
+    &--button {
+        display: flex;
+        width: 100%;
+        flex-direction: row;
+        justify-content: flex-end;
+        button {
+            background-color: #67a1919e;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            &:hover {
+                background-color: vars.$logoSidebar;
+                cursor: pointer;
+            }
+        }
+    }
+}
 }

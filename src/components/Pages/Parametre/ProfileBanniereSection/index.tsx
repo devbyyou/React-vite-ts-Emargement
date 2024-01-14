@@ -1,9 +1,9 @@
-import React, { FormEvent } from 'react';
+import React, { FormEvent, MouseEvent } from 'react';
 import './index.scss';
 import { useAppDispatch, useAppSelector } from '../../../../hooks/redux';
 import useInputManager from '../../../../utils/useInputManager';
 import uploadImage from '../../../../utils/cloudinary';
-import { updateCoacheLogo } from '../../../../store/reducers/coaches';
+import { updateCoacheBanniere } from '../../../../store/reducers/coaches';
 
 function ProfileBanniereSection() {
   const dispatch = useAppDispatch();
@@ -24,23 +24,25 @@ function ProfileBanniereSection() {
     const formData = createFormData();
     if (!formData) return;
     try {
-      const lelogo = await uploadImage(formData);
-      await dispatch(updateCoacheLogo({ lelogo }));
+      const labanniere = await uploadImage(formData);
+      await dispatch(updateCoacheBanniere({ labanniere }));
     } catch (error) {
       // eslint-disable-next-line no-console
       console.error('Error during form submission:', error);
     }
+
+    // updateCoacheBanniere
   };
 
   return (
     <div className="profile-section">
       <div className="titleProfilePictureSection">
 
-        <h3>Photo de profil</h3>
+        <h3>Photo de la banniere</h3>
       </div>
 
       <div className="profile-image">
-        <img src={logo} alt="" srcSet="" />
+        <img src={banniere} alt="" srcSet="" />
 
       </div>
       <form onSubmit={formHandleSubmit}>

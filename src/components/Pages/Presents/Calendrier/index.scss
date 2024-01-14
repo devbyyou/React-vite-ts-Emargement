@@ -28,7 +28,7 @@
     flex-direction: column;
     width: 65%;
     background-color: #ffff;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0px 4px rgba(0, 0, 0, 0.05);
 
     .react-calendar__navigation {
         width: 100% !important;
@@ -97,7 +97,7 @@
     text-transform: uppercase;
     text-decoration: none;
     opacity: 0.3;
-    color: rgb(75, 75, 75);
+    color: rgba(104, 104, 104, 0.848);
 }
 .react-calendar .react-calendar__navigation button {
     background-color: #ffff;
