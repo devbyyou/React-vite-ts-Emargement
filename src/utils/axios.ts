@@ -6,9 +6,11 @@ import { getUserDataFromLocalStorage, removeUserDataFromLocalStorage } from './u
 
 // Je créer une instance d'axios me permettant d'enregistrer
 // une configuration de base
+// const baseURL = 'http://localhost:3000/api';
+const baseURL = process.env.NODE_ENV === 'production' ? 'https://devbyyou.com/api' : "http://localhost:3000/api'";
 // eslint-disable-next-line import/prefer-default-export
 export const axiosInstance = axios.create({
-  baseURL: 'http://localhost:3000/api',
+  baseURL,
 });
 // Intercepteur pour gérer les erreurs
 axiosInstance.interceptors.response.use(
