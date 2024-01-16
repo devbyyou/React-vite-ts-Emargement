@@ -10,7 +10,7 @@ import { getUserDataFromLocalStorage, removeUserDataFromLocalStorage } from './u
 // const baseURL = process.env.NODE_ENV === 'production' ? 'http://devbyyou.com/api' : "http://localhost:3000/api'";
 // eslint-disable-next-line import/prefer-default-export
 export const axiosInstance = axios.create({
-  baseURL: 'http://devbyyou.com/api',
+  baseURL: 'https://www.devbyyou.com/api',
 });
 // Intercepteur pour gérer les erreurs
 axiosInstance.interceptors.response.use(
