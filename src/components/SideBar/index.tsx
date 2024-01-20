@@ -18,7 +18,6 @@ function SideBar() {
   const token = useAppSelector((state) => state.user.token);
   const [scrollPosition, setScrollPosition] = useState(0);
   const { joueur, user } = token;
-
   const classNameLink = ({ isActive }: NavLinkParams) => cn('icons', {
     'menu-link--active': isActive,
   });
