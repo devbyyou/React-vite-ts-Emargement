@@ -39,14 +39,12 @@ function SideBar() {
       setScrollPosition(window.scrollY);
     };
 
-    // Ajoutez un écouteur d'événements pour détecter le défilement
     window.addEventListener('scroll', handleScroll);
 
-    // Nettoyez l'écouteur d'événements lors du démontage du composant
     return () => {
       window.removeEventListener('scroll', handleScroll);
     };
-  }, []); // Assurez-vous que l'effet s'exécute une seule fois à l'initialisation
+  }, []);
 
   return (
     <div className="responsive__sidebar">
