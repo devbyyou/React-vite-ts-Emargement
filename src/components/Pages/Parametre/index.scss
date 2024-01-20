@@ -3,7 +3,7 @@
 .parametre__content {
     font-family: vars.$fontText;
     // margin: 10px;
-    .photo__profil{
+    .photo__profil {
         display: flex;
         flex-direction: row;
         gap: 2rem;
@@ -41,9 +41,11 @@
     margin-left: 48px;
     margin-bottom: 30px;
     border-radius: 10px;
-    box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+    box-shadow:
+        rgba(0, 0, 0, 0.4) 0px 2px 4px,
+        rgba(0, 0, 0, 0.3) 0px 7px 13px -3px,
+        rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
     margin-right: 0.8rem;
-
 }
 
 .parametre__content-form {
@@ -52,7 +54,6 @@
     justify-content: center;
     align-items: center;
     gap: 2rem;
-
 }
 
 .parametre__content-form-nom-prenom {
@@ -106,7 +107,7 @@
         border: none;
         padding: 15px;
         border-radius: 10px;
-        background-color: #89bfaa6e ;
+        background-color: #89bfaa6e;
         &:hover {
             background-color: vars.$buttonHover;
             // transform: scale(0.3);
@@ -142,7 +143,32 @@
     padding: 20px;
     background: radial-gradient(circle, rgb(255, 255, 255) 0%, rgb(245, 251, 249) 40%);
     gap: 13px;
-    h2{
+    h2 {
         font-size: 30px;
+    }
+}
+@media (max-width: 600px) {
+    .parametre__content-forms {
+        margin: 0;
+        width: 100%;
+    }
+
+    .parametre__content-form-nom-prenom {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 2rem;
+        flex-direction: row;
+        width: 100%;
+        flex-wrap: wrap;
+    }
+    .parametre__content .photo__profil {
+      
+        flex-direction: column;
+        gap: 0rem;
+        flex-wrap: wrap;
+    }
+    .parametre__content-except {
+        margin-right: 0px;
     }
 }

@@ -30,6 +30,11 @@
     //     z-index: -1;
     // }
 }
+@media (max-width: 600px) {
+    .content__notification {
+        margin-right: 10px;
+    }
+}
 .notif {
     height: 2em;
     width: 2em;

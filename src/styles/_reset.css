@@ -136,11 +136,6 @@ html {
   box-sizing: border-box;
 }
 
-@media (max-width: 600px) {
-  html {
-    width: 100vh;
-  }
-}
 
 *,
 *::before,

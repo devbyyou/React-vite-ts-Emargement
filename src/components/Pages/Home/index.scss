@@ -16,6 +16,22 @@
         padding-left: 40px;
         margin-left: 30px;
         position: relative;
+        margin-right: 10px;
+    }
+}
+
+@media (max-width: 600px) {
+    .form {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-left: 0px;
+
+        &__input {
+            margin-left: 0px;
+            width: 100%;
+        }
     }
 }
 
@@ -36,8 +52,8 @@
 }
 @media (max-width: 600px) {
     .logo__search {
-        position: absolute;
-        left: 44px;
+        position: relative;
+        left: 2rem;
         z-index: 2;
     }
 }
@@ -48,16 +64,41 @@
     align-items: center;
     justify-content: space-between;
 }
+
+@media (max-width: 600px) {
+    .header__page--home {
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: column-reverse;
+        align-items: flex-end;
+        gap: 1rem;
+        width: 100%;
+        margin-top: 1rem;
+    }
+}
+
 .backgroundHeader {
     background: radial-gradient(circle, rgb(255, 255, 255) 0%, rgb(245, 251, 249) 40%);
 }
 
 .messageHome {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
     // background-color: aqua;
     margin: 30px 30px 0px 30px;
     font-weight: bold;
     font-family: vars.$fontTextCorp;
     font-size: 25px;
+}
+@media (max-width: 600px) {
+    .messageHome {
+        margin: 0px;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+    }
 }
 
 .content__displayChoice {

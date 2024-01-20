@@ -82,7 +82,7 @@ function Graph() {
   };
 
   return (
-    <div>
+    <div className="graph__content">
       <img className="graph_img" src={graph} alt="" />
       <Line data={chartData} options={chartOptions} />
     </div>

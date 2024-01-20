@@ -7,6 +7,12 @@
     font-family: "Blinker", sans-serif;
 }
 
+@media (max-width: 600px) {
+    .members-list {
+       margin: 0 15px 0 15px;
+    }
+}
+
 .header {
     display: flex;
     justify-content: space-between;

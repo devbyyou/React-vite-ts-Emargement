@@ -25,7 +25,6 @@ function App() {
   const token = useAppSelector((state) => state.user.token);
   const equipes = useAppSelector((state) => state.equipes.equipes);
   const { joueur, user } = token;
-  // console.log(joueur);
 
   const dispatch = useAppDispatch();
   useEffect(() => {
@@ -73,14 +72,10 @@ function App() {
                 element={<Equipe />}
               />
             ))}
-            {
-
-                equipes.map((listesEquipes) => {
-                  const { joueurs } = listesEquipes;
-                  return joueurs.map((player) => <Route key={player.id} path={`/equipes/joueur/:${player.categorie_id}/:${player.id}`} element={<Joueur />} />);
-                })
-
-              }
+            { equipes.map((listesEquipes) => {
+              const { joueurs } = listesEquipes;
+              return joueurs.map((player) => <Route key={player.id} path={`/equipes/joueur/:${player.categorie_id}/:${player.id}`} element={<Joueur />} />);
+            })}
 
             {/* <Route path="/pageJoueur" element={<QRCodeReader />} /> */}
             <Route path="*" element={<div>404</div>} />

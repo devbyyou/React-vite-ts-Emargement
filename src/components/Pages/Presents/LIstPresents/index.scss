@@ -7,6 +7,14 @@
     width: 60%;
     font-family: vars.$fontText;
 }
+@media (max-width: 600px) {
+    .listPresents {
+        width: 100%;
+        // padding-left: 1rem;
+        // padding-right: 1rem;
+    }
+}
+
 .listPresents__timer {
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
     padding: 31px;
@@ -66,12 +74,12 @@
 .absent {
     background-color: #f4e4e8;
 }
-.teamSelect{
+.teamSelect {
     // text-decoration: none;
     border: 1px solid vars.$button;
     // border: none;
     font-family: vars.$fontText;
-    margin: 0 auto ;
+    margin: 0 auto;
     padding: 9px;
     display: flex;
     align-items: center;

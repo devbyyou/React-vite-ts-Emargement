@@ -15,6 +15,13 @@
     padding: 10px;
     // margin: 10px 0 10px 30px;
 }
+
+@media (max-width: 600px) {
+    .title {
+        margin-left: 8px;
+    }
+}
+
 .overview {
     display: flex;
     gap: 10px;
@@ -37,7 +44,6 @@
     max-width: 340px;
     background-color: oldlace;
     // background-color: #fff6e694;
-
 
     &__title {
         display: flex;
