@@ -59,7 +59,6 @@ function Parametre() {
         </div>
       </header>
       <div className="parametre__content-except">
-
         <div className="parametre__content-forms">
           <div className="parametre__content-form-title">
             <h3 className="parametre__content-title"> Information personnelles</h3>
@@ -76,20 +75,20 @@ function Parametre() {
               <div className="parametre__content-form-nom-prenom">
                 <label className="parametre__content-label">
                   Prénom
-                  <input name="prenom" onChange={handleChangeCredentials('prenom')} className="parametre__content-form-input -prenom" type="text" value={prenom} />
+                  <input placeholder="Prenom" name="prenom" onChange={handleChangeCredentials('prenom')} className="parametre__content-form-input -prenom" type="text" value={prenom} />
                 </label>
                 <label className="parametre__content-label">
                   Nom
-                  <input value={nom} name="nom" onChange={handleChangeCredentials('nom')} className="parametre__content-form-input -nom" type="text" />
+                  <input placeholder="Nom" value={nom} name="nom" onChange={handleChangeCredentials('nom')} className="parametre__content-form-input -nom" type="text" />
                 </label>
               </div>
               <label className="parametre__content-label">
                 Rôle
-                <input value={role} name="role" onChange={handleChangeCredentials('role')} className="parametre__content-form-input -role" type="text" />
+                <input placeholder="Role" value={role} name="role" onChange={handleChangeCredentials('role')} className="parametre__content-form-input -role" type="text" />
               </label>
               <label className="parametre__content-label">
                 Mot de passe
-                <input name="password" value={password} onChange={handleChangeCredentials('password')} className="parametre__content-form-input -role" type="password" />
+                <input placeholder="Password" name="password" value={password} onChange={handleChangeCredentials('password')} className="parametre__content-form-input -role" type="password" />
               </label>
               <div className="parametre__content-form-btn-mdf">
                 <button onClick={handleSubmitUpdate} type="button">

@@ -116,7 +116,7 @@ export const initialState: UserState = {
   errorLogin: null,
   isLoading: false,
   credentials: {
-    email: 'pierre.dupont@example.com',
+    email: 'jeandupont@exemple.com',
     password: 'motdepasse1',
   },
   ...userData,

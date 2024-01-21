@@ -26,7 +26,8 @@ function Home() {
       <div className="messageHome">
         <h2>
           { `
-        Bienvenue à nouveau, 
+        Bienvenue, 
+      
         ${prenom}`}
           {' '}
           👋
