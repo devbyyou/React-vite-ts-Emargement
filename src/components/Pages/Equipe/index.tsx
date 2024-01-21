@@ -22,6 +22,7 @@ function Equipe() {
   const [stateInput, setStateInput] = useState('');
   const [stateActiveRef, setstateActiveRef] = useState<boolean | undefined | any>(false);
   const [buttonSession, setbuttonSession] = useState('');
+  const [ActiveSeance, setstateActiveSeance] = useState<true | false | undefined>(undefined);
   const dispatch = useAppDispatch();
   const params = useParams();
   const equipeId = Object.values(params)[0];
@@ -62,6 +63,7 @@ function Equipe() {
   }
   function handleClickToggle() {
     setstateActiveRef(false);
+    setstateActiveSeance(false);
     dispatch(toggleIsOpen());
   }
   const openClassNames = cn('newteam__content', {
@@ -87,6 +89,7 @@ function Equipe() {
     dispatch(toggleIsOpen());
     setstateActiveRef(undefined);
     setbuttonSession(event.target.value);
+    setstateActiveSeance(true);
   };
 
   return (
@@ -97,6 +100,7 @@ function Equipe() {
         openClassNames={openClassNames}
         stateActiveRef={stateActiveRef}
         buttonSession={buttonSession}
+        ActiveSeance={ActiveSeance}
         joueur={[]}
         handleUpdatingPlayer={function (): Promise<void> {
           throw new Error('Function not implemented.');
@@ -185,7 +189,7 @@ function Equipe() {
                   <h2 className="titleMembre">Séances</h2>
                 </header>
                 <div className="table tablenoScrool">
-                  <div className="row label noScrool">
+                  <div className="row label noScrool rowSeance">
                     <div className="cell">Id</div>
                     <div className="cell">Equipe/Catégorie</div>
                     <div className="cell">Localisation</div>
@@ -193,7 +197,7 @@ function Equipe() {
                     <div className="cell">Coach</div>
                   </div>
                   {filteredBYid.map((seance) => (
-                    <div key={seance.id} className="row">
+                    <div key={seance.id} className="row rowSeance">
                       <div className="cell">
                         {seance.id}
                         {/* <div className="table__email">test</div> */}

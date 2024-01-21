@@ -47,46 +47,68 @@ function SideBar() {
 
   return (
     <div className="responsive__sidebar">
-      <nav className={navbarClasses}>
-        <ul className="nav__list">
-          <li className="nav__item">
-            <NavLink to="/" className={classNameLinkResponsive}>
-              <p className="bx bx-home-alt nav__icon">
-                {' '}
-                <GoHome />
-              </p>
-            </NavLink>
-          </li>
+      { user ? (
+        <nav className={navbarClasses}>
+          <ul className="nav__list">
 
-          <li className="nav__item">
-            <NavLink to="/equipes" className={classNameLinkResponsive}>
-              <p className="bx bx-user nav__icon">
-                {' '}
-                <PiUsersThreeLight />
-              </p>
-            </NavLink>
-          </li>
+            <li className="nav__item">
+              <NavLink to="/" className={classNameLinkResponsive}>
+                <p className="bx bx-home-alt nav__icon">
+                  {' '}
+                  <GoHome />
+                </p>
+              </NavLink>
+            </li>
 
-          <li className="nav__item">
-            <NavLink to="/presents" className={classNameLinkResponsive}>
-              <p className="bx bx-book nav__icon">
-                {' '}
-                <LuClipboardSignature />
-              </p>
-            </NavLink>
-          </li>
+            <li className="nav__item">
+              <NavLink to="/equipes" className={classNameLinkResponsive}>
+                <p className="bx bx-user nav__icon">
+                  {' '}
+                  <PiUsersThreeLight />
+                </p>
+              </NavLink>
+            </li>
 
-          <li className="nav__item">
-            <NavLink to="/parametre" className={classNameLinkResponsive}>
-              <p className="bx bx-briefcase-alt-2 nav__icon">
+            <li className="nav__item">
+              <NavLink to="/presents" className={classNameLinkResponsive}>
+                <p className="bx bx-book nav__icon">
+                  {' '}
+                  <LuClipboardSignature />
+                </p>
+              </NavLink>
+            </li>
 
-                <AiOutlineSetting />
-              </p>
-            </NavLink>
-          </li>
+            <li className="nav__item">
+              <NavLink to="/parametre" className={classNameLinkResponsive}>
+                <p className="bx bx-briefcase-alt-2 nav__icon">
 
-        </ul>
-      </nav>
+                  <AiOutlineSetting />
+                </p>
+              </NavLink>
+            </li>
+          </ul>
+        </nav>
+      ) : (
+        <nav className={navbarClasses}>
+          <ul className="nav__list">
+            <li className="nav__item">
+              <NavLink to="/pageJoueur" className={classNameLinkResponsive}>
+                <p className="bx bx-home-alt nav__icon">
+                  {' '}
+                  <GoHome />
+                </p>
+              </NavLink>
+            </li>
+            <li className="nav__item">
+              <NavLink to="/parametre" className={classNameLinkResponsive}>
+                <p className="bx bx-briefcase-alt-2 nav__icon">
+                  <AiOutlineSetting />
+                </p>
+              </NavLink>
+            </li>
+          </ul>
+        </nav>
+      )}
 
       <nav className="sidebar">
         <svg
@@ -133,7 +155,6 @@ function SideBar() {
             transform="matrix(1.98818 0 0 1.98818 -7.476 127.676)"
           />
         </svg>
-
         { user ? (
           <div className="sidebarLink">
 

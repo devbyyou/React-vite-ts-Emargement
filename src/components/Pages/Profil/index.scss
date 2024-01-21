@@ -7,7 +7,15 @@
     padding: 1.25rem;
     font-family: vars.$fontTextCorp;
 }
-
+@media (max-width: 600px) {
+    .profil__content {
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+        padding: 1.25rem;
+        font-family: "Blinker", sans-serif;
+    }
+}
 .profil__banniere {
     display: flex;
     flex-direction: column;

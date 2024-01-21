@@ -7,7 +7,7 @@
     left: 50%;
     transform: translate(-50%, -50%);
     background-color: rgba(0, 0, 0, 0.5) !important;
-    z-index: 2;
+    z-index: 4;
     width: 100%;
     height: 100%;
     display: flex;
@@ -52,6 +52,11 @@
                 color: #ffffff;
             }
         }
+        @media (max-width: 600px) {
+            .close {
+                right: 145px;
+            }
+        }
     }
     &__card {
         width: 40%;
@@ -63,7 +68,7 @@
         align-items: flex-start;
         // padding: 10px;
         border: none;
-     
+
         &--categorie {
             display: flex;
             flex-direction: column;
@@ -187,13 +192,12 @@
     }
     .newplayer {
         background-color: #f0fff1;
-    }         
-    .updatePlayer{
+    }
+    .updatePlayer {
         background-color: rgba(255, 164, 164, 0.602);
-    }   
+    }
 
     .newplayerField {
-        
         display: flex;
         flex-direction: row;
         // flex-wrap: wrap;
@@ -216,4 +220,28 @@
             }
         }
     }
+}
+@media (max-width: 600px) {
+    .newteam__content {
+        // background-color: red;
+        // position: relative;
+
+        width: 100vh;
+        &__card {
+            position: absolute;
+            width: auto;
+            // transform: translate(-5%, -50%);
+            // background-color: red !important;
+        }
+    }
+  
+}
+.modalplayerResponsive {
+    height: 100%;
+}
+
+.modalplayerResponsiveClose {
+    top: -10px !important;
+    font-size: 40px !important;
+    color: #688bac !important;
 }

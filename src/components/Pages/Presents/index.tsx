@@ -16,6 +16,8 @@ function Presents() {
   const tab: any = [];
   seances.map((seanc) => tab.push(new Date(seanc)));
   const laseance = tab[0];
+  // console.log(laseance);
+
   return (
     <div className="content__page-presents">
       <BanniereMessage selectedDate={selectedDate} />

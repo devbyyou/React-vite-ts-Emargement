@@ -43,7 +43,7 @@ function Home() {
         <MembersList />
         <ListChoice />
       </div>
-      <h3 className="title__graph">Pourcentage de fréquentation (par jour) </h3>
+      <h3 className="title title__graph">Pourcentage de fréquentation (par jour) </h3>
       <Graph />
     </>
   );

@@ -7,6 +7,7 @@ import { setQRCodeData, updateLastActivityAndManagePresence } from '../../store/
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import Header from '../Pages/Home/Header';
 import './index.scss';
+import img from '../../assets/fond-gris-nature-elegance-abstraite_127755-912.avif';
 
 function QRCodeReader() {
   const token = useAppSelector((state) => state.user.token);
@@ -42,8 +43,8 @@ function QRCodeReader() {
             retard,
           }));
         } else if (now < horaireLocal) {
-          const statut = '--';
-          const absence = 'ABSENT';
+          const statut = 'PRESENT';
+          const absence = '--';
           const retard = '--';
           dispatch(updateLastActivityAndManagePresence({
             seanceId,
@@ -82,6 +83,8 @@ function QRCodeReader() {
         <h2>QR Code Reader</h2>
         <p>D&apos;ici, tu peut scanner ton QRcode </p>
       </header>
+      <img className="imgQr" src={img} alt="" />
+
       <QrReader
         scanDelay={300}
         // eslint-disable-next-line @typescript-eslint/ban-ts-comment
@@ -89,6 +92,8 @@ function QRCodeReader() {
         onResult={handleScan}
         // style={{ width: '90%' }}
         className="qrCode__reader"
+        facingMode="environment"
+        constraints={{ facingMode: 'environment' }}
       />
 
     </div>

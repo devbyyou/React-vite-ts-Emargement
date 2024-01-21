@@ -5,6 +5,7 @@ import React, { ChangeEvent, useState } from 'react';
 import { format, addDays, parseISO } from 'date-fns';
 import { useAppDispatch, useAppSelector } from '../../../../../hooks/redux';
 import { changeCredentialsField, addSeance } from '../../../../../store/reducers/seance';
+import { toggleIsOpen } from '../../../../../store/reducers/equipes';
 
 function SeanceForm() {
   const dispatch = useAppDispatch();
@@ -66,6 +67,7 @@ function SeanceForm() {
     downloadLink.click();
     setSelectedDay('');
     setSelectedTime(new Date());
+    dispatch(toggleIsOpen());
   };
 
   return (
@@ -75,11 +77,11 @@ function SeanceForm() {
       <div className="newplayerField">
         <label>
           Adresse
-          <input name="Adresse" onChange={handleChangeInput('adresse')} value={adresse} type="text" />
+          <input placeholder="Adresse" name="Adresse" onChange={handleChangeInput('adresse')} value={adresse} type="text" />
         </label>
         <label>
           Ville
-          <input name="ville" onChange={handleChangeInput('ville')} value={ville} type="text" />
+          <input placeholder="ville" name="ville" onChange={handleChangeInput('ville')} value={ville} type="text" />
         </label>
       </div>
 

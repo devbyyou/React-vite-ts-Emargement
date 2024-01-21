@@ -22,6 +22,7 @@ function TimerSeance({ laseance } :Itarget) {
   //   currentDate.setDate(laseance.getDate());
   //   return currentDate;
   // };
+  // console.log(laseance);
 
   return (
     <div className="listPresents__timer green">

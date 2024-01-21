@@ -110,33 +110,33 @@ function Joueur() {
     <div className="joueur__content">
       <div className={openClassNames}>
         <div onClick={handleClickedClose} onKeyDown={handleKeyDown} role="button" tabIndex={0} className="modal-header">
-          <button type="button" className="close" data-dismiss="modal" aria-hidden="true">
+          <button type="button" className="close " data-dismiss="modal" aria-hidden="true">
             x
           </button>
         </div>
-        <div className="newteam__content__card ">
+        <div className="newteam__content__card">
           <form onSubmit={handleUpdatingPlayer} action="submit" className="my-form updatePlayer">
             <h2>Modification Joueur</h2>
             <label>
               Nom Joueur
-              <input name="nom" onChange={handleChangeInput('nom')} value={nom} type="text" />
+              <input placeholder="Nom" name="nom" onChange={handleChangeInput('nom')} value={nom} type="text" />
             </label>
             <label>
               Prenom Joueur
-              <input name="prenom" onChange={handleChangeInput('prenom')} value={prenom} type="text" />
+              <input placeholder="Prenom" name="prenom" onChange={handleChangeInput('prenom')} value={prenom} type="text" />
             </label>
             <label>
               Email
-              <input name="email" onChange={handleChangeInput('email')} value={email} type="text" />
+              <input placeholder="Email" name="email" onChange={handleChangeInput('email')} value={email} type="text" />
             </label>
             <div className="newplayerField">
               <label>
                 Tel
-                <input name="tel" onChange={handleChangeInput('tel')} value={tel} type="text" />
+                <input placeholder="Phone" name="tel" onChange={handleChangeInput('tel')} value={tel} type="text" />
               </label>
               <label>
                 age
-                <input name="age" onChange={handleChangeInput('age')} value={age} type="text" />
+                <input placeholder="Age" name="age" onChange={handleChangeInput('age')} value={age} type="text" />
               </label>
             </div>
             <div className="newteam__content__card--categorie">
@@ -167,7 +167,7 @@ function Joueur() {
             </div>
             <label>
               Statut
-              <input name="statut" onChange={handleChangeInput('statut')} value={statut} type="text" />
+              <input placeholder="Active" name="statut" onChange={handleChangeInput('statut')} value={statut} type="text" />
             </label>
             <div className="file-input-section">
               <div className="dashed-box">

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FormEvent } from 'react';
 import './index.scss';
 import { AiOutlineSearch } from 'react-icons/ai';
 import cn from 'classnames';
@@ -11,9 +11,13 @@ function Header() {
   const openClassNames = cn('header__page--home', {
     backgroundHeader: joueur,
   });
+  const handleSubmitForm = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+  };
+
   return (
     <header className={openClassNames}>
-      <form action="submit" className="form">
+      <form onSubmit={handleSubmitForm} action="submit" className="form">
         <AiOutlineSearch className="logo__search" />
         <input placeholder="Recherche" className="form__input" type="text" />
       </form>

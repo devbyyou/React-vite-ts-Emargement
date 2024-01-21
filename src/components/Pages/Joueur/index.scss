@@ -200,4 +200,16 @@
         flex-direction: column-reverse !important;
         gap: 5rem;
     }
+
+    .joueur__content .joueur__div {
+        width: 50%;
+    }
+    .joueur__content .joueur__informations {
+        margin-left: 10px;
+        margin-right: 10px;
+    }
+    .joueur__content .timeline-event-block {
+        margin-left: 10px;
+        margin-right: 10px;
+    }
 }

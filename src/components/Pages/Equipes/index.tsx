@@ -86,6 +86,7 @@ function Equipes() {
           throw new Error('Function not implemented.');
         }}
         buttonSession=""
+        ActiveSeance={undefined}
       />
     </div>
   );

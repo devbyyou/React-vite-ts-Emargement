@@ -168,12 +168,13 @@
     }
 
     .nav__menu {
+        font-family: vars.$fontText;
         display: block;
         position: fixed;
-        bottom: 1rem;
-        background-color: #e1ffe3cf;
-        width: 95%;
-        border-radius: 4rem;
+        bottom: 0rem;
+        background-color: #adc3be;
+        width: 100%;
+        border-radius: 22px 22px 0rem 0rem;
         padding: 9px 2.25rem;
         backdrop-filter: blur(10px);
         transition: 0.4s;
@@ -192,13 +193,23 @@
             list-style: none;
         }
         .active-link {
-            background: linear-gradient(180deg, vars.$bgContent);
-            color: vars.$bgContent;
-            background: rgba(0, 0, 0, 0.09);
+            background: rgba(235, 255, 249, 0.62);
+            filter: brightness(1.2);
+            color: #f4f9f4;
             padding: 0.7rem !important;
+            filter: drop-shadow(2px 4px 6px #7bad9f);
+            mix-blend-mode: overlay;
+            backdrop-filter: blur(64px);
+            transform: scale(1.1); 
+            transition: transform 3.2s ease-out;
+            &:focus{
+                transform: scale(1.10);
+                transition-delay: 4s; 
+            }
+
         }
         .nav__link {
-            color: rgb(37 37 37);
+            color: rgb(65, 65, 65);
             font-size: 1.25rem;
             padding: 0.4rem;
             display: flex;
@@ -218,12 +229,12 @@
     }
 }
 .visible {
-    opacity: 1; 
-    transition: opacity 0.3s ease-in-out; 
+    opacity: 1;
+    transition: opacity 0.3s ease-in-out;
 }
 
 .invisible {
-    opacity: 0; 
-    pointer-events: none; 
-    transition: opacity 0.3s ease-in-out; 
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease-in-out;
 }

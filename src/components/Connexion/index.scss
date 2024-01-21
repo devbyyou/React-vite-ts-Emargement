@@ -46,14 +46,14 @@
   &-button {
     font-size: 15px;
     color: #fff;
-    background-color: rgba(194, 232, 217, 0.36);
     border-radius: 10px;
     border: 0;
     padding: 0.7em;
     height: 2.5em;
     width: 7rem;
+    background-color: vars.$logoSidebar;
     &:hover{
-      background-color: vars.$logoSidebar;
+      background-color: rgba(194, 232, 217, 0.36);
     }
   }
 }
