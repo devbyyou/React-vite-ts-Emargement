@@ -1,3 +1,5 @@
+/* eslint-disable no-nested-ternary */
+/* eslint-disable react/no-array-index-key */
 /* eslint-disable max-len */
 import React, {
   ChangeEvent,
@@ -55,6 +57,14 @@ function Joueur() {
   // const equipeTrouvee = equipes.find((equipe) => equipe.joueurs.some((player) => player.id.toString() === joueurId?.toString()));
   const equipeTrouvee = equipes.find((equipe) => equipe.joueurs.some((player) => player.id.toString() === joueurId?.toString()));
 
+  const findPresence = equipeTrouvee?.seances.flatMap((seance) => seance.presences.filter((presence) => presence.joueur_id.toString() === joueurId?.toString()));
+  const findAllSeances = equipes.map((seances) => seances.seances);
+
+  const findDatePresenceById = (seance_id: number) => {
+    const filteredSeance = findAllSeances?.flatMap((seances) => seances
+      .filter((seance) => seance.id.toString() === seance_id.toString())).map((sean) => sean.date);
+    return filteredSeance.length > 0 ? filteredSeance.join(', ') : 'No matching seances found';
+  };
   useEffect(() => {
 
   }, [joueur, equipes]);
@@ -68,7 +78,6 @@ function Joueur() {
   };
   const handleDeletePlayer: MouseEventHandler<HTMLButtonElement> = async () => {
     // eslint-disable-next-line no-alert
-    alert('le joueur va etre supprimer. Riderectuion ');
     await dispatch(deleteJoueurs({ joueurId }));
     navigate(`/equipes/${equipeTrouvee?.categories.nom}/${equipeTrouvee?.id}`);
   };
@@ -106,6 +115,7 @@ function Joueur() {
       dispatch(toggleIsOpen());
     }
   };
+
   return (
     <div className="joueur__content">
       <div className={openClassNames}>
@@ -279,32 +289,34 @@ function Joueur() {
                     <th>Présence</th>
                   </tr>
                 </thead>
-                <tbody>
-                  <tr>
-                    <td>2023-11-09</td>
-                    <td>
+                {
+               findPresence?.map((presence, index) => (
+                 <tbody key={index}>
+                   <tr>
+                     <td>{findDatePresenceById(presence.seance_id)}</td>
+                     <td>
 
-                      {' '}
-                      {equipeTrouvee?.categories.nom}
-                      {' - '}
-                      {equipeTrouvee?.nom}
+                       {' '}
+                       {equipeTrouvee?.categories.nom}
+                       {' - '}
+                       {equipeTrouvee?.nom}
 
-                    </td>
-                    <td><span>Absent</span></td>
-                  </tr>
-                  <tr>
-                    <td>2023-02-12</td>
-                    <td>
+                     </td>
+                     <td>
+                       <span>
+                         {
+                      presence.statut !== '--' ? presence.statut : presence.statut
+                      && presence.retard !== '--' ? presence.retard : presence.retard
+                      && presence.absence !== '--' ? presence.absence : presence.absence
+                      }
+                       </span>
 
-                      {' '}
-                      {equipeTrouvee?.categories.nom}
-                      {' - '}
-                      {equipeTrouvee?.nom}
+                     </td>
+                   </tr>
 
-                    </td>
-                    <td><span className="tardif">Tardif</span></td>
-                  </tr>
-                </tbody>
+                 </tbody>
+               ))
+}
               </table>
             </div>
           </div>

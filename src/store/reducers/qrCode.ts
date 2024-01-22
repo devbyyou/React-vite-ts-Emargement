@@ -47,6 +47,9 @@ const qrCodeReducer = createReducer(initialState, (builder) => {
     })
     .addCase(updateLastActivityAndManagePresence.fulfilled, (state, action) => {
       alert('Le QrCode à bien été validé ! ');
+    })
+    .addCase(updateLastActivityAndManagePresence.pending, () => {
+      alert('Scanning en cours... Veuillez patienter');
     });
 });
 

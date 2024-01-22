@@ -157,6 +157,7 @@ const joueursReducer = createReducer(initialState, (builder) => {
     })
     .addCase(deleteJoueurs.fulfilled, (state, action) => {
       state.joueurs = action.payload;
+      alert('le joueur à bien été supprimé.');
     })
     .addCase(updateJoueurs.fulfilled, (state, action) => {
       state.joueurs = action.payload;
